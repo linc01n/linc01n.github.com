@@ -1,6 +1,32 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://linc01n.github.com/blog/2011/09/07/readable-code/</loc>
+        <lastmod>2013-03-19T21:01:21+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://linc01n.github.com/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion/
+        </loc>
+        <lastmod>2013-03-19T21:01:21+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://linc01n.github.com/blog/2011/09/28/synergy-on-mac-osx-lion/</loc>
+        <lastmod>2013-03-19T21:01:21+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://linc01n.github.com/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/
+        </loc>
+        <lastmod>2013-03-19T21:01:21+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://linc01n.github.com/blog/2011/10/18/django-admin-auto-select-current-user/
+        </loc>
+        <lastmod>2013-03-19T21:01:21+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://linc01n.github.com/blog/2013/03/19/softether-on-vps/</loc>
         <lastmod>2013-03-19T22:23:12+08:00</lastmod>
     </url>

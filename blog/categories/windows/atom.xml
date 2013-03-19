@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: windows | Coding, Coding, Coding]]></title>
+  <link href="http://linc01n.github.com/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://linc01n.github.com/"/>
+  <updated>2013-03-19T22:29:08+08:00</updated>
+  <id>http://linc01n.github.com/</id>
+  <author>
+    <name><![CDATA[Lincoln Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Synergey Key Mapping Between Mac and Windows]]></title>
+    <link href="http://linc01n.github.com/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/"/>
+    <updated>2011-10-03T21:49:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows</id>
+    <content type="html"><![CDATA[<h1>My Brain is going to Explode!</h1>
+
+<p>Synergy is doing a great job about sharing keyboard and mouse between OSes. But when it comes to mac and windows, there are some new problems.</p>
+
+<p>Mac and Windows have different keyboard shortcut. The most confusing shortcut fighting in my head is copy and paste. Synergy support copy and paste between machine which is nice. So I can copy some text from windows and paste them in mac.</p>
+
+<p>Here comes the problem. I control-c in my windows and go to my Mac I hit control-v all the time. This is a vice versa problem. To solve it, I need to map control key to command key.</p>
+
+<p>But setting up keybinding is hard in synergy. It is quite hard to make synergy working between my Mac Lion and Win 7. So I decided not to touch the config file of synergy.</p>
+
+<h1>Solution: KeyRemap4MacBook</h1>
+
+<p>Download from tekezo website: <a href="http://pqrs.org/macosx/keyremap4macbook/index.html">http://pqrs.org/macosx/keyremap4macbook/index.html</a></p>
+
+<p>Direct Link : <a href="http://pqrs.org/macosx/keyremap4macbook/files/KeyRemap4MacBook-7.4.0.pkg.zip">http://pqrs.org/macosx/keyremap4macbook/files/KeyRemap4MacBook-7.4.0.pkg.zip</a></p>
+
+<p>After installing the pkg and reboot, go to System Perferences->KeyRemap4MacBook.</p>
+
+<p>Tick the following combobox:</p>
+
+<ul>
+<li>Shift_L to Lazy_Shift_L</li>
+<li>Shift_R to Lazy_Shift_R</li>
+<li>Option + Tab to Command + Tab</li>
+<li>Use PC Style Copy/Paste</li>
+<li>Use PC Style Undo</li>
+<li>Use PC Style Select All</li>
+<li>Use PC Style Save</li>
+<li>Use PC Style Find</li>
+<li>Use PC Style New Tab in Browser</li>
+</ul>
+
+
+<h1>Done</h1>
+
+<p>Now I can use control-c and control-v in both of my machine. The shortcut won't mess up my head anymore. :)</p>
+]]></content>
+  </entry>
+  
+</feed>

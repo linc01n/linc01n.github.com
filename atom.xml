@@ -4,7 +4,7 @@
   <title><![CDATA[Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-03-19T22:23:16+08:00</updated>
+  <updated>2013-03-19T22:29:08+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -251,6 +251,389 @@ Click on &#8220;Manage Virtual Hub&#8221;</p>
 <h3>Done</h3>
 
 <p>You can try to connect to the vpn server.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Django Admin: Auto Select Current User]]></title>
+    <link href="http://linc01n.github.com/blog/2011/10/18/django-admin-auto-select-current-user/"/>
+    <updated>2011-10-18T17:38:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2011/10/18/django-admin-auto-select-current-user</id>
+    <content type="html"><![CDATA[<h2>Background</h2>
+
+<p>There are often times in developing a CMS need to mark down who created the record. Django provide a nice admin interface for us. But when we only use the default, user need to select who they are by themselves. We want to auto select for them and they can&#8217;t pretend to be others.</p>
+
+<h2>code</h2>
+
+<p>In the django models.py, we have the following:</p>
+
+<figure class='code'><figcaption><span>models.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Notes</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">content</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">created_by</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&quot;Created By&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We want the created_by to be set automatically for the logged in user.</p>
+
+<p>So in our admin:</p>
+
+<figure class='code'><figcaption><span>admin  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">NotesAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">formfield_for_foreignkey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_field</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">db_field</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;created_by&#39;</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;queryset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NotesAdmin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">formfield_for_foreignkey</span><span class="p">(</span><span class="n">db_field</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">get_readonly_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class='line'>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">readonly_fields</span> <span class="o">+</span> <span class="p">(</span><span class="s">&#39;created_by&#39;</span><span class="p">,)</span>
+</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">readonly_fields</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">add_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">form_url</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">extra_context</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span class='line'>        <span class="n">data</span><span class="p">[</span><span class="s">&#39;created_by&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+</span><span class='line'>        <span class="n">request</span><span class="o">.</span><span class="n">GET</span> <span class="o">=</span> <span class="n">data</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NotesAdmin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">form_url</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">extra_context</span><span class="o">=</span><span class="n">extra_context</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Notes</span><span class="p">,</span> <span class="n">NotesAdmin</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>explanation</h2>
+
+<p>The add_view function help us to select the current user from the drop-down list.</p>
+
+<p>The formfield_for_foreignkey help us to filter out other users.</p>
+
+<p>By combining this two function we get:</p>
+
+<p><img src="http://linc01n.github.com/images/created_by.jpg" alt="Created By" /></p>
+
+<p>The last get_readonly_fields function make this field can&#8217;t be edit after the creation.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Synergey Key Mapping Between Mac and Windows]]></title>
+    <link href="http://linc01n.github.com/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/"/>
+    <updated>2011-10-03T21:49:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows</id>
+    <content type="html"><![CDATA[<h1>My Brain is going to Explode!</h1>
+
+<p>Synergy is doing a great job about sharing keyboard and mouse between OSes. But when it comes to mac and windows, there are some new problems.</p>
+
+<p>Mac and Windows have different keyboard shortcut. The most confusing shortcut fighting in my head is copy and paste. Synergy support copy and paste between machine which is nice. So I can copy some text from windows and paste them in mac.</p>
+
+<p>Here comes the problem. I control-c in my windows and go to my Mac I hit control-v all the time. This is a vice versa problem. To solve it, I need to map control key to command key.</p>
+
+<p>But setting up keybinding is hard in synergy. It is quite hard to make synergy working between my Mac Lion and Win 7. So I decided not to touch the config file of synergy.</p>
+
+<h1>Solution: KeyRemap4MacBook</h1>
+
+<p>Download from tekezo website: <a href="http://pqrs.org/macosx/keyremap4macbook/index.html">http://pqrs.org/macosx/keyremap4macbook/index.html</a></p>
+
+<p>Direct Link : <a href="http://pqrs.org/macosx/keyremap4macbook/files/KeyRemap4MacBook-7.4.0.pkg.zip">http://pqrs.org/macosx/keyremap4macbook/files/KeyRemap4MacBook-7.4.0.pkg.zip</a></p>
+
+<p>After installing the pkg and reboot, go to System Perferences->KeyRemap4MacBook.</p>
+
+<p>Tick the following combobox:</p>
+
+<ul>
+<li>Shift_L to Lazy_Shift_L</li>
+<li>Shift_R to Lazy_Shift_R</li>
+<li>Option + Tab to Command + Tab</li>
+<li>Use PC Style Copy/Paste</li>
+<li>Use PC Style Undo</li>
+<li>Use PC Style Select All</li>
+<li>Use PC Style Save</li>
+<li>Use PC Style Find</li>
+<li>Use PC Style New Tab in Browser</li>
+</ul>
+
+
+<h1>Done</h1>
+
+<p>Now I can use control-c and control-v in both of my machine. The shortcut won&#8217;t mess up my head anymore. :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Synergy on Mac OSX Lion]]></title>
+    <link href="http://linc01n.github.com/blog/2011/09/28/synergy-on-mac-osx-lion/"/>
+    <updated>2011-09-28T12:31:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2011/09/28/synergy-on-mac-osx-lion</id>
+    <content type="html"><![CDATA[<p><em>Update the QuickSynergy Download link</em></p>
+
+<h1>tl;dr</h1>
+
+<h3>On Mac:</h3>
+
+<p>Download: <a href="http://quicksynergy.googlecode.com/files/QuickSynergy.dmg">QuickSynergy for Mac</a></p>
+
+<p>Setup the Windows Computer name or IP on the display edge in Quick Synergy.</p>
+
+<p>Press Start.</p>
+
+<h3>On Windows:</h3>
+
+<p>Download: <a href="http://synergy.googlecode.com/files/synergy-1.3.7-Windows-x86.exe">Synergy 1.3.7</a></p>
+
+<p>Install it and run it.</p>
+
+<p>Type in the Mac IP in the &#8220;Other Computer&#8217;s Host Name&#8221;</p>
+
+<h3>Done</h3>
+
+<h1>Same mouse and keyboard for Mac and Windows</h1>
+
+<p><a href="http://synergy-foss.org/">Synergy</a> is a software kvm. It can let you share same set of mouse and keyboard between two different computers through TCP/IP.</p>
+
+<h2>Synergy 1.3.7</h2>
+
+<p>I want to setup my Lion as server and Win7 as client. After trying with multiple combination of version and configuration, I found Quick Synergy can at least work.</p>
+
+<p>Problems with 1.4.4 Beta Server on Lion is the keyboard can&#8217;t use the Shift key in Windows machine. Problmes with 1.3.7 Server is that I can make my keyboard work in Windows machine.</p>
+
+<h2>Solutions</h2>
+
+<p>Install Quick Synergy with the above instruction. Simple configuration and save all the hassle.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Enabling NTFS Write Support on Mac OSX Lion]]></title>
+    <link href="http://linc01n.github.com/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion/"/>
+    <updated>2011-09-25T22:25:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion</id>
+    <content type="html"><![CDATA[<h2>Mac OSX Lion weaknesses</h2>
+
+<p>I have just bought my new Macbook Pro and setting it up as my dev box. Mac OSX has out-of-the-box support for NTFS read. If you want to transfer file between OSes you will choose FAT32. But FAT32 has one big problem which is no file can exceed 4GB size limit.</p>
+
+<h2>Setup procedure: fuse4x + ntfs-3g</h2>
+
+<p>Install Xcode 4 from App store <a href="http://itunes.apple.com/app/xcode/id448457090?mt=12">Link</a></p>
+
+<p>After download, Click the &#8220;Install Xcode&#8221; from the Launchpad. (I really don&#8217;t understand why Xcode behave like this when it comes to App Store. : ( )</p>
+
+<p>Then open Terminal:
+Press ⌘ + Space then type Terminal</p>
+
+<p>Install Homebrew</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install fuse4x + ntfs-3g</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ brew install ntfs-3g</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Load fuse4x kext to kernel</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cp -rfX /usr/local/Cellar/fuse4x-kext/0.8.12/Library/Extensions/fuse4x.kext /System/Library/Extensions
+</span><span class='line'>$ sudo chmod +s /System/Library/Extensions/fuse4x.kext/Support/load_fuse4x</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Setup Auto-mount</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo mv /sbin/mount_ntfs /sbin/mount_ntfs.orig
+</span><span class='line'>$ sudo touch /sbin/mount_ntfs
+</span><span class='line'>$ sudo chmod 0775 /sbin/mount_ntfs
+</span><span class='line'>$ sudo chown 0:0 /sbin/mount_ntfs
+</span><span class='line'>$ sudo nano /sbin/mount_ntfs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After the last command, a text editor will open. Paste the following code to the editor.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
+</span><span class='line'>
+</span><span class='line'>VOLUME_NAME="${@:$#}"
+</span><span class='line'>VOLUME_NAME=${VOLUME_NAME#/Volumes/}
+</span><span class='line'>USER_ID=501
+</span><span class='line'>GROUP_ID=20
+</span><span class='line'>TIMEOUT=20
+</span><span class='line'>
+</span><span class='line'>if [ `/usr/bin/stat -f "%u" /dev/console` -eq 0 ]; then
+</span><span class='line'>        USERNAME=`/usr/bin/defaults read /library/preferences/com.apple.loginwindow | /usr/bin/grep autoLoginUser | /usr/bin/awk '{ print $3 }' | /usr/bin/sed 's/;//'`
+</span><span class='line'>        if [ "$USERNAME" = "" ]; then
+</span><span class='line'>                until [ `stat -f "%u" /dev/console` -ne 0 ] || [ $TIMEOUT -eq 0 ]; do
+</span><span class='line'>                        sleep 1
+</span><span class='line'>                        let TIMEOUT--
+</span><span class='line'>                done
+</span><span class='line'>                if [ $TIMEOUT -ne 0 ]; then
+</span><span class='line'>                        USER_ID=`/usr/bin/stat -f "%u" /dev/console`
+</span><span class='line'>                        GROUP_ID=`/usr/bin/stat -f "%g" /dev/console`
+</span><span class='line'>                fi
+</span><span class='line'>        else
+</span><span class='line'>                USER_ID=`/usr/bin/id -u $USERNAME`
+</span><span class='line'>                GROUP_ID=`/usr/bin/id -g $USERNAME`
+</span><span class='line'>        fi
+</span><span class='line'>else
+</span><span class='line'>        USER_ID=`/usr/bin/stat -f "%u" /dev/console`
+</span><span class='line'>        GROUP_ID=`/usr/bin/stat -f "%g" /dev/console`
+</span><span class='line'>fi
+</span><span class='line'>
+</span><span class='line'>/usr/local/bin/ntfs-3g \
+</span><span class='line'>        -o volname="${VOLUME_NAME}" \
+</span><span class='line'>        -o local \
+</span><span class='line'>        -o noappledouble \
+</span><span class='line'>        -o negative_vncache \
+</span><span class='line'>        -o auto_xattr \
+</span><span class='line'>        -o auto_cache \
+</span><span class='line'>        -o noatime \
+</span><span class='line'>        -o windows_names \
+</span><span class='line'>        -o user_xattr \
+</span><span class='line'>        -o inherit \
+</span><span class='line'>        -o uid=$USER_ID \
+</span><span class='line'>        -o gid=$GROUP_ID \
+</span><span class='line'>        -o allow_other \
+</span><span class='line'>        "$@" &&gt; /var/log/ntfsmnt.log
+</span><span class='line'>
+</span><span class='line'>exit $?;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The USER_ID should be 501 if you are the only user of your machine. or you can update the USER_ID and GROUP_ID by typing this to check your user and group</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ id -u && id -g</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which the first line is user id, second line is group id.</p>
+
+<p><em>source: <a href="http://fernandoff.posterous.com/ntfs-write-support-on-osx-lion-with-ntfs-3g-f">fernando&#8217;s blog</a> (I edit the path of ntfs-3g since we install in Homebrew)</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Readable Code]]></title>
+    <link href="http://linc01n.github.com/blog/2011/09/07/readable-code/"/>
+    <updated>2011-09-07T22:29:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2011/09/07/readable-code</id>
+    <content type="html"><![CDATA[<h1>Clean Code</h1>
+
+<p>I have graduated from college this June. The culture in my college is you do all group projects by youself. So collaboration is some what new to me.</p>
+
+<p>I started working in a web company after my graduation. After two months of non-stop coding day and night, I learnt a few things about coding.</p>
+
+<p>This time I will talk about coding practice.</p>
+
+<h2>Background</h2>
+
+<p>The project I invovled was a CMS-like Web Site Builder. The whole team had 4 coders. We used SVN as a version control tools for collaboration. A PHP MVC framework is used in developing the project(God bless :) ).</p>
+
+<h2>Coding Practice</h2>
+
+<p>Assignment or functions call can tightly packed:</p>
+
+<pre><code>a = 1;
+foo();
+bar();
+</code></pre>
+
+<p>Loop should wrap with newline</p>
+
+<pre><code>foo();
+
+if(bar){
+  a = 1;
+}
+
+foo();
+
+for($i = 0; $i &lt; 10; $i++){
+
+  if(bar){
+    exit();
+  }
+
+}
+
+exit();
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>I always think coding practice is not a very important thing in development. But after I worked with a project that contains 30K LOC, I understand this kind of agreement can help with code maintenance and easier for debugging.</p>
 ]]></content>
   </entry>
   

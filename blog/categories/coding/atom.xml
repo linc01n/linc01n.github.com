@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: coding | Coding, Coding, Coding]]></title>
+  <link href="http://linc01n.github.com/blog/categories/coding/atom.xml" rel="self"/>
+  <link href="http://linc01n.github.com/"/>
+  <updated>2013-03-19T22:29:08+08:00</updated>
+  <id>http://linc01n.github.com/</id>
+  <author>
+    <name><![CDATA[Lincoln Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Django Admin: Auto Select Current User]]></title>
+    <link href="http://linc01n.github.com/blog/2011/10/18/django-admin-auto-select-current-user/"/>
+    <updated>2011-10-18T17:38:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2011/10/18/django-admin-auto-select-current-user</id>
+    <content type="html"><![CDATA[<h2>Background</h2>
+
+<p>There are often times in developing a CMS need to mark down who created the record. Django provide a nice admin interface for us. But when we only use the default, user need to select who they are by themselves. We want to auto select for them and they can't pretend to be others.</p>
+
+<h2>code</h2>
+
+<p>In the django models.py, we have the following:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>models.py  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Notes</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+</span><span class='line'><span class="n">content</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+</span><span class='line'><span class="n">date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">()</span>
+</span><span class='line'><span class="n">created_by</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&quot;Created By&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We want the created_by to be set automatically for the logged in user.</p>
+
+<p>So in our admin:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>admin  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">NotesAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">formfield_for_foreignkey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_field</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">db_field</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;created_by&#39;</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;queryset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NotesAdmin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">formfield_for_foreignkey</span><span class="p">(</span><span class="n">db_field</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">get_readonly_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">readonly_fields</span> <span class="o">+</span> <span class="p">(</span><span class="s">&#39;created_by&#39;</span><span class="p">,)</span>
+</span><span class='line'>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">readonly_fields</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">add_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">form_url</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">extra_context</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">data</span><span class="p">[</span><span class="s">&#39;created_by&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+</span><span class='line'>    <span class="n">request</span><span class="o">.</span><span class="n">GET</span> <span class="o">=</span> <span class="n">data</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">NotesAdmin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">form_url</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">extra_context</span><span class="o">=</span><span class="n">extra_context</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Notes</span><span class="p">,</span> <span class="n">NotesAdmin</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>explanation</h2>
+
+<p>The add_view function help us to select the current user from the drop-down list.</p>
+
+<p>The formfield_for_foreignkey help us to filter out other users.</p>
+
+<p>By combining this two function we get:</p>
+
+<p><img src="/images/created_by.jpg" alt="Created By" /></p>
+
+<p>The last get_readonly_fields function make this field can't be edit after the creation.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Readable Code]]></title>
+    <link href="http://linc01n.github.com/blog/2011/09/07/readable-code/"/>
+    <updated>2011-09-07T22:29:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2011/09/07/readable-code</id>
+    <content type="html"><![CDATA[<h1>Clean Code</h1>
+
+<p>I have graduated from college this June. The culture in my college is you do all group projects by youself. So collaboration is some what new to me.</p>
+
+<p>I started working in a web company after my graduation. After two months of non-stop coding day and night, I learnt a few things about coding.</p>
+
+<p>This time I will talk about coding practice.</p>
+
+<h2>Background</h2>
+
+<p>The project I invovled was a CMS-like Web Site Builder. The whole team had 4 coders. We used SVN as a version control tools for collaboration. A PHP MVC framework is used in developing the project(God bless :) ).</p>
+
+<h2>Coding Practice</h2>
+
+<p>Assignment or functions call can tightly packed:</p>
+
+<pre><code>a = 1;
+foo();
+bar();
+</code></pre>
+
+<p>Loop should wrap with newline</p>
+
+<pre><code>foo();
+
+if(bar){
+  a = 1;
+}
+
+foo();
+
+for($i = 0; $i &lt; 10; $i++){
+
+  if(bar){
+    exit();
+  }
+
+}
+
+exit();
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>I always think coding practice is not a very important thing in development. But after I worked with a project that contains 30K LOC, I understand this kind of agreement can help with code maintenance and easier for debugging.</p>
+]]></content>
+  </entry>
+  
+</feed>
