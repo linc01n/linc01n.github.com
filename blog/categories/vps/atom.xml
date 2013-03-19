@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vps | Coding, Coding, Coding]]></title>
+  <link href="http://linc01n.github.com/blog/categories/vps/atom.xml" rel="self"/>
+  <link href="http://linc01n.github.com/"/>
+  <updated>2013-03-19T22:23:16+08:00</updated>
+  <id>http://linc01n.github.com/</id>
+  <author>
+    <name><![CDATA[Lincoln Lee]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SoftEther on VPS]]></title>
+    <link href="http://linc01n.github.com/blog/2013/03/19/softether-on-vps/"/>
+    <updated>2013-03-19T19:06:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2013/03/19/softether-on-vps</id>
+    <content type="html"><![CDATA[<p>I saw a post on <a href="http://www.lowendtalk.com/discussion/8783/softether-very-powerful-easy-to-use-multi-protocol-vpn-software">lowendtalk</a> last week introducing a new piece of vpn software call SoftEther.</p>
+
+<h3>What is <a href="http://www.softether.org/">SoftEther</a></h3>
+
+<p>A Free ​Cross-platform Multi-protocol VPN program,
+as an academic project from <a href="http://www.tsukuba.ac.jp/english/">University of Tsukuba</a>.</p>
+
+<p>It is a single server which support SSL-VPN (HTTPS) and 6 major VPN protocols (OpenVPN, IPsec, L2TP, MS-SSTP, L2TPv3 and EtherIP).</p>
+
+<p>I would like to also highlight the <a href="http://www.softether.org/1-features/1._Ultimate_Powerful_VPN_Connectivity#1.6._VPN_over_ICMP.2C_and_VPN_over_DNS_(Awesome!)">VPN over ICMP and VPN over DNS</a> feature if you are inside a very strict network.</p>
+
+<h3>VPS Setup Guide</h3>
+
+<p>Requirement: VPS</p>
+
+<p>I am using vps from buyvm. I got from a year deal which is USD12/year.</p>
+
+<ul>
+<li>Spec:
+
+<ul>
+<li>RAM: 128MB</li>
+<li>Burst: 256MB</li>
+<li>Disk Space: 15GB</li>
+<li>Bandwidth: 500GB</li>
+<li>Location: Buffalo, USA</li>
+</ul>
+</li>
+<li>OS:
+
+<ul>
+<li>Debian 6.0 64bit (minimal)</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Make sure you login root as follow:
+<img src="/images/softether_vps/login.png" alt="login as root" /></p>
+
+<p>Before installing SoftEther Server let us install some prerequisite.
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (build_tools.sh)</span> <a href='/downloads/code/build_tools.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>apt-get update
+</span><span class='line'>apt-get install build-essential
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Go to <a href="http://www.softether-download.com/en.aspx?product=softether">SoftEther</a> to download the server binary.
+<img src="/images/softether_vps/download_selection.png" alt="download selection" /></p>
+
+<p>I am using Ver 1.00, Build 9029, rc2 in this tutorial.</p>
+
+<p>After download, run
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (make.sh)</span> <a href='/downloads/code/make.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>tar zxf softether-vpnserver-v1.00-9029-rc2-2013.03.16-linux-x64-64bit.tar.gz
+</span><span class='line'><span class="nb">cd </span>vpnserver
+</span><span class='line'>make
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Read the Agreement and press 1 three times.</p>
+
+<p>Then we move the dir to /usr/local/
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (install.sh)</span> <a href='/downloads/code/install.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">cd</span> ..
+</span><span class='line'>mv vpnserver /usr/local
+</span><span class='line'><span class="nb">cd</span> /usr/local/vpnserver/
+</span><span class='line'>chmod 600 *
+</span><span class='line'>chmod 700 vpncmd
+</span><span class='line'>chmod 700 vpnserver
+</span><span class='line'>nano /etc/init.d/vpnserver
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>paste the following content to nano
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (vpnserver.sh)</span> <a href='/downloads/code/vpnserver.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="c"># chkconfig: 2345 99 01</span>
+</span><span class='line'><span class="c"># description: SoftEther VPN Server</span>
+</span><span class='line'><span class="nv">DAEMON</span><span class="o">=</span>/usr/local/vpnserver/vpnserver
+</span><span class='line'><span class="nv">LOCK</span><span class="o">=</span>/var/lock/subsys/vpnserver
+</span><span class='line'><span class="nb">test</span> -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>0
+</span><span class='line'><span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+</span><span class='line'>start<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> start
+</span><span class='line'>touch <span class="nv">$LOCK</span>
+</span><span class='line'>;;
+</span><span class='line'>stop<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> stop
+</span><span class='line'>rm <span class="nv">$LOCK</span>
+</span><span class='line'>;;
+</span><span class='line'>restart<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> stop
+</span><span class='line'>sleep 3
+</span><span class='line'><span class="nv">$DAEMON</span> start
+</span><span class='line'>;;
+</span><span class='line'>*<span class="o">)</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Usage: $0 {start|stop|restart}&quot;</span>
+</span><span class='line'><span class="nb">exit </span>1
+</span><span class='line'><span class="k">esac</span>
+</span><span class='line'><span class="nb">exit </span>0
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>ctrl-o ret ctrl-x</p>
+
+<p>After that we enable the service
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (service.sh)</span> <a href='/downloads/code/service.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>chmod 755 /etc/init.d/vpnserver
+</span><span class='line'>mkdir /var/lock/subsys
+</span><span class='line'>update-rc.d vpnserver defaults
+</span><span class='line'>/etc/init.d/vpnserver start
+</span><span class='line'><span class="nb">cd</span> /usr/local/vpnserver/
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Then we need to do a checking.
+<code>
+./vpncmd
+3
+check
+</code></p>
+
+<p>You should get 4 "Pass".</p>
+
+<p>We need to set the server admin password
+<code>
+./vpncmd
+1
+ret
+ret
+VPN Server&gt;ServerPasswordSet
+</code>
+Enter the admin password.</p>
+
+<p>I do the setting on a windows client.
+It is running
+<img src="/images/softether_vps/server_manager.png" alt="server manager" /></p>
+
+<p>Install it, run it, click New setting. Input ip and password.
+<img src="/images/softether_vps/setting.png" alt="input setting" /></p>
+
+<p>Then connect to it.
+On successful login, it will pop up Easy Setup
+<img src="/images/softether_vps/easy_setup.png" alt="easy setup" />
+Check Remote Access Server and Next
+<img src="/images/softether_vps/warning.png" alt="warning" /></p>
+
+<p>Yes</p>
+
+<p><img src="/images/softether_vps/virtual_hub.png" alt="Virtual Hub name" /></p>
+
+<p>OK</p>
+
+<p><img src="/images/softether_vps/l2tp.png" alt="Setup L2TP" />
+Check Enable L2TP Server Function and input your own pre-share key</p>
+
+<p>OK</p>
+
+<p><img src="/images/softether_vps/azure.png" alt="Azure" />
+We disable Azure VPN</p>
+
+<p><img src="/images/softether_vps/create_user.png" alt="Create User" />
+Then we need to create a new user. This is trivial.
+<img src="/images/softether_vps/user.png" alt="User" /></p>
+
+<p><img src="/images/softether_vps/manager.png" alt="Manager" />
+Click on "Manage Virtual Hub"</p>
+
+<p>Click on "Secure NAT"
+<img src="/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
+
+<p>Enable the Virtual NAT</p>
+
+<h3>Done</h3>
+
+<p>You can try to connect to the vpn server.</p>
+]]></content>
+  </entry>
+  
+</feed>
