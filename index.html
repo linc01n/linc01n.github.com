@@ -223,9 +223,23 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
 <span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
-</span><span class='line'><span class="c"># chkconfig: 2345 99 01</span>
-</span><span class='line'><span class="c"># description: SoftEther VPN Server</span>
+</span><span class='line'><span class="c">### BEGIN INIT INFO</span>
+</span><span class='line'><span class="c"># Provides:          vpnserver</span>
+</span><span class='line'><span class="c"># Required-Start:    $remote_fs $syslog</span>
+</span><span class='line'><span class="c"># Required-Stop:     $remote_fs $syslog</span>
+</span><span class='line'><span class="c"># Default-Start:     2 3 4 5</span>
+</span><span class='line'><span class="c"># Default-Stop:      0 1 6</span>
+</span><span class='line'><span class="c"># Short-Description: Start daemon at boot time</span>
+</span><span class='line'><span class="c"># Description:       Enable Softether by daemon.</span>
+</span><span class='line'><span class="c">### END INIT INFO</span>
 </span><span class='line'><span class="nv">DAEMON</span><span class="o">=</span>/usr/local/vpnserver/vpnserver
 </span><span class='line'><span class="nv">LOCK</span><span class="o">=</span>/var/lock/subsys/vpnserver
 </span><span class='line'><span class="nb">test</span> -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>0
