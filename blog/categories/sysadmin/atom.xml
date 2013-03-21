@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sysadmin | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/blog/categories/sysadmin/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-03-21T21:16:19+08:00</updated>
+  <updated>2013-03-21T21:40:57+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -22,7 +22,7 @@
 
 <h3>What is <a href="http://www.softether.org/">SoftEther</a></h3>
 
-<p>A Free ​Cross-platform Multi-protocol VPN program,
+<p>A Free Cross-platform Multi-protocol VPN program,
 as an academic project from <a href="http://www.tsukuba.ac.jp/english/">University of Tsukuba</a>.</p>
 
 <p>It is a single server which support SSL-VPN (HTTPS) and 6 major VPN protocols (OpenVPN, IPsec, L2TP, MS-SSTP, L2TPv3 and EtherIP).</p>
@@ -30,6 +30,14 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>I would like to also highlight the <a href="http://www.softether.org/1-features/1._Ultimate_Powerful_VPN_Connectivity#1.6._VPN_over_ICMP.2C_and_VPN_over_DNS_(Awesome!)">VPN over ICMP and VPN over DNS</a> feature if you are inside a very strict network.</p>
 
 <h3>VPS Setup Guide</h3>
+
+<blockquote><p>SoftEther author contacted me to highlight serveral points:</p>
+
+<ul>
+<li>On physical server, local bridge will perform better than SecureNAT</li>
+<li><strong>DO NOT</strong> enable both local bridge and SecureNAT at the same time. Packets will loop infinitly and make your server <code>100%</code> CPU usage.</li>
+</ul>
+</blockquote>
 
 <p>Requirement: VPS</p>
 
@@ -251,6 +259,8 @@ Click on "Manage Virtual Hub"</p>
 <p><img src="/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
 
 <p>Enable the Virtual NAT</p>
+
+<blockquote><p>Again <strong>DO NOT</strong> enable SecureNAT and local bridge at the same time!</p></blockquote>
 
 <h3>Done</h3>
 
