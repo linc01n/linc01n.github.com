@@ -4,7 +4,7 @@
   <title><![CDATA[Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-03-21T21:40:57+08:00</updated>
+  <updated>2013-03-21T21:42:11+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -283,7 +283,7 @@ Click on &#8220;Manage Virtual Hub&#8221;</p>
 
 <h3>Done</h3>
 
-<p>You can try to connect to the vpn server.</p>
+<p>You can try to connect to the vpn server through L2TP/IPSec.</p>
 ]]></content>
   </entry>
   
