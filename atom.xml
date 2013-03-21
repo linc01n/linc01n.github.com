@@ -4,11 +4,11 @@
   <title><![CDATA[Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-03-21T02:37:17+08:00</updated>
+  <updated>2013-03-21T21:16:19+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
-    
+    <email><![CDATA[git@lincoln.hk]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
@@ -55,8 +55,9 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 </ul>
 
 
-<p>Make sure you login root as follow:
-<img src="http://linc01n.github.com/images/softether_vps/login.png" alt="login as root" /></p>
+<p>Make sure you login root as follow:</p>
+
+<p><img src="http://linc01n.github.com/images/softether_vps/login.png" alt="login as root" /></p>
 
 <p>Before installing SoftEther Server let us install some prerequisite.</p>
 
@@ -68,8 +69,9 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Go to <a href="http://www.softether-download.com/en.aspx?product=softether">SoftEther</a> to download the server binary.
-<img src="http://linc01n.github.com/images/softether_vps/download_selection.png" alt="download selection" /></p>
+<p>Go to <a href="http://www.softether-download.com/en.aspx?product=softether">SoftEther</a> to download the server binary.</p>
+
+<p><img src="http://linc01n.github.com/images/softether_vps/download_selection.png" alt="download selection" /></p>
 
 <p>I am using Ver 1.00, Build 9029, rc2 in this tutorial.</p>
 
@@ -224,17 +226,21 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>Enter the admin password.</p>
 
 <p>I do the setting on a windows client.
-It is running
-<img src="http://linc01n.github.com/images/softether_vps/server_manager.png" alt="server manager" /></p>
+It is running</p>
 
-<p>Install it, run it, click New setting. Input ip and password.
-<img src="http://linc01n.github.com/images/softether_vps/setting.png" alt="input setting" /></p>
+<p><img src="http://linc01n.github.com/images/softether_vps/server_manager.png" alt="server manager" /></p>
+
+<p>Install it, run it, click New setting. Input ip and password.</p>
+
+<p><img src="http://linc01n.github.com/images/softether_vps/setting.png" alt="input setting" /></p>
 
 <p>Then connect to it.
-On successful login, it will pop up Easy Setup
-<img src="http://linc01n.github.com/images/softether_vps/easy_setup.png" alt="easy setup" />
-Check Remote Access Server and Next
-<img src="http://linc01n.github.com/images/softether_vps/warning.png" alt="warning" /></p>
+On successful login, it will pop up Easy Setup</p>
+
+<p><img src="http://linc01n.github.com/images/softether_vps/easy_setup.png" alt="easy setup" />
+Check Remote Access Server and Next</p>
+
+<p><img src="http://linc01n.github.com/images/softether_vps/warning.png" alt="warning" /></p>
 
 <p>Yes</p>
 
@@ -250,15 +256,18 @@ Check Enable L2TP Server Function and input your own pre-share key</p>
 <p><img src="http://linc01n.github.com/images/softether_vps/azure.png" alt="Azure" />
 We disable Azure VPN</p>
 
-<p><img src="http://linc01n.github.com/images/softether_vps/create_user.png" alt="Create User" />
-Then we need to create a new user. This is trivial.
-<img src="http://linc01n.github.com/images/softether_vps/user.png" alt="User" /></p>
+<p><img src="http://linc01n.github.com/images/softether_vps/create_user.png" alt="Create User" /></p>
+
+<p>Then we need to create a new user. This is trivial.</p>
+
+<p><img src="http://linc01n.github.com/images/softether_vps/user.png" alt="User" /></p>
 
 <p><img src="http://linc01n.github.com/images/softether_vps/manager.png" alt="Manager" />
 Click on &#8220;Manage Virtual Hub&#8221;</p>
 
-<p>Click on &#8220;Secure NAT&#8221;
-<img src="http://linc01n.github.com/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
+<p>Click on &#8220;Secure NAT&#8221;</p>
+
+<p><img src="http://linc01n.github.com/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
 
 <p>Enable the Virtual NAT</p>
 
