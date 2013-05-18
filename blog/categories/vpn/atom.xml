@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vpn | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/blog/categories/vpn/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-05-18T17:34:12+08:00</updated>
+  <updated>2013-05-18T17:39:01+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -263,6 +263,8 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <h3>VPS Setup Guide</h3>
 
+<p>This post use SecureNAT. You may want to <a href="http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/">setup local bridge</a>.</p>
+
 <blockquote><p>SoftEther author contacted me to highlight serveral points:</p>
 
 <ul>
@@ -273,7 +275,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>Requirement: VPS</p>
 
-<p>I am using vps from buyvm. I got from a year deal which is USD12/year.</p>
+<p>I am using vps from buyvm. I got from a year deal which is USD12/year. I would recommend <a href="https://clientarea.ramnode.com/aff.php?aff=319">Ramnode</a> as a VPS provider. Their VPS is speedy and support is amazing.</p>
 
 <ul>
 <li>Spec:
@@ -486,7 +488,7 @@ We disable Azure VPN</p>
 <p><img src="/images/softether_vps/manager.png" alt="Manager" />
 Click on "Manage Virtual Hub"</p>
 
-<p>Click on "Secure NAT"</p>
+<p>Click on "Secure NAT" (If you want a faster connection we can refer to my 2nd post on <a href="http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/">softether</a>)</p>
 
 <p><img src="/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
 
