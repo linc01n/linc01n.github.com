@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>SoftEther on VPS - Coding, Coding, Coding</title>
+	<title>Softether on VPS using local bridge - Coding, Coding, Coding</title>
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="SoftEther on VPS I saw a post on lowendtalk last week introducing a new piece of vpn software call SoftEther. What is SoftEther A Free Cross- &hellip;">
+	<meta name="description" content="Softether on VPS using local bridge This post continues on the last post about Softether setup on a VPS. Problem on SecureNAT SecureNAT is a fairly &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -17,7 +17,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="Coding, Coding, Coding" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://linc01n.github.com/blog/2013/03/19/softether-on-vps/">
+	<link rel="canonical" href="http://linc01n.github.com/blog/2013/05/17/softether-on-vps-using-local-bridge/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -117,109 +117,76 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">SoftEther on VPS</h1>
-	<div class="entry-content" itemprop="articleBody"><p>I saw a post on <a href="http://www.lowendtalk.com/discussion/8783/softether-very-powerful-easy-to-use-multi-protocol-vpn-software">lowendtalk</a> last week introducing a new piece of vpn software call SoftEther.</p>
+	<h1 class="title" itemprop="name">Softether on VPS using local bridge</h1>
+	<div class="entry-content" itemprop="articleBody"><p>This post continues on the last post about <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether setup on a VPS</a>.</p>
 
-<h3>What is <a href="http://www.softether.org/">SoftEther</a></h3>
+<h3>Problem on SecureNAT</h3>
 
-<p>A Free Cross-platform Multi-protocol VPN program,
-as an academic project from <a href="http://www.tsukuba.ac.jp/english/">University of Tsukuba</a>.</p>
+<p>SecureNAT is a fairly simple way to setup Softether. You don&#8217;t need a lot of sysadmin skill and network understanding in order to get Softether up and running.</p>
 
-<p>It is a single server which support SSL-VPN (HTTPS) and 6 major VPN protocols (OpenVPN, IPsec, L2TP, MS-SSTP, L2TPv3 and EtherIP).</p>
+<p>The problem is SecureNAT is a bit <strong>SLOW</strong>. I will show a comparison at the end of this article.</p>
 
-<p>I would like to also highlight the <a href="http://www.softether.org/1-features/1._Ultimate_Powerful_VPN_Connectivity#1.6._VPN_over_ICMP.2C_and_VPN_over_DNS_(Awesome!)">VPN over ICMP and VPN over DNS</a> feature if you are inside a very strict network.</p>
+<p>We can boost the performance using a local bridge.</p>
 
-<h3>VPS Setup Guide</h3>
+<h3>Softether using local bridge</h3>
 
-<blockquote><p>SoftEther author contacted me to highlight serveral points:</p>
+<p>To start with you need Softether installed and setup. You can follow the guide on <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether on VPS</a></p>
 
-<ul>
-<li>On physical server, local bridge will perform better than SecureNAT</li>
-<li><strong>DO NOT</strong> enable both local bridge and SecureNAT at the same time. Packets will loop infinitly and make your server <code>100%</code> CPU usage.</li>
-</ul>
-</blockquote>
+<p>Just skip the last step &#8220;Enable the Virtual NAT&#8221;</p>
 
-<p>Requirement: VPS</p>
+<h3>Local bridge Setup</h3>
 
-<p>I am using vps from buyvm. I got from a year deal which is USD12/year.</p>
+<blockquote><p><strong>Network setup</strong></p>
 
-<ul>
-<li>Spec:
+<p>VPN Server IP: 192.168.7.1</p>
 
-<ul>
-<li>RAM: 128MB</li>
-<li>Burst: 256MB</li>
-<li>Disk Space: 15GB</li>
-<li>Bandwidth: 500GB</li>
-<li>Location: Buffalo, USA</li>
-</ul>
-</li>
-<li>OS:
+<p>VPN Client IP Range: 192.168.7.50-192.168.7.60</p>
 
-<ul>
-<li>Debian 6.0 64bit (minimal)</li>
-</ul>
-</li>
-</ul>
+<p>Tap Device name: tap_soft</p></blockquote>
 
+<p>From here we go to the &#8220;Local Bridge Setting&#8221;</p>
 
-<p>Make sure you login root as follow:</p>
+<p><img src="/images/softether_local_bridge/local-bridge-setting.png" alt="Local Bridge Setting" /></p>
 
-<p><img src="/images/softether_vps/login.png" alt="login as root" /></p>
+<p>First we choose the Virtual Hub. It should be only one for normal setup.</p>
 
-<p>Before installing SoftEther Server let us install some prerequisite.</p>
+<p>Then we check the tap device box.</p>
 
-<figure class='code'><figcaption><span> (build_tools.sh)</span> <a href='/downloads/code/build_tools.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>apt-get update
-</span><span class='line'>apt-get install build-essential
-</span></code></pre></td></tr></table></div></figure>
+<p>After that we type in the name of the tap device(I use soft here for simplicity).</p>
+
+<p><img src="/images/softether_local_bridge/create-local-bridge.png" alt="Create Local Bridge" /></p>
+
+<p>After the creation of the local bridge we jump back to our server. And run</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># ifconfig tap_soft </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Go to <a href="http://www.softether-download.com/en.aspx?product=softether">SoftEther</a> to download the server binary.</p>
+<p>It should show you something similar to this</p>
 
-<p><img src="/images/softether_vps/download_selection.png" alt="download selection" /></p>
+<p><img src="/images/softether_local_bridge/check-on-the-sever.png" alt="Check on the server" /></p>
 
-<p>I am using Ver 1.00, Build 9029, rc2 in this tutorial.</p>
+<p>Because we are not going to use SecureNAT and SecureDHCP. We need to install a DHCP server on our VPS. We are going to use dnsmasq as our DHCP server.</p>
 
-<p>After download, run</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># apt-get install dnsmasq</span></code></pre></td></tr></table></div></figure>
 
-<figure class='code'><figcaption><span> (make.sh)</span> <a href='/downloads/code/make.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+
+<p>Now edit the /etc/dnsmasq.conf file. Add these 3 lines at the end.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>tar zxf softether-vpnserver-v1.00-9029-rc2-2013.03.16-linux-x64-64bit.tar.gz
-</span><span class='line'><span class="nb">cd </span>vpnserver
-</span><span class='line'>make
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>interface=tap_soft
+</span><span class='line'>dhcp-range=tap_soft,192.168.7.50,192.168.7.60,12h
+</span><span class='line'>dhcp-option=tap_soft,3,192.168.7.1</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Read the Agreement and press 1 three times.</p>
+<p>The above 3 lines are used to enable the dhcp server on interface tap_soft.</p>
 
-<p>Then we move the dir to /usr/local/</p>
+<p>Next step we need a new set of init script which will config tap interface for us when Softether start up.</p>
 
-<figure class='code'><figcaption><span> (install.sh)</span> <a href='/downloads/code/install.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">cd</span> ..
-</span><span class='line'>mv vpnserver /usr/local
-</span><span class='line'><span class="nb">cd</span> /usr/local/vpnserver/
-</span><span class='line'>chmod 600 *
-</span><span class='line'>chmod 700 vpncmd
-</span><span class='line'>chmod 700 vpnserver
-</span><span class='line'>nano /etc/init.d/vpnserver
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>paste the following content to nano</p>
-
-<figure class='code'><figcaption><span> (vpnserver.sh)</span> <a href='/downloads/code/vpnserver.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span>/etc/init.d/vpnserver  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -252,7 +219,13 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <span class='line-number'>30</span>
 <span class='line-number'>31</span>
 <span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
 </span><span class='line'><span class="c">### BEGIN INIT INFO</span>
 </span><span class='line'><span class="c"># Provides:          vpnserver</span>
 </span><span class='line'><span class="c"># Required-Start:    $remote_fs $syslog</span>
@@ -264,11 +237,15 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 </span><span class='line'><span class="c">### END INIT INFO</span>
 </span><span class='line'><span class="nv">DAEMON</span><span class="o">=</span>/usr/local/vpnserver/vpnserver
 </span><span class='line'><span class="nv">LOCK</span><span class="o">=</span>/var/lock/subsys/vpnserver
+</span><span class='line'><span class="nv">TAP_ADDR</span><span class="o">=</span>192.168.7.1
+</span><span class='line'>
 </span><span class='line'><span class="nb">test</span> -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>0
 </span><span class='line'><span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
 </span><span class='line'>start<span class="o">)</span>
 </span><span class='line'><span class="nv">$DAEMON</span> start
 </span><span class='line'>touch <span class="nv">$LOCK</span>
+</span><span class='line'>sleep 1
+</span><span class='line'>/sbin/ifconfig tap_soft <span class="nv">$TAP_ADDR</span>
 </span><span class='line'>;;
 </span><span class='line'>stop<span class="o">)</span>
 </span><span class='line'><span class="nv">$DAEMON</span> stop
@@ -278,6 +255,8 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 </span><span class='line'><span class="nv">$DAEMON</span> stop
 </span><span class='line'>sleep 3
 </span><span class='line'><span class="nv">$DAEMON</span> start
+</span><span class='line'>sleep 1
+</span><span class='line'>/sbin/ifconfig tap_soft <span class="nv">$TAP_ADDR</span>
 </span><span class='line'>;;
 </span><span class='line'>*<span class="o">)</span>
 </span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Usage: $0 {start|stop|restart}&quot;</span>
@@ -287,103 +266,50 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>ctrl-o ret ctrl-x</p>
+<p>Then we need to enable NAT on linux server.</p>
 
-<p>After that we enable the service</p>
+<p>Add this file to /etc/sysctl.d/ to enable ipv4 forwarding.</p>
 
-<figure class='code'><figcaption><span> (service.sh)</span> <a href='/downloads/code/service.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>chmod 755 /etc/init.d/vpnserver
-</span><span class='line'>mkdir /var/lock/subsys
-</span><span class='line'>update-rc.d vpnserver defaults
-</span><span class='line'>/etc/init.d/vpnserver start
-</span><span class='line'><span class="nb">cd</span> /usr/local/vpnserver/
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>net.ipv4.ip_forward <span class="o">=</span> 1
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Then we need to do a checking.</p>
+<p>Apply the sysctl run</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./vpncmd
-</span><span class='line'>3
-</span><span class='line'>check</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># sysctl --system</span></code></pre></td></tr></table></div></figure>
 
 
-<p>You should get 4 &#8220;Pass&#8221;.</p>
-
-<p>We need to set the server admin password</p>
+<p>Then we add a POSTROUTING rule to iptables</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>./vpncmd
-</span><span class='line'>1
-</span><span class='line'>ret
-</span><span class='line'>ret
-</span><span class='line'>VPN Server&gt;ServerPasswordSet</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># iptables -t nat -A POSTROUTING -s 192.168.7.0/24 -j SNAT --to-source [YOUR VPS IP ADDRESS]</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Enter the admin password.</p>
+<p>To make our iptables rule survive after reboot install <code>iptables-persistent</code></p>
 
-<p>I do the setting on a windows client.
-It is running</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># apt-get install iptables-persistent</span></code></pre></td></tr></table></div></figure>
 
-<p><img src="/images/softether_vps/server_manager.png" alt="server manager" /></p>
 
-<p>Install it, run it, click New setting. Input ip and password.</p>
+<p>After all the above setting, restart the vpnserver then we are good to go.</p>
 
-<p><img src="/images/softether_vps/setting.png" alt="input setting" /></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># /etc/init.d/vpnserver restart</span></code></pre></td></tr></table></div></figure>
 
-<p>Then connect to it.
-On successful login, it will pop up Easy Setup</p>
 
-<p><img src="/images/softether_vps/easy_setup.png" alt="easy setup" />
-Check Remote Access Server and Next</p>
+<p>Comparison on SecureNAT and local bridge method.</p>
 
-<p><img src="/images/softether_vps/warning.png" alt="warning" /></p>
+<p><img src="/images/softether_local_bridge/l2tp_bridge.png" alt="Speed test on local bridge" />
+<img src="/images/softether_local_bridge/l2tp_SecureNAT.png" alt="Speed test on SecureNAT" /></p>
 
-<p>Yes</p>
+<h3>Conclusion</h3>
 
-<p><img src="/images/softether_vps/virtual_hub.png" alt="Virtual Hub name" /></p>
+<p>Local bridge use far less CPU resources than SecureNAT. It is a bit trouble to setup but I think it is worth to use local bridge.</p>
 
-<p>OK</p>
-
-<p><img src="/images/softether_vps/l2tp.png" alt="Setup L2TP" />
-Check Enable L2TP Server Function and input your own pre-share key</p>
-
-<p>OK</p>
-
-<p><img src="/images/softether_vps/azure.png" alt="Azure" />
-We disable Azure VPN</p>
-
-<p><img src="/images/softether_vps/create_user.png" alt="Create User" /></p>
-
-<p>Then we need to create a new user. This is trivial.</p>
-
-<p><img src="/images/softether_vps/user.png" alt="User" /></p>
-
-<p><img src="/images/softether_vps/manager.png" alt="Manager" />
-Click on &#8220;Manage Virtual Hub&#8221;</p>
-
-<p>Click on &#8220;Secure NAT&#8221;</p>
-
-<p><img src="/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
-
-<p>Enable the Virtual NAT</p>
-
-<blockquote><p>Again <strong>DO NOT</strong> enable SecureNAT and local bridge at the same time!</p></blockquote>
-
-<h3>Done</h3>
-
-<p>You can try to connect to the vpn server through L2TP/IPSec.</p>
+<p>I would recommend <a href="https://clientarea.ramnode.com/aff.php?aff=319">Ramnode</a> as a VPS provider. Their VPS is speedy and support is amazing.</p>
 </div>
 
 </article>
@@ -431,8 +357,8 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://linc01n.github.com/blog/2013/03/19/softether-on-vps/';
-        var disqus_url = 'http://linc01n.github.com/blog/2013/03/19/softether-on-vps/';
+        var disqus_identifier = 'http://linc01n.github.com/blog/2013/05/17/softether-on-vps-using-local-bridge/';
+        var disqus_url = 'http://linc01n.github.com/blog/2013/05/17/softether-on-vps-using-local-bridge/';
         var disqus_script = 'embed.js';
       
     (function () {

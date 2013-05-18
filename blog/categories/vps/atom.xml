@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vps | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/blog/categories/vps/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-03-24T13:57:18+08:00</updated>
+  <updated>2013-05-18T17:34:12+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -12,6 +12,238 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Softether on VPS using local bridge]]></title>
+    <link href="http://linc01n.github.com/blog/2013/05/17/softether-on-vps-using-local-bridge/"/>
+    <updated>2013-05-17T19:00:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2013/05/17/softether-on-vps-using-local-bridge</id>
+    <content type="html"><![CDATA[<p>This post continues on the last post about <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether setup on a VPS</a>.</p>
+
+<h3>Problem on SecureNAT</h3>
+
+<p>SecureNAT is a fairly simple way to setup Softether. You don't need a lot of sysadmin skill and network understanding in order to get Softether up and running.</p>
+
+<p>The problem is SecureNAT is a bit <strong>SLOW</strong>. I will show a comparison at the end of this article.</p>
+
+<p>We can boost the performance using a local bridge.</p>
+
+<h3>Softether using local bridge</h3>
+
+<p>To start with you need Softether installed and setup. You can follow the guide on <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether on VPS</a></p>
+
+<p>Just skip the last step "Enable the Virtual NAT"</p>
+
+<h3>Local bridge Setup</h3>
+
+<blockquote><p><strong>Network setup</strong></p>
+
+<p>VPN Server IP: 192.168.7.1</p>
+
+<p>VPN Client IP Range: 192.168.7.50-192.168.7.60</p>
+
+<p>Tap Device name: tap_soft</p></blockquote>
+
+<p>From here we go to the "Local Bridge Setting"</p>
+
+<p><img src="/images/softether_local_bridge/local-bridge-setting.png" alt="Local Bridge Setting" /></p>
+
+<p>First we choose the Virtual Hub. It should be only one for normal setup.</p>
+
+<p>Then we check the tap device box.</p>
+
+<p>After that we type in the name of the tap device(I use soft here for simplicity).</p>
+
+<p><img src="/images/softether_local_bridge/create-local-bridge.png" alt="Create Local Bridge" /></p>
+
+<p>After the creation of the local bridge we jump back to our server. And run</p>
+
+<p>```</p>
+
+<h1>ifconfig tap_soft</h1>
+
+<p>```</p>
+
+<p>It should show you something similar to this</p>
+
+<p><img src="/images/softether_local_bridge/check-on-the-sever.png" alt="Check on the server" /></p>
+
+<p>Because we are not going to use SecureNAT and SecureDHCP. We need to install a DHCP server on our VPS. We are going to use dnsmasq as our DHCP server.</p>
+
+<p>```</p>
+
+<h1>apt-get install dnsmasq</h1>
+
+<p>```</p>
+
+<p>Now edit the /etc/dnsmasq.conf file. Add these 3 lines at the end.</p>
+
+<p><code>
+interface=tap_soft
+dhcp-range=tap_soft,192.168.7.50,192.168.7.60,12h
+dhcp-option=tap_soft,3,192.168.7.1
+</code></p>
+
+<p>The above 3 lines are used to enable the dhcp server on interface tap_soft.</p>
+
+<p>Next step we need a new set of init script which will config tap interface for us when Softether start up.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/init.d/vpnserver  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;!/bin/sh&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h3&gt;BEGIN INIT INFO&lt;/h3&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Provides:          vpnserver&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Required-Start:    <span class="nv">$remote_fs</span> <span class="nv">$syslog</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Required-Stop:     <span class="nv">$remote_fs</span> <span class="nv">$syslog</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Default-Start:     2 3 4 5&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Default-Stop:      0 1 6&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Short-Description: Start daemon at boot <span class="nb">time</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Description:       Enable Softether by daemon.&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h3&gt;END INIT INFO&lt;/h3&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;DAEMON<span class="o">=</span>/usr/local/vpnserver/vpnserver
+</span><span class='line'><span class="nv">LOCK</span><span class="o">=</span>/var/lock/subsys/vpnserver
+</span><span class='line'><span class="nv">TAP_ADDR</span><span class="o">=</span>192.168.7.1&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;test -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>0
+</span><span class='line'><span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+</span><span class='line'>start<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> start
+</span><span class='line'>touch <span class="nv">$LOCK</span>
+</span><span class='line'>sleep 1
+</span><span class='line'>/sbin/ifconfig tap_soft <span class="nv">$TAP_ADDR</span>
+</span><span class='line'>;;
+</span><span class='line'>stop<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> stop
+</span><span class='line'>rm <span class="nv">$LOCK</span>
+</span><span class='line'>;;
+</span><span class='line'>restart<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> stop
+</span><span class='line'>sleep 3
+</span><span class='line'><span class="nv">$DAEMON</span> start
+</span><span class='line'>sleep 1
+</span><span class='line'>/sbin/ifconfig tap_soft <span class="nv">$TAP_ADDR</span>
+</span><span class='line'>;;
+</span><span class='line'>*<span class="o">)</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Usage: $0 {start|stop|restart}&quot;</span>
+</span><span class='line'><span class="nb">exit </span>1
+</span><span class='line'><span class="k">esac</span>
+</span><span class='line'><span class="nb">exit </span>0
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Then we need to enable NAT on linux server.</p>
+
+<p>Add this file to /etc/sysctl.d/ to enable ipv4 forwarding.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>net.ipv4.ip_forward <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Apply the sysctl run</p>
+
+<p>```</p>
+
+<h1>sysctl --system</h1>
+
+<p>```</p>
+
+<p>Then we add a POSTROUTING rule to iptables</p>
+
+<p>```</p>
+
+<h1>iptables -t nat -A POSTROUTING -s 192.168.7.0/24 -j SNAT --to-source [YOUR VPS IP ADDRESS]</h1>
+
+<p>```</p>
+
+<p>To make our iptables rule survive after reboot install <code>iptables-persistent</code></p>
+
+<p>```</p>
+
+<h1>apt-get install iptables-persistent</h1>
+
+<p>```</p>
+
+<p>After all the above setting, restart the vpnserver then we are good to go.</p>
+
+<p>```</p>
+
+<h1>/etc/init.d/vpnserver restart</h1>
+
+<p>```</p>
+
+<p>Comparison on SecureNAT and local bridge method.</p>
+
+<p><img src="/images/softether_local_bridge/l2tp_bridge.png" alt="Speed test on local bridge" />
+<img src="/images/softether_local_bridge/l2tp_SecureNAT.png" alt="Speed test on SecureNAT" /></p>
+
+<h3>Conclusion</h3>
+
+<p>Local bridge use far less CPU resources than SecureNAT. It is a bit trouble to setup but I think it is worth to use local bridge.</p>
+
+<p>I would recommend <a href="https://clientarea.ramnode.com/aff.php?aff=319">Ramnode</a> as a VPS provider. Their VPS is speedy and support is amazing.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SoftEther on VPS]]></title>
