@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vps | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/blog/categories/vps/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-05-18T17:39:01+08:00</updated>
+  <updated>2013-05-18T18:05:06+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -229,6 +229,8 @@ dhcp-option=tap_soft,3,192.168.7.1
 <p>```</p>
 
 <h1>/etc/init.d/vpnserver restart</h1>
+
+<h1>/etc/init.d/dnsmasq restart</h1>
 
 <p>```</p>
 
