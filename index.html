@@ -7,7 +7,7 @@
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="May 17th, 2013 ops, sysadmin, vpn, vps Softether on VPS using local bridge This post continues on the last post about Softether setup on a VPS. &hellip;">
+	<meta name="description" content="Jun 13th, 2013 ad network, geo, targeting, work Cloudflare messup with our geo targeting ad serving Self-doubt on my code I have joined a local AD &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,15 +80,15 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/">Cloudflare messup with our geo targeting ad serving</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/17/softether-on-vps-using-local-bridge/">Softether on VPS using local bridge</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page/">Load testing on sqale.jp single container for static page</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/19/softether-on-vps/">SoftEther on VPS</a>
       </li>
     
   </ul>
@@ -118,6 +118,61 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-13T23:16:00+08:00" data-updated="true" itemprop="datePublished">Jun 13<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ad-network/'>ad network</a>, <a class='category' href='/blog/categories/geo/'>geo</a>, <a class='category' href='/blog/categories/targeting/'>targeting</a>, <a class='category' href='/blog/categories/work/'>work</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/" itemprop="url">Cloudflare messup with our geo targeting ad serving</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>Self-doubt on my code</h3>
+
+<p>I have joined a local AD network company as a senior developer(who got out of college one year ago). I joined this company for more than half a year. Mainly working on cleaning the code and infrastructure. I redesign the AD selection algorithm and implement it. I have learned a lot from this practice. Geo targeting is one of the selection criteria.</p>
+
+<p>I received a support ticket from our operation team last week. We have launched a new campaign targeting US internet user but we are recording HK IP address. The first thought that struck me was I messed up the implementation(some background information: my new algorithm is testing on production. There is no time for proxy shadowing or mock test. SHIP IT before test it!).</p>
+
+<p>I rethink the whole logic in my head step-by-step. The truth is I don&#8217;t know what happen. Large scale production system is a beast. I still find myself clueless on other parts of the system.</p>
+
+<p>I didn&#8217;t manage to figure out what happen so our team decided to checkout all the statistic we&#8217;ve got dig deeper to see what happen.</p>
+
+<h3>Cloudflare is caching javascript</h3>
+
+<p>I visited the publisher site and found out our script tag type become &#8216;text/rocketscript&#8217;. After some googling it is a thing called RocketLoader from Cloudflare.</p>
+
+<p>This thing messes up with geo targeting for all of our ads. After some research, <a href="http://www.advertserve.com/blog/2013/04/cloudflare-and-rocketloader/">AdvretServe</a> and <a href="http://udinra.com/blog/google-adsense-cloudflare-issue-and-solution">Google Adsense</a> are also having this problem.</p>
+
+<p>Our javascript content is different per request. Cloudflare execute our javascript and save it. I know static content should use CDN to speed up things. But some ad network is not using static js. I don&#8217;t know much but at least all the 3-rd party agency we worked with are using dynamic js.</p>
+
+<h3>Solution (which is not really a solution)</h3>
+
+<p>We need to ask publisher to disable Cloudflare. Cloudflare not only affect geotargeting campaign. We later find out that it also lower the publisher total ad serve. We are still investigating what&#8217;s the issue. But we will list Cloudflare as not compatible with our network.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">

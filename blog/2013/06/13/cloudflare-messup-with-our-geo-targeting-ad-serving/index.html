@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Category: windows - Coding, Coding, Coding</title>
+	<title>Cloudflare messup with our geo targeting ad serving - Coding, Coding, Coding</title>
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Category: windows">
+	<meta name="description" content="Cloudflare messup with our geo targeting ad serving Self-doubt on my code I have joined a local AD network company as a senior developer(who got out &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -17,7 +17,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="Coding, Coding, Coding" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://linc01n.github.comblog/categories/windows/">
+	<link rel="canonical" href="http://linc01n.github.com/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -116,30 +116,54 @@
 
 			
 			<div class="mid-col-container">
-				<div id="content" class="inner">
-	
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Cloudflare messup with our geo targeting ad serving</h1>
+	<div class="entry-content" itemprop="articleBody"><h3>Self-doubt on my code</h3>
 
+<p>I have joined a local AD network company as a senior developer(who got out of college one year ago). I joined this company for more than half a year. Mainly working on cleaning the code and infrastructure. I redesign the AD selection algorithm and implement it. I have learned a lot from this practice. Geo targeting is one of the selection criteria.</p>
 
-	
-	
-	<section class="archives"><h1 class="year">2011</h1>
+<p>I received a support ticket from our operation team last week. We have launched a new campaign targeting US internet user but we are recording HK IP address. The first thought that struck me was I messed up the implementation(some background information: my new algorithm is testing on production. There is no time for proxy shadowing or mock test. SHIP IT before test it!).</p>
 
-<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<span class="date"><time datetime="2011-10-03T21:49:00+08:00" itemprop="datePublished">Oct  3</time></span>
-		<br>
-		<span class="tags">
+<p>I rethink the whole logic in my head step-by-step. The truth is I don&#8217;t know what happen. Large scale production system is a beast. I still find myself clueless on other parts of the system.</p>
 
+<p>I didn&#8217;t manage to figure out what happen so our team decided to checkout all the statistic we&#8217;ve got dig deeper to see what happen.</p>
 
-	<a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/osx/'>osx</a>, <a class='category' href='/blog/categories/windows/'>windows</a>
+<h3>Cloudflare is caching javascript</h3>
 
+<p>I visited the publisher site and found out our script tag type become &#8216;text/rocketscript&#8217;. After some googling it is a thing called RocketLoader from Cloudflare.</p>
 
-</span>
-	    
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/">Synergey Key Mapping Between Mac and Windows</a></h1>
+<p>This thing messes up with geo targeting for all of our ads. After some research, <a href="http://www.advertserve.com/blog/2013/04/cloudflare-and-rocketloader/">AdvretServe</a> and <a href="http://udinra.com/blog/google-adsense-cloudflare-issue-and-solution">Google Adsense</a> are also having this problem.</p>
+
+<p>Our javascript content is different per request. Cloudflare execute our javascript and save it. I know static content should use CDN to speed up things. But some ad network is not using static js. I don&#8217;t know much but at least all the 3-rd party agency we worked with are using dynamic js.</p>
+
+<h3>Solution (which is not really a solution)</h3>
+
+<p>We need to ask publisher to disable Cloudflare. Cloudflare not only affect geotargeting campaign. We later find out that it also lower the publisher total ad serve. We are still investigating what&#8217;s the issue. But we will list Cloudflare as not compatible with our network.</p>
+</div>
+
 </article>
 
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
 </div>
 			</div>
 			<footer id="footer" class="inner"><p>
@@ -161,7 +185,10 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       var disqus_shortname = 'linc01n';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://linc01n.github.com/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/';
+        var disqus_url = 'http://linc01n.github.com/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
