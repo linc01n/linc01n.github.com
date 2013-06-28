@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Category: ad network - Coding, Coding, Coding</title>
+	<title>Add google webmaster verification in octopress - Coding, Coding, Coding</title>
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Category: ad network">
+	<meta name="description" content="Add google webmaster verification in octopress Google Webmaster verification I deployed my blog on github. So I can&#8217;t use DNS verification. I &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -17,7 +17,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="Coding, Coding, Coding" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://linc01n.github.comblog/categories/ad-network/">
+	<link rel="canonical" href="http://linc01n.github.com/blog/2013/06/28/add-google-webmaster-verification-in-octopress/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -116,30 +116,50 @@
 
 			
 			<div class="mid-col-container">
-				<div id="content" class="inner">
-	
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Add google webmaster verification in octopress</h1>
+	<div class="entry-content" itemprop="articleBody"><h3>Google Webmaster verification</h3>
 
+<p>I deployed my blog on github. So I can&#8217;t use DNS verification. I used HTML verification. It require you to put a specific html file on your root directory.</p>
 
-	
-	
-	<section class="archives"><h1 class="year">2013</h1>
+<h3>How to add the file in Octopress</h3>
 
-<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<span class="date"><time datetime="2013-06-13T23:16:00+08:00" itemprop="datePublished">Jun 13</time></span>
-		<br>
-		<span class="tags">
+<p>I tried to place the file in /public folder every time before I run <code>rake deploy</code> to deploy my blog. This method is too much trouble and sometime I will forget to do it.</p>
 
+<p>To solve this problem, go to _config.yml file in Octopress.</p>
 
-	<a class='category' href='/blog/categories/ad-network/'>ad network</a>, <a class='category' href='/blog/categories/geo/'>geo</a>, <a class='category' href='/blog/categories/targeting/'>targeting</a>, <a class='category' href='/blog/categories/work/'>work</a>
+<p>Add this line:</p>
 
+<p><code>include: ["googlexxxxxx.html"]</code></p>
 
-</span>
-	    
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/">Cloudflare messup with our geo targeting ad serving</a></h1>
+<p>And place the googlexxxxxx.html file under source directory.</p>
+
+<p>You can try to remove the whole public directory and run <code>rake generate</code>. You will see the google html file is also inside.</p>
+</div>
+
 </article>
 
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
 </div>
 			</div>
 			<footer id="footer" class="inner"><p>
@@ -161,7 +181,10 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       var disqus_shortname = 'linc01n';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://linc01n.github.com/blog/2013/06/28/add-google-webmaster-verification-in-octopress/';
+        var disqus_url = 'http://linc01n.github.com/blog/2013/06/28/add-google-webmaster-verification-in-octopress/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

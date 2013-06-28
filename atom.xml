@@ -4,7 +4,7 @@
   <title><![CDATA[Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-06-28T19:32:59+08:00</updated>
+  <updated>2013-06-28T19:42:31+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Add google webmaster verification in octopress]]></title>
+    <link href="http://linc01n.github.com/blog/2013/06/28/add-google-webmaster-verification-in-octopress/"/>
+    <updated>2013-06-28T19:34:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2013/06/28/add-google-webmaster-verification-in-octopress</id>
+    <content type="html"><![CDATA[<h3>Google Webmaster verification</h3>
+
+<p>I deployed my blog on github. So I can&#8217;t use DNS verification. I used HTML verification. It require you to put a specific html file on your root directory.</p>
+
+<h3>How to add the file in Octopress</h3>
+
+<p>I tried to place the file in /public folder every time before I run <code>rake deploy</code> to deploy my blog. This method is too much trouble and sometime I will forget to do it.</p>
+
+<p>To solve this problem, go to _config.yml file in Octopress.</p>
+
+<p>Add this line:</p>
+
+<p><code>include: ["googlexxxxxx.html"]</code></p>
+
+<p>And place the googlexxxxxx.html file under source directory.</p>
+
+<p>You can try to remove the whole public directory and run <code>rake generate</code>. You will see the google html file is also inside.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cloudflare messup with our geo targeting ad serving]]></title>
