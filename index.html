@@ -7,7 +7,7 @@
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Jun 28th, 2013 blog, google webmaster, octopress, verification Add google webmaster verification in octopress Google Webmaster verification I &hellip;">
+	<meta name="description" content="Oct 5th, 2013 coding, ruby, vagrant, vm Using Parallels Desktop as Vagrant Provider Vagrant is great! What is vagrant? Vagrant provides easy to &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,15 +80,15 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/">Using Parallels Desktop as Vagrant Provider</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/28/add-google-webmaster-verification-in-octopress/">Add google webmaster verification in octopress</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/">Cloudflare messup with our geo targeting ad serving</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/17/softether-on-vps-using-local-bridge/">Softether on VPS using local bridge</a>
       </li>
     
   </ul>
@@ -101,6 +101,99 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-05T21:40:00+08:00" data-updated="true" itemprop="datePublished">Oct 5<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/coding/'>coding</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/vagrant/'>vagrant</a>, <a class='category' href='/blog/categories/vm/'>vm</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/" itemprop="url">Using Parallels Desktop as Vagrant Provider</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>Vagrant is great!</h3>
+
+<h4>What is vagrant?</h4>
+
+<p><a href="http://www.vagrantup.com/">Vagrant</a> provides easy to configure, reproducible, and portable work environments. In other words, It creates a VM for development.</p>
+
+<p>I use vagrant to do my development in the past year. Slowly learning all the pros and cons of vagrant when using it for development. Vagrant use VirtualBox as a VM host. There is a problem about the license of the guest addition of VirtualBox. If I want to use it commercially I need to purchase a license from Oracle(USD50 for 100 end users). Problem is 100 licenses min buy.</p>
+
+<h4>Vagrant can use VMWare as a host</h4>
+
+<p>Later version of vagrant abstract the VM provider as a provider plugin. This open the possibility to support other hypervisor.</p>
+
+<h3>I own a Parallels Desktop 8 license</h3>
+
+<p>It would be great if I can use PD8 as my vagrant host. Now the dream came true. <a href="https://github.com/yshahin/vagrant-parallels">https://github.com/yshahin/vagrant-parallels</a>. Vagrant Parallels plugin!</p>
+
+<p>I tested it for almost 2 days. Everything works fine. I can do <code>vagrant ssh</code> <code>vagrant up</code> <code>vagrant halt</code>.</p>
+
+<p>The site provide one box for you to use. The box for vagrant-paralles is a bit special. I want Ubuntu 12.04.3 LTS for one of my project. So I decided to build the box myself.</p>
+
+<h3>Veewee easy way to build vagrant box</h3>
+
+<p><a href="https://github.com/jedi4ever/veewee">Veewee</a> is a tool for easily (and repeatedly) building custom Vagrant base boxes, KVMs, and virtual machine images.</p>
+
+<p>Veewee supports parallels export 15 days ago. It got almost all the common linux distribution.</p>
+
+<h3>Building my own parallels box is not that easy</h3>
+
+<p>First, you need to install the parallels SDK for python. If you are using homebrew version of python you need to symlink the SDK separately.</p>
+
+<p><code>ln -s /Library/Frameworks/ParallelsVirtualizationSDK.framework/Libraries/Python/2.7/prlsdkapi /usr/local/lib/python2.7/site-packages/</code></p>
+
+<p>Then you need to create a definition for the box. I use</p>
+
+<p><code>veewee parallels define 'ubuntu-12.04-lts' 'ubuntu-12.04.3-server-amd64'</code></p>
+
+<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don&#8217;t need those since we are creating for PD.</p>
+
+<p>Let&#8217;s build the box with</p>
+
+<p><code>veewee parallels build 'ubuntu-12.04-lts' --workdir=/path/to/wd</code></p>
+
+<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don&#8217;t know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
+
+<p>The last step of creating the box is</p>
+
+<p><code>veewee parallels export 'ubuntu-1204-lts' --workdir=/path/to/wd</code></p>
+
+<h3>Vagrant up</h3>
+
+<p>So after importing the box, created the new Vagrantfile. We can start the vagrant box.</p>
+
+<p><code>vagrant up --provider=paralles</code></p>
+
+<p>Use the provider flag on the first time boot.</p>
+
+<h3>Everything is just like VirtualBox</h3>
+
+<p>The networking config in Vagrantfile seems still not support. But this plugin is only 0.0.4. We will see.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -1269,88 +1362,11 @@ Press ⌘ + Space then type Terminal</p>
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-07T22:29:00+08:00" data-updated="true" itemprop="datePublished">Sep 7<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/coding/'>coding</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2011/09/07/readable-code/" itemprop="url">Readable Code</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<h1>Clean Code</h1>
-
-<p>I have graduated from college this June. The culture in my college is you do all group projects by youself. So collaboration is some what new to me.</p>
-
-<p>I started working in a web company after my graduation. After two months of non-stop coding day and night, I learnt a few things about coding.</p>
-
-<p>This time I will talk about coding practice.</p>
-
-<h2>Background</h2>
-
-<p>The project I invovled was a CMS-like Web Site Builder. The whole team had 4 coders. We used SVN as a version control tools for collaboration. A PHP MVC framework is used in developing the project(God bless :) ).</p>
-
-<h2>Coding Practice</h2>
-
-<p>Assignment or functions call can tightly packed:</p>
-
-<pre><code>a = 1;
-foo();
-bar();
-</code></pre>
-
-<p>Loop should wrap with newline</p>
-
-<pre><code>foo();
-
-if(bar){
-  a = 1;
-}
-
-foo();
-
-for($i = 0; $i &lt; 10; $i++){
-
-  if(bar){
-    exit();
-  }
-
-}
-
-exit();
-</code></pre>
-
-<h2>Conclusion</h2>
-
-<p>I always think coding practice is not a very important thing in development. But after I worked with a project that contains 30K LOC, I understand this kind of agreement can help with code maintenance and easier for debugging.</p>
-
-		
-		
-	</div>
-
-</article>
-
 </div>
 <nav id="pagenavi">
     
+    
+        <a href="/blog/page/2/" class="next">Next</a>
     
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav></div>

@@ -4,7 +4,7 @@
   <title><![CDATA[Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-10-06T23:55:27+08:00</updated>
+  <updated>2013-10-07T00:39:40+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Parallels Desktop as Vagrant Provider]]></title>
+    <link href="http://linc01n.github.com/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/"/>
+    <updated>2013-10-05T21:40:00+08:00</updated>
+    <id>http://linc01n.github.com/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider</id>
+    <content type="html"><![CDATA[<h3>Vagrant is great!</h3>
+
+<h4>What is vagrant?</h4>
+
+<p><a href="http://www.vagrantup.com/">Vagrant</a> provides easy to configure, reproducible, and portable work environments. In other words, It creates a VM for development.</p>
+
+<p>I use vagrant to do my development in the past year. Slowly learning all the pros and cons of vagrant when using it for development. Vagrant use VirtualBox as a VM host. There is a problem about the license of the guest addition of VirtualBox. If I want to use it commercially I need to purchase a license from Oracle(USD50 for 100 end users). Problem is 100 licenses min buy.</p>
+
+<h4>Vagrant can use VMWare as a host</h4>
+
+<p>Later version of vagrant abstract the VM provider as a provider plugin. This open the possibility to support other hypervisor.</p>
+
+<h3>I own a Parallels Desktop 8 license</h3>
+
+<p>It would be great if I can use PD8 as my vagrant host. Now the dream came true. <a href="https://github.com/yshahin/vagrant-parallels">https://github.com/yshahin/vagrant-parallels</a>. Vagrant Parallels plugin!</p>
+
+<p>I tested it for almost 2 days. Everything works fine. I can do <code>vagrant ssh</code> <code>vagrant up</code> <code>vagrant halt</code>.</p>
+
+<p>The site provide one box for you to use. The box for vagrant-paralles is a bit special. I want Ubuntu 12.04.3 LTS for one of my project. So I decided to build the box myself.</p>
+
+<h3>Veewee easy way to build vagrant box</h3>
+
+<p><a href="https://github.com/jedi4ever/veewee">Veewee</a> is a tool for easily (and repeatedly) building custom Vagrant base boxes, KVMs, and virtual machine images.</p>
+
+<p>Veewee supports parallels export 15 days ago. It got almost all the common linux distribution.</p>
+
+<h3>Building my own parallels box is not that easy</h3>
+
+<p>First, you need to install the parallels SDK for python. If you are using homebrew version of python you need to symlink the SDK separately.</p>
+
+<p><code>ln -s /Library/Frameworks/ParallelsVirtualizationSDK.framework/Libraries/Python/2.7/prlsdkapi /usr/local/lib/python2.7/site-packages/</code></p>
+
+<p>Then you need to create a definition for the box. I use</p>
+
+<p><code>veewee parallels define 'ubuntu-12.04-lts' 'ubuntu-12.04.3-server-amd64'</code></p>
+
+<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don&#8217;t need those since we are creating for PD.</p>
+
+<p>Let&#8217;s build the box with</p>
+
+<p><code>veewee parallels build 'ubuntu-12.04-lts' --workdir=/path/to/wd</code></p>
+
+<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don&#8217;t know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
+
+<p>The last step of creating the box is</p>
+
+<p><code>veewee parallels export 'ubuntu-1204-lts' --workdir=/path/to/wd</code></p>
+
+<h3>Vagrant up</h3>
+
+<p>So after importing the box, created the new Vagrantfile. We can start the vagrant box.</p>
+
+<p><code>vagrant up --provider=paralles</code></p>
+
+<p>Use the provider flag on the first time boot.</p>
+
+<h3>Everything is just like VirtualBox</h3>
+
+<p>The networking config in Vagrantfile seems still not support. But this plugin is only 0.0.4. We will see.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Add google webmaster verification in octopress]]></title>
