@@ -7,7 +7,7 @@
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Sep 7th, 2011 coding Readable Code Clean Code I have graduated from college this June. The culture in my college is you do all group projects by &hellip;">
+	<meta name="description" content="Sep 25th, 2011 development setup, mac, osx, tutorial Enabling NTFS Write Support on Mac OSX Lion Mac OSX Lion weaknesses I have just bought my new &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,15 +80,15 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/08/using-gruff-graphing-library/">Using gruff graphing library</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/">Using Parallels Desktop as Vagrant Provider</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/06/28/add-google-webmaster-verification-in-octopress/">Add google webmaster verification in octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/">Cloudflare messup with our geo targeting ad serving</a>
       </li>
     
   </ul>
@@ -101,6 +101,190 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-25T22:25:00+08:00" data-updated="true" itemprop="datePublished">Sep 25<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/development-setup/'>development setup</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/osx/'>osx</a>, <a class='category' href='/blog/categories/tutorial/'>tutorial</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion/" itemprop="url">Enabling NTFS Write Support on Mac OSX Lion</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>Mac OSX Lion weaknesses</h2>
+
+<p>I have just bought my new Macbook Pro and setting it up as my dev box. Mac OSX has out-of-the-box support for NTFS read. If you want to transfer file between OSes you will choose FAT32. But FAT32 has one big problem which is no file can exceed 4GB size limit.</p>
+
+<h2>Setup procedure: fuse4x + ntfs-3g</h2>
+
+<p>Install Xcode 4 from App store <a href="http://itunes.apple.com/app/xcode/id448457090?mt=12">Link</a></p>
+
+<p>After download, Click the &#8220;Install Xcode&#8221; from the Launchpad. (I really don&#8217;t understand why Xcode behave like this when it comes to App Store. : ( )</p>
+
+<p>Then open Terminal:
+Press ⌘ + Space then type Terminal</p>
+
+<p>Install Homebrew</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install fuse4x + ntfs-3g</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ brew install ntfs-3g</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Load fuse4x kext to kernel</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cp -rfX /usr/local/Cellar/fuse4x-kext/0.8.12/Library/Extensions/fuse4x.kext /System/Library/Extensions
+</span><span class='line'>$ sudo chmod +s /System/Library/Extensions/fuse4x.kext/Support/load_fuse4x</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Setup Auto-mount</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo mv /sbin/mount_ntfs /sbin/mount_ntfs.orig
+</span><span class='line'>$ sudo touch /sbin/mount_ntfs
+</span><span class='line'>$ sudo chmod 0775 /sbin/mount_ntfs
+</span><span class='line'>$ sudo chown 0:0 /sbin/mount_ntfs
+</span><span class='line'>$ sudo nano /sbin/mount_ntfs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After the last command, a text editor will open. Paste the following code to the editor.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
+</span><span class='line'>
+</span><span class='line'>VOLUME_NAME="${@:$#}"
+</span><span class='line'>VOLUME_NAME=${VOLUME_NAME#/Volumes/}
+</span><span class='line'>USER_ID=501
+</span><span class='line'>GROUP_ID=20
+</span><span class='line'>TIMEOUT=20
+</span><span class='line'>
+</span><span class='line'>if [ `/usr/bin/stat -f "%u" /dev/console` -eq 0 ]; then
+</span><span class='line'>        USERNAME=`/usr/bin/defaults read /library/preferences/com.apple.loginwindow | /usr/bin/grep autoLoginUser | /usr/bin/awk '{ print $3 }' | /usr/bin/sed 's/;//'`
+</span><span class='line'>        if [ "$USERNAME" = "" ]; then
+</span><span class='line'>                until [ `stat -f "%u" /dev/console` -ne 0 ] || [ $TIMEOUT -eq 0 ]; do
+</span><span class='line'>                        sleep 1
+</span><span class='line'>                        let TIMEOUT--
+</span><span class='line'>                done
+</span><span class='line'>                if [ $TIMEOUT -ne 0 ]; then
+</span><span class='line'>                        USER_ID=`/usr/bin/stat -f "%u" /dev/console`
+</span><span class='line'>                        GROUP_ID=`/usr/bin/stat -f "%g" /dev/console`
+</span><span class='line'>                fi
+</span><span class='line'>        else
+</span><span class='line'>                USER_ID=`/usr/bin/id -u $USERNAME`
+</span><span class='line'>                GROUP_ID=`/usr/bin/id -g $USERNAME`
+</span><span class='line'>        fi
+</span><span class='line'>else
+</span><span class='line'>        USER_ID=`/usr/bin/stat -f "%u" /dev/console`
+</span><span class='line'>        GROUP_ID=`/usr/bin/stat -f "%g" /dev/console`
+</span><span class='line'>fi
+</span><span class='line'>
+</span><span class='line'>/usr/local/bin/ntfs-3g \
+</span><span class='line'>        -o volname="${VOLUME_NAME}" \
+</span><span class='line'>        -o local \
+</span><span class='line'>        -o noappledouble \
+</span><span class='line'>        -o negative_vncache \
+</span><span class='line'>        -o auto_xattr \
+</span><span class='line'>        -o auto_cache \
+</span><span class='line'>        -o noatime \
+</span><span class='line'>        -o windows_names \
+</span><span class='line'>        -o user_xattr \
+</span><span class='line'>        -o inherit \
+</span><span class='line'>        -o uid=$USER_ID \
+</span><span class='line'>        -o gid=$GROUP_ID \
+</span><span class='line'>        -o allow_other \
+</span><span class='line'>        "$@" &&gt; /var/log/ntfsmnt.log
+</span><span class='line'>
+</span><span class='line'>exit $?;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The USER_ID should be 501 if you are the only user of your machine. or you can update the USER_ID and GROUP_ID by typing this to check your user and group</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ id -u && id -g</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which the first line is user id, second line is group id.</p>
+
+<p><em>source: <a href="http://fernandoff.posterous.com/ntfs-write-support-on-osx-lion-with-ntfs-3g-f">fernando&#8217;s blog</a> (I edit the path of ntfs-3g since we install in Homebrew)</em></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
