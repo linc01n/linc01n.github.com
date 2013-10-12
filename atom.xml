@@ -4,7 +4,7 @@
   <title><![CDATA[Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-10-08T22:50:23+08:00</updated>
+  <updated>2013-10-08T22:54:16+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -93,7 +93,7 @@
 
 <p>This is the generated graph:</p>
 
-<p><img src="http://linc01n.github.com/images/gruff.png" alt="Generated Graph" /></p>
+<p><img src="../images/gruff.png" alt="Generated Graph" /></p>
 ]]></content>
   </entry>
   
