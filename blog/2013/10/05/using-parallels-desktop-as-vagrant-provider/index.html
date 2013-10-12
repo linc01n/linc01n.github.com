@@ -220,14 +220,16 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 
 
 
-  <script src="/javascripts/jquery.scrolldepth.min.js"></script>
   <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(["_setAccount", 'UA-25566299-1']);
-    _gaq.push(["_trackPageview"]);
-    _gaq.push(["_gapTrackBounce", 10]);
-    _gaq.push(["_gapTrackReads", 20, 30]);
-    _gaq.push(["_gapTrackLinkClicks"]);
+    _gap.push(['_trackPageview']);
+    _gap.push(['_gapTrackBounceViaTime', 10]);
+    _gap.push(['_gapTrackBounceViaScroll', 50]);
+    _gap.push(['_gapTrackReads', 20, 30]);
+    _gap.push(['_gapTrackLinkClicks']);
+    _gap.push(['_gapTrackMaxScroll', 25]);
+
 
     (function() {
         var gap = document.createElement("script");
@@ -238,11 +240,6 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(gap, s);
     })();
-  </script>
-  <script>
-  $(function() {
-    $.scrollDepth();
-  });
   </script>
 
 

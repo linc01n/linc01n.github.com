@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vpn | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.com/blog/categories/vpn/atom.xml" rel="self"/>
   <link href="http://linc01n.github.com/"/>
-  <updated>2013-10-08T22:54:35+08:00</updated>
+  <updated>2013-10-12T19:00:53+08:00</updated>
   <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -88,65 +88,117 @@ dhcp-option=tap_soft,3,192.168.7.1
 
 <p>Next step we need a new set of init script which will config tap interface for us when Softether start up.</p>
 
-<p>{% codeblock /etc/init.d/vpnserver lang:bash %}</p>
-
-<h1>!/bin/sh</h1>
-
-<h3>BEGIN INIT INFO</h3>
-
-<h1>Provides:          vpnserver</h1>
-
-<h1>Required-Start:    $remote_fs $syslog</h1>
-
-<h1>Required-Stop:     $remote_fs $syslog</h1>
-
-<h1>Default-Start:     2 3 4 5</h1>
-
-<h1>Default-Stop:      0 1 6</h1>
-
-<h1>Short-Description: Start daemon at boot time</h1>
-
-<h1>Description:       Enable Softether by daemon.</h1>
-
-<h3>END INIT INFO</h3>
-
-<p>DAEMON=/usr/local/vpnserver/vpnserver
-LOCK=/var/lock/subsys/vpnserver
-TAP_ADDR=192.168.7.1</p>
-
-<p>test -x $DAEMON || exit 0
-case "$1" in
-start)
-$DAEMON start
-touch $LOCK
-sleep 1
-/sbin/ifconfig tap_soft $TAP_ADDR
-;;
-stop)
-$DAEMON stop
-rm $LOCK
-;;
-restart)
-$DAEMON stop
-sleep 3
-$DAEMON start
-sleep 1
-/sbin/ifconfig tap_soft $TAP_ADDR
-;;
-*)
-echo "Usage: $0 {start|stop|restart}"
-exit 1
-esac
-exit 0
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/init.d/vpnserver  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;!/bin/sh&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h3&gt;BEGIN INIT INFO&lt;/h3&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Provides:          vpnserver&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Required-Start:    <span class="nv">$remote_fs</span> <span class="nv">$syslog</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Required-Stop:     <span class="nv">$remote_fs</span> <span class="nv">$syslog</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Default-Start:     2 3 4 5&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Default-Stop:      0 1 6&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Short-Description: Start daemon at boot <span class="nb">time</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Description:       Enable Softether by daemon.&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h3&gt;END INIT INFO&lt;/h3&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;DAEMON<span class="o">=</span>/usr/local/vpnserver/vpnserver
+</span><span class='line'><span class="nv">LOCK</span><span class="o">=</span>/var/lock/subsys/vpnserver
+</span><span class='line'><span class="nv">TAP_ADDR</span><span class="o">=</span>192.168.7.1&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;test -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>0
+</span><span class='line'><span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+</span><span class='line'>start<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> start
+</span><span class='line'>touch <span class="nv">$LOCK</span>
+</span><span class='line'>sleep 1
+</span><span class='line'>/sbin/ifconfig tap_soft <span class="nv">$TAP_ADDR</span>
+</span><span class='line'>;;
+</span><span class='line'>stop<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> stop
+</span><span class='line'>rm <span class="nv">$LOCK</span>
+</span><span class='line'>;;
+</span><span class='line'>restart<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> stop
+</span><span class='line'>sleep 3
+</span><span class='line'><span class="nv">$DAEMON</span> start
+</span><span class='line'>sleep 1
+</span><span class='line'>/sbin/ifconfig tap_soft <span class="nv">$TAP_ADDR</span>
+</span><span class='line'>;;
+</span><span class='line'>*<span class="o">)</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Usage: $0 {start|stop|restart}&quot;</span>
+</span><span class='line'><span class="nb">exit </span>1
+</span><span class='line'><span class="k">esac</span>
+</span><span class='line'><span class="nb">exit </span>0
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Then we need to enable NAT on linux server.</p>
 
 <p>Add this file to /etc/sysctl.d/ to enable ipv4 forwarding.</p>
 
-<p>{% codeblock /etc/sysctl.d/ipv4_forwarding.conf lang:bash %}
-net.ipv4.ip_forward = 1
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>net.ipv4.ip_forward <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Apply the sysctl run</p>
 
@@ -252,7 +304,12 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p><img src="/images/softether_vps/login.png" alt="login as root" /></p>
 
 <p>Before installing SoftEther Server let us install some prerequisite.
-{% include_code build_tools.sh %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (build_tools.sh)</span> <a href='/downloads/code/build_tools.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>apt-get update
+</span><span class='line'>apt-get install build-essential
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Go to <a href="http://www.softether-download.com/en.aspx?product=softether">SoftEther</a> to download the server binary.</p>
 
@@ -261,20 +318,118 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>I am using Ver 1.00, Build 9029, rc2 in this tutorial.</p>
 
 <p>After download, run
-{% include_code make.sh %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (make.sh)</span> <a href='/downloads/code/make.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>tar zxf softether-vpnserver-v1.00-9029-rc2-2013.03.16-linux-x64-64bit.tar.gz
+</span><span class='line'><span class="nb">cd </span>vpnserver
+</span><span class='line'>make
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Read the Agreement and press 1 three times.</p>
 
 <p>Then we move the dir to /usr/local/
-{% include_code install.sh %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (install.sh)</span> <a href='/downloads/code/install.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">cd</span> ..
+</span><span class='line'>mv vpnserver /usr/local
+</span><span class='line'><span class="nb">cd</span> /usr/local/vpnserver/
+</span><span class='line'>chmod 600 *
+</span><span class='line'>chmod 700 vpncmd
+</span><span class='line'>chmod 700 vpnserver
+</span><span class='line'>nano /etc/init.d/vpnserver
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>paste the following content to nano
-{% include_code vpnserver.sh %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (vpnserver.sh)</span> <a href='/downloads/code/vpnserver.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="c">### BEGIN INIT INFO</span>
+</span><span class='line'><span class="c"># Provides:          vpnserver</span>
+</span><span class='line'><span class="c"># Required-Start:    $remote_fs $syslog</span>
+</span><span class='line'><span class="c"># Required-Stop:     $remote_fs $syslog</span>
+</span><span class='line'><span class="c"># Default-Start:     2 3 4 5</span>
+</span><span class='line'><span class="c"># Default-Stop:      0 1 6</span>
+</span><span class='line'><span class="c"># Short-Description: Start daemon at boot time</span>
+</span><span class='line'><span class="c"># Description:       Enable Softether by daemon.</span>
+</span><span class='line'><span class="c">### END INIT INFO</span>
+</span><span class='line'><span class="nv">DAEMON</span><span class="o">=</span>/usr/local/vpnserver/vpnserver
+</span><span class='line'><span class="nv">LOCK</span><span class="o">=</span>/var/lock/subsys/vpnserver
+</span><span class='line'><span class="nb">test</span> -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>0
+</span><span class='line'><span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+</span><span class='line'>start<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> start
+</span><span class='line'>touch <span class="nv">$LOCK</span>
+</span><span class='line'>;;
+</span><span class='line'>stop<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> stop
+</span><span class='line'>rm <span class="nv">$LOCK</span>
+</span><span class='line'>;;
+</span><span class='line'>restart<span class="o">)</span>
+</span><span class='line'><span class="nv">$DAEMON</span> stop
+</span><span class='line'>sleep 3
+</span><span class='line'><span class="nv">$DAEMON</span> start
+</span><span class='line'>;;
+</span><span class='line'>*<span class="o">)</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Usage: $0 {start|stop|restart}&quot;</span>
+</span><span class='line'><span class="nb">exit </span>1
+</span><span class='line'><span class="k">esac</span>
+</span><span class='line'><span class="nb">exit </span>0
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>ctrl-o ret ctrl-x</p>
 
 <p>After that we enable the service
-{% include_code service.sh %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (service.sh)</span> <a href='/downloads/code/service.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>chmod 755 /etc/init.d/vpnserver
+</span><span class='line'>mkdir /var/lock/subsys
+</span><span class='line'>update-rc.d vpnserver defaults
+</span><span class='line'>/etc/init.d/vpnserver start
+</span><span class='line'><span class="nb">cd</span> /usr/local/vpnserver/
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Then we need to do a checking.
 <code>
