@@ -1,77 +1,75 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://linc01n.github.com/blog/2011/09/07/readable-code/</loc>
+        <loc>http://linc01n.github.io/blog/2011/09/07/readable-code/</loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
         <loc>
-            http://linc01n.github.com/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion/
+            http://linc01n.github.io/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion/
         </loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
-        <loc>http://linc01n.github.com/blog/2011/09/28/synergy-on-mac-osx-lion/</loc>
+        <loc>http://linc01n.github.io/blog/2011/09/28/synergy-on-mac-osx-lion/</loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
         <loc>
-            http://linc01n.github.com/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/
+            http://linc01n.github.io/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/
         </loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
+        <loc>http://linc01n.github.io/blog/2011/10/18/django-admin-auto-select-current-user/</loc>
+        <lastmod>2013-10-12T23:18:38+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://linc01n.github.io/blog/2013/03/19/softether-on-vps/</loc>
+        <lastmod>2013-10-12T23:18:38+08:00</lastmod>
+    </url>
+    <url>
         <loc>
-            http://linc01n.github.com/blog/2011/10/18/django-admin-auto-select-current-user/
+            http://linc01n.github.io/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page/
         </loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
-        <loc>http://linc01n.github.com/blog/2013/03/19/softether-on-vps/</loc>
+        <loc>http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/</loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
         <loc>
-            http://linc01n.github.com/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page/
-        </loc>
-        <lastmod>2013-10-12T23:18:38+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://linc01n.github.com/blog/2013/05/17/softether-on-vps-using-local-bridge/</loc>
-        <lastmod>2013-10-12T23:18:38+08:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://linc01n.github.com/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/
-        </loc>
-        <lastmod>2013-10-12T23:18:38+08:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://linc01n.github.com/blog/2013/06/28/add-google-webmaster-verification-in-octopress/
+            http://linc01n.github.io/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/
         </loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
         <loc>
-            http://linc01n.github.com/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/
+            http://linc01n.github.io/blog/2013/06/28/add-google-webmaster-verification-in-octopress/
         </loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
-        <loc>http://linc01n.github.com/blog/2013/10/08/using-gruff-graphing-library/</loc>
+        <loc>
+            http://linc01n.github.io/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/
+        </loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
-        <loc>http://linc01n.github.com/blog/archives/</loc>
+        <loc>http://linc01n.github.io/blog/2013/10/08/using-gruff-graphing-library/</loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
-        <loc>http://linc01n.github.com/</loc>
+        <loc>http://linc01n.github.io/blog/archives/</loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
     <url>
-        <loc>http://linc01n.github.com/robots.txt</loc>
+        <loc>http://linc01n.github.io/</loc>
+        <lastmod>2013-10-12T23:18:38+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://linc01n.github.io/robots.txt</loc>
         <lastmod>2013-10-12T23:18:38+08:00</lastmod>
     </url>
 </urlset>

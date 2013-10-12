@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: work | Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.com/blog/categories/work/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.com/"/>
-  <updated>2013-10-12T23:26:49+08:00</updated>
-  <id>http://linc01n.github.com/</id>
+  <link href="http://linc01n.github.io/blog/categories/work/atom.xml" rel="self"/>
+  <link href="http://linc01n.github.io/"/>
+  <updated>2013-10-12T23:35:29+08:00</updated>
+  <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Cloudflare messup with our geo targeting ad serving]]></title>
-    <link href="http://linc01n.github.com/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/"/>
+    <link href="http://linc01n.github.io/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/"/>
     <updated>2013-06-13T23:16:00+08:00</updated>
-    <id>http://linc01n.github.com/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving</id>
+    <id>http://linc01n.github.io/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving</id>
     <content type="html"><![CDATA[<h3>Self-doubt on my code</h3>
 
 <p>I have joined a local AD network company as a senior developer(who got out of college one year ago). I joined this company for more than half a year. Mainly working on cleaning the code and infrastructure. I redesign the AD selection algorithm and implement it. I have learned a lot from this practice. Geo targeting is one of the selection criteria.</p>
