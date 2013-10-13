@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://linc01n.github.io/sitemap.xml 
+Sitemap: http://linc01n.github.com/sitemap.xml 

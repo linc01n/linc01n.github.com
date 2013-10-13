@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: django | Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.io/blog/categories/django/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.io/"/>
-  <updated>2013-10-13T01:02:35+08:00</updated>
-  <id>http://linc01n.github.io/</id>
+  <link href="http://linc01n.github.com/blog/categories/django/atom.xml" rel="self"/>
+  <link href="http://linc01n.github.com/"/>
+  <updated>2013-10-13T12:00:10+08:00</updated>
+  <id>http://linc01n.github.com/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Django Admin: Auto Select Current User]]></title>
-    <link href="http://linc01n.github.io/blog/2011/10/18/django-admin-auto-select-current-user/"/>
+    <link href="http://linc01n.github.com/blog/2011/10/18/django-admin-auto-select-current-user/"/>
     <updated>2011-10-18T17:38:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2011/10/18/django-admin-auto-select-current-user</id>
+    <id>http://linc01n.github.com/blog/2011/10/18/django-admin-auto-select-current-user</id>
     <content type="html"><![CDATA[<h2>Background</h2>
 
 <p>There are often times in developing a CMS need to mark down who created the record. Django provide a nice admin interface for us. But when we only use the default, user need to select who they are by themselves. We want to auto select for them and they can't pretend to be others.</p>
