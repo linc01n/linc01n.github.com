@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ops | Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.com/blog/categories/ops/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.com/"/>
-  <updated>2013-10-13T12:00:10+08:00</updated>
-  <id>http://linc01n.github.com/</id>
+  <link href="http://linc01n.github.io/blog/categories/ops/atom.xml" rel="self"/>
+  <link href="http://linc01n.github.io/"/>
+  <updated>2013-10-13T12:04:59+08:00</updated>
+  <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Softether on VPS using local bridge]]></title>
-    <link href="http://linc01n.github.com/blog/2013/05/17/softether-on-vps-using-local-bridge/"/>
+    <link href="http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/"/>
     <updated>2013-05-17T19:00:00+08:00</updated>
-    <id>http://linc01n.github.com/blog/2013/05/17/softether-on-vps-using-local-bridge</id>
+    <id>http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge</id>
     <content type="html"><![CDATA[<p>This post continues on the last post about <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether setup on a VPS</a>.</p>
 
 <h3>Problem on SecureNAT</h3>
@@ -249,9 +249,9 @@ dhcp-option=tap_soft,3,192.168.7.1
   
   <entry>
     <title type="html"><![CDATA[SoftEther on VPS]]></title>
-    <link href="http://linc01n.github.com/blog/2013/03/19/softether-on-vps/"/>
+    <link href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/"/>
     <updated>2013-03-19T19:06:00+08:00</updated>
-    <id>http://linc01n.github.com/blog/2013/03/19/softether-on-vps</id>
+    <id>http://linc01n.github.io/blog/2013/03/19/softether-on-vps</id>
     <content type="html"><![CDATA[<p>I saw a post on <a href="http://www.lowendtalk.com/discussion/8783/softether-very-powerful-easy-to-use-multi-protocol-vpn-software">lowendtalk</a> last week introducing a new piece of vpn software call SoftEther.</p>
 
 <h3>What is <a href="http://www.softether.org/">SoftEther</a></h3>

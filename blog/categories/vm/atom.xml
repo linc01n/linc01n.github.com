@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: vm | Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.com/blog/categories/vm/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.com/"/>
-  <updated>2013-10-13T12:00:10+08:00</updated>
-  <id>http://linc01n.github.com/</id>
+  <link href="http://linc01n.github.io/blog/categories/vm/atom.xml" rel="self"/>
+  <link href="http://linc01n.github.io/"/>
+  <updated>2013-10-13T12:04:59+08:00</updated>
+  <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using Parallels Desktop as Vagrant Provider]]></title>
-    <link href="http://linc01n.github.com/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/"/>
+    <link href="http://linc01n.github.io/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/"/>
     <updated>2013-10-05T21:40:00+08:00</updated>
-    <id>http://linc01n.github.com/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider</id>
+    <id>http://linc01n.github.io/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider</id>
     <content type="html"><![CDATA[<h3>Vagrant is great!</h3>
 
 <h4>What is vagrant?</h4>
