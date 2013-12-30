@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vps | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/vps/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2013-10-14T14:24:25+08:00</updated>
+  <updated>2013-12-30T22:27:04+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -22,7 +22,7 @@
 
 <h3>Problem on SecureNAT</h3>
 
-<p>SecureNAT is a fairly simple way to setup Softether. You don't need a lot of sysadmin skill and network understanding in order to get Softether up and running.</p>
+<p>SecureNAT is a fairly simple way to setup Softether. You don&rsquo;t need a lot of sysadmin skill and network understanding in order to get Softether up and running.</p>
 
 <p>The problem is SecureNAT is a bit <strong>SLOW</strong>. I will show a comparison at the end of this article.</p>
 
@@ -32,7 +32,7 @@
 
 <p>To start with you need Softether installed and setup. You can follow the guide on <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether on VPS</a></p>
 
-<p>Just skip the last step "Enable the Virtual NAT"</p>
+<p>Just skip the last step &ldquo;Enable the Virtual NAT&rdquo;</p>
 
 <h3>Local bridge Setup</h3>
 
@@ -44,7 +44,7 @@
 
 <p>Tap Device name: tap_soft</p></blockquote>
 
-<p>From here we go to the "Local Bridge Setting"</p>
+<p>From here we go to the &ldquo;Local Bridge Setting&rdquo;</p>
 
 <p><img src="/images/softether_local_bridge/local-bridge-setting.png" alt="Local Bridge Setting" /></p>
 
@@ -88,8 +88,8 @@ dhcp-option=tap_soft,3,192.168.7.1
 
 <p>Next step we need a new set of init script which will config tap interface for us when Softether start up.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/init.d/vpnserver  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/init.d/vpnserver </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -166,7 +166,7 @@ dhcp-option=tap_soft,3,192.168.7.1
 </span><span class='line'><span class="nv">TAP_ADDR</span><span class="o">=</span>192.168.7.1&lt;/p&gt;
 </span><span class='line'>
 </span><span class='line'>&lt;p&gt;test -x <span class="nv">$DAEMON</span> <span class="o">||</span> <span class="nb">exit </span>0
-</span><span class='line'><span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+</span><span class='line'><span class="k">case</span> &amp;ldquo;<span class="nv">$1</span>&amp;rdquo; in
 </span><span class='line'>start<span class="o">)</span>
 </span><span class='line'><span class="nv">$DAEMON</span> start
 </span><span class='line'>touch <span class="nv">$LOCK</span>
@@ -185,7 +185,7 @@ dhcp-option=tap_soft,3,192.168.7.1
 </span><span class='line'>/sbin/ifconfig tap_soft <span class="nv">$TAP_ADDR</span>
 </span><span class='line'>;;
 </span><span class='line'>*<span class="o">)</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Usage: $0 {start|stop|restart}&quot;</span>
+</span><span class='line'><span class="nb">echo</span> &amp;ldquo;Usage: <span class="nv">$0</span> <span class="o">{</span>start|stop|restart<span class="o">}</span>&amp;rdquo;
 </span><span class='line'><span class="nb">exit </span>1
 </span><span class='line'><span class="k">esac</span>
 </span><span class='line'><span class="nb">exit </span>0
@@ -195,8 +195,8 @@ dhcp-option=tap_soft,3,192.168.7.1
 
 <p>Add this file to /etc/sysctl.d/ to enable ipv4 forwarding.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>net.ipv4.ip_forward <span class="o">=</span> 1
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
@@ -204,7 +204,7 @@ dhcp-option=tap_soft,3,192.168.7.1
 
 <p>```</p>
 
-<h1>sysctl --system</h1>
+<h1>sysctl &mdash;system</h1>
 
 <p>```</p>
 
@@ -212,7 +212,7 @@ dhcp-option=tap_soft,3,192.168.7.1
 
 <p>```</p>
 
-<h1>iptables -t nat -A POSTROUTING -s 192.168.7.0/24 -j SNAT --to-source [YOUR VPS IP ADDRESS]</h1>
+<h1>iptables -t nat -A POSTROUTING -s 192.168.7.0/24 -j SNAT &mdash;to-source [YOUR VPS IP ADDRESS]</h1>
 
 <p>```</p>
 
@@ -305,7 +305,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>Before installing SoftEther Server let us install some prerequisite.
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (build_tools.sh)</span> <a href='/downloads/code/build_tools.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>apt-get update
 </span><span class='line'>apt-get install build-essential
@@ -319,7 +319,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>After download, run
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (make.sh)</span> <a href='/downloads/code/make.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>tar zxf softether-vpnserver-v1.00-9029-rc2-2013.03.16-linux-x64-64bit.tar.gz
@@ -331,7 +331,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>Then we move the dir to /usr/local/
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (install.sh)</span> <a href='/downloads/code/install.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -349,7 +349,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>paste the following content to nano
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (vpnserver.sh)</span> <a href='/downloads/code/vpnserver.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -419,7 +419,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>After that we enable the service
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (service.sh)</span> <a href='/downloads/code/service.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -438,7 +438,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 check
 </code></p>
 
-<p>You should get 4 "Pass".</p>
+<p>You should get 4 &ldquo;Pass&rdquo;.</p>
 
 <p>We need to set the server admin password
 <code>
@@ -488,9 +488,9 @@ We disable Azure VPN</p>
 <p><img src="/images/softether_vps/user.png" alt="User" /></p>
 
 <p><img src="/images/softether_vps/manager.png" alt="Manager" />
-Click on "Manage Virtual Hub"</p>
+Click on &ldquo;Manage Virtual Hub&rdquo;</p>
 
-<p>Click on "Secure NAT" (If you want a faster connection we can refer to my 2nd post on <a href="http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/">softether</a>)</p>
+<p>Click on &ldquo;Secure NAT&rdquo; (If you want a faster connection we can refer to my 2nd post on <a href="http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/">softether</a>)</p>
 
 <p><img src="/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
 

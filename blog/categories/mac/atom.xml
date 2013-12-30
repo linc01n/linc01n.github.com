@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2013-10-14T14:24:25+08:00</updated>
+  <updated>2013-12-30T22:27:04+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -53,7 +53,7 @@
 
 <h1>Done</h1>
 
-<p>Now I can use control-c and control-v in both of my machine. The shortcut won't mess up my head anymore. :)</p>
+<p>Now I can use control-c and control-v in both of my machine. The shortcut won&rsquo;t mess up my head anymore. :)</p>
 ]]></content>
   </entry>
   
@@ -80,7 +80,7 @@
 
 <p>Install it and run it.</p>
 
-<p>Type in the Mac IP in the "Other Computer's Host Name"</p>
+<p>Type in the Mac IP in the &ldquo;Other Computer&rsquo;s Host Name&rdquo;</p>
 
 <h3>Done</h3>
 
@@ -92,7 +92,7 @@
 
 <p>I want to setup my Lion as server and Win7 as client. After trying with multiple combination of version and configuration, I found Quick Synergy can at least work.</p>
 
-<p>Problems with 1.4.4 Beta Server on Lion is the keyboard can't use the Shift key in Windows machine. Problmes with 1.3.7 Server is that I can make my keyboard work in Windows machine.</p>
+<p>Problems with 1.4.4 Beta Server on Lion is the keyboard can&rsquo;t use the Shift key in Windows machine. Problmes with 1.3.7 Server is that I can make my keyboard work in Windows machine.</p>
 
 <h2>Solutions</h2>
 
@@ -113,7 +113,7 @@
 
 <p>Install Xcode 4 from App store <a href="http://itunes.apple.com/app/xcode/id448457090?mt=12">Link</a></p>
 
-<p>After download, Click the "Install Xcode" from the Launchpad. (I really don't understand why Xcode behave like this when it comes to App Store. : ( )</p>
+<p>After download, Click the &ldquo;Install Xcode&rdquo; from the Launchpad. (I really don&rsquo;t understand why Xcode behave like this when it comes to App Store. : ( )</p>
 
 <p>Then open Terminal:
 Press ⌘ + Space then type Terminal</p>
@@ -153,7 +153,7 @@ $ sudo nano /sbin/mount_ntfs
 
 <h1>!/bin/bash</h1>
 
-<p>VOLUME_NAME="${@:$#}"
+<p>VOLUME_NAME=&ldquo;${@:$#}&rdquo;
 VOLUME_NAME=${VOLUME_NAME#/Volumes/}
 USER_ID=501
 GROUP_ID=20
@@ -212,7 +212,7 @@ $ id -u &amp;&amp; id -g
 </code>
 which the first line is user id, second line is group id.</p>
 
-<p><em>source: <a href="http://fernandoff.posterous.com/ntfs-write-support-on-osx-lion-with-ntfs-3g-f">fernando's blog</a> (I edit the path of ntfs-3g since we install in Homebrew)</em></p>
+<p><em>source: <a href="http://fernandoff.posterous.com/ntfs-write-support-on-osx-lion-with-ntfs-3g-f">fernando&rsquo;s blog</a> (I edit the path of ntfs-3g since we install in Homebrew)</em></p>
 ]]></content>
   </entry>
   

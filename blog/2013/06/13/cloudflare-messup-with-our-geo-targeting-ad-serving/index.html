@@ -7,7 +7,7 @@
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Cloudflare messup with our geo targeting ad serving Self-doubt on my code I have joined a local AD network company as a senior developer(who got out &hellip;">
+	<meta name="description" content="Cloudflare Messup With Our Geo Targeting Ad Serving Self-doubt on my code I have joined a local AD network company as a senior developer(who got out &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -120,28 +120,28 @@ window.addEventListener('load', function(e) {
 		<div class="mid-col">
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Cloudflare messup with our geo targeting ad serving</h1>
+	<h1 class="title" itemprop="name">Cloudflare Messup With Our Geo Targeting Ad Serving</h1>
 	<div class="entry-content" itemprop="articleBody"><h3>Self-doubt on my code</h3>
 
 <p>I have joined a local AD network company as a senior developer(who got out of college one year ago). I joined this company for more than half a year. Mainly working on cleaning the code and infrastructure. I redesign the AD selection algorithm and implement it. I have learned a lot from this practice. Geo targeting is one of the selection criteria.</p>
 
 <p>I received a support ticket from our operation team last week. We have launched a new campaign targeting US internet user but we are recording HK IP address. The first thought that struck me was I messed up the implementation(some background information: my new algorithm is testing on production. There is no time for proxy shadowing or mock test. SHIP IT before test it!).</p>
 
-<p>I rethink the whole logic in my head step-by-step. The truth is I don&#8217;t know what happen. Large scale production system is a beast. I still find myself clueless on other parts of the system.</p>
+<p>I rethink the whole logic in my head step-by-step. The truth is I don&rsquo;t know what happen. Large scale production system is a beast. I still find myself clueless on other parts of the system.</p>
 
-<p>I didn&#8217;t manage to figure out what happen so our team decided to checkout all the statistic we&#8217;ve got dig deeper to see what happen.</p>
+<p>I didn&rsquo;t manage to figure out what happen so our team decided to checkout all the statistic we&rsquo;ve got dig deeper to see what happen.</p>
 
 <h3>Cloudflare is caching javascript</h3>
 
-<p>I visited the publisher site and found out our script tag type become &#8216;text/rocketscript&#8217;. After some googling it is a thing called RocketLoader from Cloudflare.</p>
+<p>I visited the publisher site and found out our script tag type become &lsquo;text/rocketscript&rsquo;. After some googling it is a thing called RocketLoader from Cloudflare.</p>
 
 <p>This thing messes up with geo targeting for all of our ads. After some research, <a href="http://www.advertserve.com/blog/2013/04/cloudflare-and-rocketloader/">AdvretServe</a> and <a href="http://udinra.com/blog/google-adsense-cloudflare-issue-and-solution">Google Adsense</a> are also having this problem.</p>
 
-<p>Our javascript content is different per request. Cloudflare execute our javascript and save it. I know static content should use CDN to speed up things. But some ad network is not using static js. I don&#8217;t know much but at least all the 3-rd party agency we worked with are using dynamic js.</p>
+<p>Our javascript content is different per request. Cloudflare execute our javascript and save it. I know static content should use CDN to speed up things. But some ad network is not using static js. I don&rsquo;t know much but at least all the 3-rd party agency we worked with are using dynamic js.</p>
 
 <h3>Solution (which is not really a solution)</h3>
 
-<p>We need to ask publisher to disable Cloudflare. Cloudflare not only affect geotargeting campaign. We later find out that it also lower the publisher total ad serve. We are still investigating what&#8217;s the issue. But we will list Cloudflare as not compatible with our network.</p>
+<p>We need to ask publisher to disable Cloudflare. Cloudflare not only affect geotargeting campaign. We later find out that it also lower the publisher total ad serve. We are still investigating what&rsquo;s the issue. But we will list Cloudflare as not compatible with our network.</p>
 </div>
 
 </article>

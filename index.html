@@ -7,7 +7,7 @@
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Oct 8th, 2013 development, graph, ruby Using gruff graphing library Requirement I played around with gruff today. The final result is really &hellip;">
+	<meta name="description" content="Oct 8th, 2013 development, graph, ruby Using Gruff Graphing Library Requirement I played around with gruff today. The final result is really &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -147,7 +147,7 @@ window.addEventListener('load', function(e) {
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/10/08/using-gruff-graphing-library/" itemprop="url">Using gruff graphing library</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/10/08/using-gruff-graphing-library/" itemprop="url">Using Gruff Graphing Library</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<h3>Requirement</h3>
 
@@ -295,13 +295,13 @@ window.addEventListener('load', function(e) {
 
 <p><code>veewee parallels define 'ubuntu-12.04-lts' 'ubuntu-12.04.3-server-amd64'</code></p>
 
-<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don&#8217;t need those since we are creating for PD.</p>
+<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don&rsquo;t need those since we are creating for PD.</p>
 
-<p>Let&#8217;s build the box with</p>
+<p>Let&rsquo;s build the box with</p>
 
 <p><code>veewee parallels build 'ubuntu-12.04-lts' --workdir=/path/to/wd</code></p>
 
-<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don&#8217;t know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
+<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don&rsquo;t know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
 
 <p>The last step of creating the box is</p>
 
@@ -350,11 +350,11 @@ window.addEventListener('load', function(e) {
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/06/28/add-google-webmaster-verification-in-octopress/" itemprop="url">Add google webmaster verification in octopress</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/06/28/add-google-webmaster-verification-in-octopress/" itemprop="url">Add Google Webmaster Verification in Octopress</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<h3>Google Webmaster verification</h3>
 
-<p>I deployed my blog on github. So I can&#8217;t use DNS verification. I used HTML verification. It require you to put a specific html file on your root directory.</p>
+<p>I deployed my blog on github. So I can&rsquo;t use DNS verification. I used HTML verification. It require you to put a specific html file on your root directory.</p>
 
 <h3>How to add the file in Octopress</h3>
 
@@ -401,7 +401,7 @@ window.addEventListener('load', function(e) {
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/" itemprop="url">Cloudflare messup with our geo targeting ad serving</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/" itemprop="url">Cloudflare Messup With Our Geo Targeting Ad Serving</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<h3>Self-doubt on my code</h3>
 
@@ -409,21 +409,21 @@ window.addEventListener('load', function(e) {
 
 <p>I received a support ticket from our operation team last week. We have launched a new campaign targeting US internet user but we are recording HK IP address. The first thought that struck me was I messed up the implementation(some background information: my new algorithm is testing on production. There is no time for proxy shadowing or mock test. SHIP IT before test it!).</p>
 
-<p>I rethink the whole logic in my head step-by-step. The truth is I don&#8217;t know what happen. Large scale production system is a beast. I still find myself clueless on other parts of the system.</p>
+<p>I rethink the whole logic in my head step-by-step. The truth is I don&rsquo;t know what happen. Large scale production system is a beast. I still find myself clueless on other parts of the system.</p>
 
-<p>I didn&#8217;t manage to figure out what happen so our team decided to checkout all the statistic we&#8217;ve got dig deeper to see what happen.</p>
+<p>I didn&rsquo;t manage to figure out what happen so our team decided to checkout all the statistic we&rsquo;ve got dig deeper to see what happen.</p>
 
 <h3>Cloudflare is caching javascript</h3>
 
-<p>I visited the publisher site and found out our script tag type become &#8216;text/rocketscript&#8217;. After some googling it is a thing called RocketLoader from Cloudflare.</p>
+<p>I visited the publisher site and found out our script tag type become &lsquo;text/rocketscript&rsquo;. After some googling it is a thing called RocketLoader from Cloudflare.</p>
 
 <p>This thing messes up with geo targeting for all of our ads. After some research, <a href="http://www.advertserve.com/blog/2013/04/cloudflare-and-rocketloader/">AdvretServe</a> and <a href="http://udinra.com/blog/google-adsense-cloudflare-issue-and-solution">Google Adsense</a> are also having this problem.</p>
 
-<p>Our javascript content is different per request. Cloudflare execute our javascript and save it. I know static content should use CDN to speed up things. But some ad network is not using static js. I don&#8217;t know much but at least all the 3-rd party agency we worked with are using dynamic js.</p>
+<p>Our javascript content is different per request. Cloudflare execute our javascript and save it. I know static content should use CDN to speed up things. But some ad network is not using static js. I don&rsquo;t know much but at least all the 3-rd party agency we worked with are using dynamic js.</p>
 
 <h3>Solution (which is not really a solution)</h3>
 
-<p>We need to ask publisher to disable Cloudflare. Cloudflare not only affect geotargeting campaign. We later find out that it also lower the publisher total ad serve. We are still investigating what&#8217;s the issue. But we will list Cloudflare as not compatible with our network.</p>
+<p>We need to ask publisher to disable Cloudflare. Cloudflare not only affect geotargeting campaign. We later find out that it also lower the publisher total ad serve. We are still investigating what&rsquo;s the issue. But we will list Cloudflare as not compatible with our network.</p>
 
 		
 		
@@ -456,13 +456,13 @@ window.addEventListener('load', function(e) {
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/05/17/softether-on-vps-using-local-bridge/" itemprop="url">Softether on VPS using local bridge</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/05/17/softether-on-vps-using-local-bridge/" itemprop="url">Softether on VPS Using Local Bridge</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<p>This post continues on the last post about <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether setup on a VPS</a>.</p>
 
 <h3>Problem on SecureNAT</h3>
 
-<p>SecureNAT is a fairly simple way to setup Softether. You don&#8217;t need a lot of sysadmin skill and network understanding in order to get Softether up and running.</p>
+<p>SecureNAT is a fairly simple way to setup Softether. You don&rsquo;t need a lot of sysadmin skill and network understanding in order to get Softether up and running.</p>
 
 <p>The problem is SecureNAT is a bit <strong>SLOW</strong>. I will show a comparison at the end of this article.</p>
 
@@ -472,7 +472,7 @@ window.addEventListener('load', function(e) {
 
 <p>To start with you need Softether installed and setup. You can follow the guide on <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether on VPS</a></p>
 
-<p>Just skip the last step &#8220;Enable the Virtual NAT&#8221;</p>
+<p>Just skip the last step &ldquo;Enable the Virtual NAT&rdquo;</p>
 
 <h3>Local bridge Setup</h3>
 
@@ -484,7 +484,7 @@ window.addEventListener('load', function(e) {
 
 <p>Tap Device name: tap_soft</p></blockquote>
 
-<p>From here we go to the &#8220;Local Bridge Setting&#8221;</p>
+<p>From here we go to the &ldquo;Local Bridge Setting&rdquo;</p>
 
 <p><img src="/images/softether_local_bridge/local-bridge-setting.png" alt="Local Bridge Setting" /></p>
 
@@ -526,8 +526,8 @@ window.addEventListener('load', function(e) {
 
 <p>Next step we need a new set of init script which will config tap interface for us when Softether start up.</p>
 
-<figure class='code'><figcaption><span>/etc/init.d/vpnserver  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>/etc/init.d/vpnserver </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -610,8 +610,8 @@ window.addEventListener('load', function(e) {
 
 <p>Add this file to /etc/sysctl.d/ to enable ipv4 forwarding.</p>
 
-<figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>net.ipv4.ip_forward <span class="o">=</span> 1
 </span></code></pre></td></tr></table></div></figure>
 
@@ -684,7 +684,7 @@ window.addEventListener('load', function(e) {
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page/" itemprop="url">Load testing on sqale.jp single container for static page</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page/" itemprop="url">Load Testing on sqale.jp Single Container for Static Page</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<p>I met with some amazing developers from <a href="https://sqale.jp">Sqale.jp</a> when I attent <a href="http://rubyconf.tw/2012/">Ruby Conf TW 2012</a> last year.</p>
 
@@ -693,11 +693,11 @@ window.addEventListener('load', function(e) {
 <p>Sqale is addressing some of the problems Heroku.</p>
 
 <ol>
-<li>Server location - Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
+<li>Server location &ndash; Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
 <li>SSH access
 
 <blockquote><p>Since your app is spread across many dynos in the dyno manifold, there is no single place to SSH into. You deploy and manage apps, not servers.<a href="https://devcenter.heroku.com/articles/one-off-dynos#ssh-access">ref</a></p></blockquote></li>
-<li>Slug size - Heroku limit it to a maximum 200MB.</li>
+<li>Slug size &ndash; Heroku limit it to a maximum 200MB.</li>
 </ol>
 
 
@@ -711,7 +711,7 @@ window.addEventListener('load', function(e) {
 
 <h2>How powerful is one container?</h2>
 
-<p>I am still testing out Sqale. Before I use Sqale in production I need to know what&#8217;s my operation cost.</p>
+<p>I am still testing out Sqale. Before I use Sqale in production I need to know what&rsquo;s my operation cost.</p>
 
 <h3>Deploy a sample app</h3>
 
@@ -719,7 +719,7 @@ window.addEventListener('load', function(e) {
 
 <h3>Static file test</h3>
 
-<p>I don&#8217;t want to test dynamic content yet. So I created a blank index.html in public/ directory and see how their nginx perform.</p>
+<p>I don&rsquo;t want to test dynamic content yet. So I created a blank index.html in public/ directory and see how their nginx perform.</p>
 
 <h4>10 concurrent request warmup for 60 second</h4>
 
@@ -837,7 +837,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>Before installing SoftEther Server let us install some prerequisite.</p>
 
 <figure class='code'><figcaption><span> (build_tools.sh)</span> <a href='/downloads/code/build_tools.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>apt-get update
 </span><span class='line'>apt-get install build-essential
@@ -853,7 +853,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>After download, run</p>
 
 <figure class='code'><figcaption><span> (make.sh)</span> <a href='/downloads/code/make.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>tar zxf softether-vpnserver-v1.00-9029-rc2-2013.03.16-linux-x64-64bit.tar.gz
@@ -867,7 +867,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>Then we move the dir to /usr/local/</p>
 
 <figure class='code'><figcaption><span> (install.sh)</span> <a href='/downloads/code/install.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -887,7 +887,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>paste the following content to nano</p>
 
 <figure class='code'><figcaption><span> (vpnserver.sh)</span> <a href='/downloads/code/vpnserver.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -959,7 +959,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>After that we enable the service</p>
 
 <figure class='code'><figcaption><span> (service.sh)</span> <a href='/downloads/code/service.sh'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -982,7 +982,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 </span><span class='line'>check</span></code></pre></td></tr></table></div></figure>
 
 
-<p>You should get 4 &#8220;Pass&#8221;.</p>
+<p>You should get 4 &ldquo;Pass&rdquo;.</p>
 
 <p>We need to set the server admin password</p>
 
@@ -1038,9 +1038,9 @@ We disable Azure VPN</p>
 <p><img src="/images/softether_vps/user.png" alt="User" /></p>
 
 <p><img src="/images/softether_vps/manager.png" alt="Manager" />
-Click on &#8220;Manage Virtual Hub&#8221;</p>
+Click on &ldquo;Manage Virtual Hub&rdquo;</p>
 
-<p>Click on &#8220;Secure NAT&#8221; (If you want a faster connection we can refer to my 2nd post on <a href="http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/">softether</a>)</p>
+<p>Click on &ldquo;Secure NAT&rdquo; (If you want a faster connection we can refer to my 2nd post on <a href="http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/">softether</a>)</p>
 
 <p><img src="/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
 
@@ -1087,14 +1087,14 @@ Click on &#8220;Manage Virtual Hub&#8221;</p>
 	<div class="entry-content" itemprop="articleBody">
 		<h2>Background</h2>
 
-<p>There are often times in developing a CMS need to mark down who created the record. Django provide a nice admin interface for us. But when we only use the default, user need to select who they are by themselves. We want to auto select for them and they can&#8217;t pretend to be others.</p>
+<p>There are often times in developing a CMS need to mark down who created the record. Django provide a nice admin interface for us. But when we only use the default, user need to select who they are by themselves. We want to auto select for them and they can&rsquo;t pretend to be others.</p>
 
 <h2>code</h2>
 
 <p>In the django models.py, we have the following:</p>
 
-<figure class='code'><figcaption><span>models.py  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>models.py </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1111,8 +1111,8 @@ Click on &#8220;Manage Virtual Hub&#8221;</p>
 
 <p>So in our admin:</p>
 
-<figure class='code'><figcaption><span>admin  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>admin </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1161,7 +1161,7 @@ Click on &#8220;Manage Virtual Hub&#8221;</p>
 
 <p><img src="/images/created_by.jpg" alt="Created By" /></p>
 
-<p>The last get_readonly_fields function make this field can&#8217;t be edit after the creation.</p>
+<p>The last get_readonly_fields function make this field can&rsquo;t be edit after the creation.</p>
 
 		
 		
@@ -1231,7 +1231,7 @@ Click on &#8220;Manage Virtual Hub&#8221;</p>
 
 <h1>Done</h1>
 
-<p>Now I can use control-c and control-v in both of my machine. The shortcut won&#8217;t mess up my head anymore. :)</p>
+<p>Now I can use control-c and control-v in both of my machine. The shortcut won&rsquo;t mess up my head anymore. :)</p>
 
 		
 		
@@ -1284,7 +1284,7 @@ Click on &#8220;Manage Virtual Hub&#8221;</p>
 
 <p>Install it and run it.</p>
 
-<p>Type in the Mac IP in the &#8220;Other Computer&#8217;s Host Name&#8221;</p>
+<p>Type in the Mac IP in the &ldquo;Other Computer&rsquo;s Host Name&rdquo;</p>
 
 <h3>Done</h3>
 
@@ -1296,7 +1296,7 @@ Click on &#8220;Manage Virtual Hub&#8221;</p>
 
 <p>I want to setup my Lion as server and Win7 as client. After trying with multiple combination of version and configuration, I found Quick Synergy can at least work.</p>
 
-<p>Problems with 1.4.4 Beta Server on Lion is the keyboard can&#8217;t use the Shift key in Windows machine. Problmes with 1.3.7 Server is that I can make my keyboard work in Windows machine.</p>
+<p>Problems with 1.4.4 Beta Server on Lion is the keyboard can&rsquo;t use the Shift key in Windows machine. Problmes with 1.3.7 Server is that I can make my keyboard work in Windows machine.</p>
 
 <h2>Solutions</h2>
 

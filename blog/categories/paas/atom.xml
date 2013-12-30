@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PaaS | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/paas/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2013-10-14T14:24:25+08:00</updated>
+  <updated>2013-12-30T22:27:04+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -25,11 +25,11 @@
 <p>Sqale is addressing some of the problems Heroku.</p>
 
 <ol>
-<li>Server location - Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
+<li>Server location &ndash; Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
 <li>SSH access
 
 <blockquote><p>Since your app is spread across many dynos in the dyno manifold, there is no single place to SSH into. You deploy and manage apps, not servers.<a href="https://devcenter.heroku.com/articles/one-off-dynos#ssh-access">ref</a></p></blockquote></li>
-<li>Slug size - Heroku limit it to a maximum 200MB.</li>
+<li>Slug size &ndash; Heroku limit it to a maximum 200MB.</li>
 </ol>
 
 
@@ -43,7 +43,7 @@
 
 <h2>How powerful is one container?</h2>
 
-<p>I am still testing out Sqale. Before I use Sqale in production I need to know what's my operation cost.</p>
+<p>I am still testing out Sqale. Before I use Sqale in production I need to know what&rsquo;s my operation cost.</p>
 
 <h3>Deploy a sample app</h3>
 
@@ -51,7 +51,7 @@
 
 <h3>Static file test</h3>
 
-<p>I don't want to test dynamic content yet. So I created a blank index.html in public/ directory and see how their nginx perform.</p>
+<p>I don&rsquo;t want to test dynamic content yet. So I created a blank index.html in public/ directory and see how their nginx perform.</p>
 
 <h4>10 concurrent request warmup for 60 second</h4>
 

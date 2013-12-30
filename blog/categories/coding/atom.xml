@@ -4,7 +4,7 @@
   <title><![CDATA[Category: coding | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/coding/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2013-10-14T14:24:25+08:00</updated>
+  <updated>2013-12-30T22:27:04+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -54,13 +54,13 @@
 
 <p><code>veewee parallels define 'ubuntu-12.04-lts' 'ubuntu-12.04.3-server-amd64'</code></p>
 
-<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don't need those since we are creating for PD.</p>
+<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don&rsquo;t need those since we are creating for PD.</p>
 
-<p>Let's build the box with</p>
+<p>Let&rsquo;s build the box with</p>
 
 <p><code>veewee parallels build 'ubuntu-12.04-lts' --workdir=/path/to/wd</code></p>
 
-<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don't know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
+<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don&rsquo;t know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
 
 <p>The last step of creating the box is</p>
 
@@ -87,14 +87,14 @@
     <id>http://linc01n.github.io/blog/2011/10/18/django-admin-auto-select-current-user</id>
     <content type="html"><![CDATA[<h2>Background</h2>
 
-<p>There are often times in developing a CMS need to mark down who created the record. Django provide a nice admin interface for us. But when we only use the default, user need to select who they are by themselves. We want to auto select for them and they can't pretend to be others.</p>
+<p>There are often times in developing a CMS need to mark down who created the record. Django provide a nice admin interface for us. But when we only use the default, user need to select who they are by themselves. We want to auto select for them and they can&rsquo;t pretend to be others.</p>
 
 <h2>code</h2>
 
 <p>In the django models.py, we have the following:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>models.py  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>models.py </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -117,8 +117,8 @@
 <p>We want the created_by to be set automatically for the logged in user.</p>
 
 <p>So in our admin:
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>admin  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>admin </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -170,7 +170,7 @@
 
 <p><img src="/images/created_by.jpg" alt="Created By" /></p>
 
-<p>The last get_readonly_fields function make this field can't be edit after the creation.</p>
+<p>The last get_readonly_fields function make this field can&rsquo;t be edit after the creation.</p>
 ]]></content>
   </entry>
   

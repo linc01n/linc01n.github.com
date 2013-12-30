@@ -4,7 +4,7 @@
   <title><![CDATA[Category: verification | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/verification/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2013-10-14T14:24:25+08:00</updated>
+  <updated>2013-12-30T22:27:04+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -20,7 +20,7 @@
     <id>http://linc01n.github.io/blog/2013/06/28/add-google-webmaster-verification-in-octopress</id>
     <content type="html"><![CDATA[<h3>Google Webmaster verification</h3>
 
-<p>I deployed my blog on github. So I can't use DNS verification. I used HTML verification. It require you to put a specific html file on your root directory.</p>
+<p>I deployed my blog on github. So I can&rsquo;t use DNS verification. I used HTML verification. It require you to put a specific html file on your root directory.</p>
 
 <h3>How to add the file in Octopress</h3>
 

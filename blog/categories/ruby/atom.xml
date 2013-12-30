@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2013-10-14T14:24:25+08:00</updated>
+  <updated>2013-12-30T22:27:04+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -33,8 +33,8 @@
 <p>To generate a graph you need to</p>
 
 <p>```ruby
-require "gruff"
-require "date"</p>
+require &ldquo;gruff&rdquo;
+require &ldquo;date&rdquo;</p>
 
 <h1>Create the graph object</h1>
 
@@ -42,7 +42,7 @@ require "date"</p>
 
 <h1>Set the title</h1>
 
-<p>g.title = "My First Graph"</p>
+<p>g.title = &ldquo;My First Graph&rdquo;</p>
 
 <h1>Let say we have a data hash</h1>
 
@@ -55,11 +55,11 @@ yesterday = Date.today.prev_day</p>
 
 <h1>We need to set the x-axis labels</h1>
 
-<h1>It need to be a Hash { 0 => "name 1", 1 => "name 2", … }</h1>
+<h1>It need to be a Hash { 0 => &ldquo;name 1&rdquo;, 1 => &ldquo;name 2&rdquo;, … }</h1>
 
 <h1>We need to do a little bit of data transform here.</h1>
 
-<p>g.labels = Hash[(0...data.keys.size).zip data.keys.map{|day| day.strftime("%d %b")}] # => {0=>"07 Oct", 1=>"08 Oct"}</p>
+<p>g.labels = Hash[(0&hellip;data.keys.size).zip data.keys.map{|day| day.strftime(&ldquo;%d %b&rdquo;)}] # => {0=>&ldquo;07 Oct&rdquo;, 1=>&ldquo;08 Oct&rdquo;}</p>
 
 <h1>Then we need to set the y-axis, we need to give it a name</h1>
 
@@ -67,7 +67,7 @@ yesterday = Date.today.prev_day</p>
 
 <h1>Write the generated graph to a file</h1>
 
-<p>g.write "gruff.png"
+<p>g.write &ldquo;gruff.png&rdquo;
 ```</p>
 
 <p>This is the generated graph:</p>
@@ -117,13 +117,13 @@ yesterday = Date.today.prev_day</p>
 
 <p><code>veewee parallels define 'ubuntu-12.04-lts' 'ubuntu-12.04.3-server-amd64'</code></p>
 
-<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don't need those since we are creating for PD.</p>
+<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don&rsquo;t need those since we are creating for PD.</p>
 
-<p>Let's build the box with</p>
+<p>Let&rsquo;s build the box with</p>
 
 <p><code>veewee parallels build 'ubuntu-12.04-lts' --workdir=/path/to/wd</code></p>
 
-<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don't know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
+<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don&rsquo;t know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
 
 <p>The last step of creating the box is</p>
 

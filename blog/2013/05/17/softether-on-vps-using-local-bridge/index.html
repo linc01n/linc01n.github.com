@@ -7,7 +7,7 @@
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Softether on VPS using local bridge This post continues on the last post about Softether setup on a VPS. Problem on SecureNAT SecureNAT is a fairly &hellip;">
+	<meta name="description" content="Softether on VPS Using Local Bridge This post continues on the last post about Softether setup on a VPS. Problem on SecureNAT SecureNAT is a fairly &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -120,12 +120,12 @@ window.addEventListener('load', function(e) {
 		<div class="mid-col">
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Softether on VPS using local bridge</h1>
+	<h1 class="title" itemprop="name">Softether on VPS Using Local Bridge</h1>
 	<div class="entry-content" itemprop="articleBody"><p>This post continues on the last post about <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether setup on a VPS</a>.</p>
 
 <h3>Problem on SecureNAT</h3>
 
-<p>SecureNAT is a fairly simple way to setup Softether. You don&#8217;t need a lot of sysadmin skill and network understanding in order to get Softether up and running.</p>
+<p>SecureNAT is a fairly simple way to setup Softether. You don&rsquo;t need a lot of sysadmin skill and network understanding in order to get Softether up and running.</p>
 
 <p>The problem is SecureNAT is a bit <strong>SLOW</strong>. I will show a comparison at the end of this article.</p>
 
@@ -135,7 +135,7 @@ window.addEventListener('load', function(e) {
 
 <p>To start with you need Softether installed and setup. You can follow the guide on <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether on VPS</a></p>
 
-<p>Just skip the last step &#8220;Enable the Virtual NAT&#8221;</p>
+<p>Just skip the last step &ldquo;Enable the Virtual NAT&rdquo;</p>
 
 <h3>Local bridge Setup</h3>
 
@@ -147,7 +147,7 @@ window.addEventListener('load', function(e) {
 
 <p>Tap Device name: tap_soft</p></blockquote>
 
-<p>From here we go to the &#8220;Local Bridge Setting&#8221;</p>
+<p>From here we go to the &ldquo;Local Bridge Setting&rdquo;</p>
 
 <p><img src="/images/softether_local_bridge/local-bridge-setting.png" alt="Local Bridge Setting" /></p>
 
@@ -189,8 +189,8 @@ window.addEventListener('load', function(e) {
 
 <p>Next step we need a new set of init script which will config tap interface for us when Softether start up.</p>
 
-<figure class='code'><figcaption><span>/etc/init.d/vpnserver  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>/etc/init.d/vpnserver </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -273,8 +273,8 @@ window.addEventListener('load', function(e) {
 
 <p>Add this file to /etc/sysctl.d/ to enable ipv4 forwarding.</p>
 
-<figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>net.ipv4.ip_forward <span class="o">=</span> 1
 </span></code></pre></td></tr></table></div></figure>
 

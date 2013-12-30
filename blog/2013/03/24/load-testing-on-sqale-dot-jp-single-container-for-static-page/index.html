@@ -7,7 +7,7 @@
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Load testing on sqale.jp single container for static page I met with some amazing developers from Sqale.jp when I attent Ruby Conf TW 2012 last year &hellip;">
+	<meta name="description" content="Load Testing on sqale.jp Single Container for Static Page I met with some amazing developers from Sqale.jp when I attent Ruby Conf TW 2012 last year &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -120,7 +120,7 @@ window.addEventListener('load', function(e) {
 		<div class="mid-col">
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Load testing on sqale.jp single container for static page</h1>
+	<h1 class="title" itemprop="name">Load Testing on sqale.jp Single Container for Static Page</h1>
 	<div class="entry-content" itemprop="articleBody"><p>I met with some amazing developers from <a href="https://sqale.jp">Sqale.jp</a> when I attent <a href="http://rubyconf.tw/2012/">Ruby Conf TW 2012</a> last year.</p>
 
 <p>Sqale is a japanese company compete with <a href="http://www.heroku.com/">Heroku</a> to provide developer friendly platform to host rails app.</p>
@@ -128,11 +128,11 @@ window.addEventListener('load', function(e) {
 <p>Sqale is addressing some of the problems Heroku.</p>
 
 <ol>
-<li>Server location - Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
+<li>Server location &ndash; Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
 <li>SSH access
 
 <blockquote><p>Since your app is spread across many dynos in the dyno manifold, there is no single place to SSH into. You deploy and manage apps, not servers.<a href="https://devcenter.heroku.com/articles/one-off-dynos#ssh-access">ref</a></p></blockquote></li>
-<li>Slug size - Heroku limit it to a maximum 200MB.</li>
+<li>Slug size &ndash; Heroku limit it to a maximum 200MB.</li>
 </ol>
 
 
@@ -146,7 +146,7 @@ window.addEventListener('load', function(e) {
 
 <h2>How powerful is one container?</h2>
 
-<p>I am still testing out Sqale. Before I use Sqale in production I need to know what&#8217;s my operation cost.</p>
+<p>I am still testing out Sqale. Before I use Sqale in production I need to know what&rsquo;s my operation cost.</p>
 
 <h3>Deploy a sample app</h3>
 
@@ -154,7 +154,7 @@ window.addEventListener('load', function(e) {
 
 <h3>Static file test</h3>
 
-<p>I don&#8217;t want to test dynamic content yet. So I created a blank index.html in public/ directory and see how their nginx perform.</p>
+<p>I don&rsquo;t want to test dynamic content yet. So I created a blank index.html in public/ directory and see how their nginx perform.</p>
 
 <h4>10 concurrent request warmup for 60 second</h4>
 

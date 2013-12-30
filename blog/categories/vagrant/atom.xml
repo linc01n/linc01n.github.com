@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vagrant | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2013-10-14T14:24:25+08:00</updated>
+  <updated>2013-12-30T22:27:04+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -54,13 +54,13 @@
 
 <p><code>veewee parallels define 'ubuntu-12.04-lts' 'ubuntu-12.04.3-server-amd64'</code></p>
 
-<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don't need those since we are creating for PD.</p>
+<p>In the definition directory edit the <em>definitions.rb</em> file. Remove virtualbox and vmware. We don&rsquo;t need those since we are creating for PD.</p>
 
-<p>Let's build the box with</p>
+<p>Let&rsquo;s build the box with</p>
 
 <p><code>veewee parallels build 'ubuntu-12.04-lts' --workdir=/path/to/wd</code></p>
 
-<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don't know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
+<p>Wait a while the os is installing. Here comes with a gotcha. If you get stuck in install grub-pc, you need to reboot you mac. I don&rsquo;t know why but it works. I also found we cannot do unattended install of Parallels tools. After the build is complete, do not shutdown the instance. Install the tools using ssh with vagrant/vagrant login.</p>
 
 <p>The last step of creating the box is</p>
 
