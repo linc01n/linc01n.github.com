@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vpn | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/vpn/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2013-12-30T22:36:40+08:00</updated>
+  <updated>2014-04-05T18:24:44+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -243,7 +243,7 @@ dhcp-option=tap_soft,3,192.168.7.1
 
 <p>Local bridge use far less CPU resources than SecureNAT. It is a bit trouble to setup but I think it is worth to use local bridge.</p>
 
-<p>I would recommend <a href="https://clientarea.ramnode.com/aff.php?aff=319">Ramnode</a> as a VPS provider. Their VPS is speedy and support is amazing.</p>
+<p>I would recommend <a href="https://clientarea.ramnode.com/aff.php?aff=319">Ramnode</a>(Affiliated) as a VPS provider. Their VPS is speedy and support is amazing.</p>
 ]]></content>
   </entry>
   
@@ -277,7 +277,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>Requirement: VPS</p>
 
-<p>I am using vps from buyvm. I got from a year deal which is USD12/year. I would recommend <a href="https://clientarea.ramnode.com/aff.php?aff=319">Ramnode</a> as a VPS provider. Their VPS is speedy and support is amazing.</p>
+<p>I am using vps from buyvm. I got from a year deal which is USD12/year. I would recommend <a href="https://clientarea.ramnode.com/aff.php?aff=319">Ramnode</a>(Affiliated) as a VPS provider. Their VPS is speedy and support is amazing.</p>
 
 <ul>
 <li>Spec:
