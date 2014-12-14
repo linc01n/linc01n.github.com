@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sysadmin | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/sysadmin/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T19:46:09+08:00</updated>
+  <updated>2014-12-14T20:10:27+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -31,11 +31,8 @@
 <p>First we boot into <a href="http://gparted.org/">GParted</a> with live CD.
 Then we issue this command</p>
 
-<p>```</p>
-
-<h1>dd if=/dev/sda of=(external harddrive) bs=1M</h1>
-
-<p>```</p>
+<pre><code># dd if=/dev/sda of=(external harddrive) bs=1M
+</code></pre>
 
 <h3>Erase Disk</h3>
 
@@ -45,41 +42,34 @@ Then we issue this command</p>
 
 <p>After SmartOS installation, we now create a new KVM</p>
 
-<p>```json /opt/new_vm.json
-{
-  &ldquo;brand&rdquo;: &ldquo;kvm&rdquo;,
-  &ldquo;vcpus&rdquo;: 1,
-  &ldquo;autoboot&rdquo;: true,
-  &ldquo;ram&rdquo;: 2048,
-  &ldquo;alias&rdquo;: &ldquo;old_machine&rdquo;,
-  &ldquo;host&rdquo;: &ldquo;old_machine&rdquo;,
-  &ldquo;resolvers&rdquo;: [&ldquo;8.8.8.8&rdquo;, &ldquo;8.8.4.4&rdquo;],
-  &ldquo;disks&rdquo;: [</p>
-
-<pre><code>{
-  "boot": true,
-  "model": "ide",
-  "size": 153600
+<pre><code class="json /opt/new_vm.json">{
+  "brand": "kvm",
+  "vcpus": 1,
+  "autoboot": true,
+  "ram": 2048,
+  "alias": "old_machine",
+  "host": "old_machine",
+  "resolvers": ["8.8.8.8", "8.8.4.4"],
+  "disks": [
+    {
+      "boot": true,
+      "model": "ide",
+      "size": 153600
+    }
+  ],
+  "nics": [
+    {
+      "nic_tag": "admin",
+      "model": "e1000",
+      "ip": "192.168.xx.xx",
+      "gateway": "192.168.xx.1",
+      "allow_ip_spoofing": true,
+      "primary": true,
+      "netmask": "255.255.255.0"
+    }
+  ]
 }
 </code></pre>
-
-<p>  ],
-  &ldquo;nics&rdquo;: [</p>
-
-<pre><code>{
-  "nic_tag": "admin",
-  "model": "e1000",
-  "ip": "192.168.xx.xx",
-  "gateway": "192.168.xx.1",
-  "allow_ip_spoofing": true,
-  "primary": true,
-  "netmask": "255.255.255.0"
-}
-</code></pre>
-
-<p>  ]
-}
-```</p>
 
 <p>Replace <code>ip</code> and <code>gateway</code> with your network settting.</p>
 
@@ -87,37 +77,27 @@ Then we issue this command</p>
 
 <p>Create kvm by</p>
 
-<p>```</p>
-
-<h1>vmadm create &lt; /opt/new_vm.json</h1>
-
-<p>```</p>
+<pre><code># vmadm create &lt; /opt/new_vm.json
+</code></pre>
 
 <p>You will get a uuid of the machine after this command.</p>
 
-<p><code>
-Successfully created VM 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
-</code></p>
+<pre><code>Successfully created VM 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
+</code></pre>
 
 <h1>Restore old machine</h1>
 
 <p>Now we copy back the old machine disk image to the newly created KVM.</p>
 
-<p>```</p>
-
-<h1>dd if=(external harddrive) of=/dev/zvol/226d5a1d-973e-4b4e-8158-ee33cc81e3f5-disk0</h1>
-
-<p>```</p>
+<pre><code># dd if=(external harddrive) of=/dev/zvol/226d5a1d-973e-4b4e-8158-ee33cc81e3f5-disk0
+</code></pre>
 
 <h1>Boot and test</h1>
 
 <p>After the disk copy finish, now you can boot up your vm and check if everything is working.</p>
 
-<p>```</p>
-
-<h1>vmadm boot 226d5a1d-973e-4b4e-8158-ee33cc81e3f5</h1>
-
-<p>```</p>
+<pre><code># vmadm boot 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
+</code></pre>
 ]]></content>
   </entry>
   
@@ -166,11 +146,8 @@ Successfully created VM 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
 
 <p>After the creation of the local bridge we jump back to our server. And run</p>
 
-<p>```</p>
-
-<h1>ifconfig tap_soft</h1>
-
-<p>```</p>
+<pre><code># ifconfig tap_soft
+</code></pre>
 
 <p>It should show you something similar to this</p>
 
@@ -178,25 +155,21 @@ Successfully created VM 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
 
 <p>Because we are not going to use SecureNAT and SecureDHCP. We need to install a DHCP server on our VPS. We are going to use dnsmasq as our DHCP server.</p>
 
-<p>```</p>
-
-<h1>apt-get install dnsmasq</h1>
-
-<p>```</p>
+<pre><code># apt-get install dnsmasq
+</code></pre>
 
 <p>Now edit the /etc/dnsmasq.conf file. Add these 3 lines at the end.</p>
 
-<p><code>
-interface=tap_soft
+<pre><code>interface=tap_soft
 dhcp-range=tap_soft,192.168.7.50,192.168.7.60,12h
 dhcp-option=tap_soft,3,192.168.7.1
-</code></p>
+</code></pre>
 
 <p>The above 3 lines are used to enable the dhcp server on interface tap_soft.</p>
 
 <p>Next step we need a new set of init script which will config tap interface for us when Softether start up.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/init.d/vpnserver </span></figcaption>
+<p><figure class='code'><figcaption><span>/etc/init.d/vpnserver </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -297,50 +270,37 @@ dhcp-option=tap_soft,3,192.168.7.1
 </span><span class='line'><span class="nb">exit </span>1
 </span><span class='line'><span class="k">esac</span>
 </span><span class='line'><span class="nb">exit </span>0
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Then we need to enable NAT on linux server.</p>
 
 <p>Add this file to /etc/sysctl.d/ to enable ipv4 forwarding.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf </span></figcaption>
+<p><figure class='code'><figcaption><span>/etc/sysctl.d/ipv4_forwarding.conf </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>net.ipv4.ip_forward <span class="o">=</span> 1
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Apply the sysctl run</p>
 
-<p>```</p>
-
-<h1>sysctl &mdash;system</h1>
-
-<p>```</p>
+<pre><code># sysctl --system
+</code></pre>
 
 <p>Then we add a POSTROUTING rule to iptables</p>
 
-<p>```</p>
-
-<h1>iptables -t nat -A POSTROUTING -s 192.168.7.0/24 -j SNAT &mdash;to-source [YOUR VPS IP ADDRESS]</h1>
-
-<p>```</p>
+<pre><code># iptables -t nat -A POSTROUTING -s 192.168.7.0/24 -j SNAT --to-source [YOUR VPS IP ADDRESS]
+</code></pre>
 
 <p>To make our iptables rule survive after reboot install <code>iptables-persistent</code></p>
 
-<p>```</p>
-
-<h1>apt-get install iptables-persistent</h1>
-
-<p>```</p>
+<pre><code># apt-get install iptables-persistent
+</code></pre>
 
 <p>After all the above setting, restart the vpnserver then we are good to go.</p>
 
-<p>```</p>
-
-<h1>/etc/init.d/vpnserver restart</h1>
-
-<h1>/etc/init.d/dnsmasq restart</h1>
-
-<p>```</p>
+<pre><code># /etc/init.d/vpnserver restart
+# /etc/init.d/dnsmasq restart
+</code></pre>
 
 <p>Comparison on SecureNAT and local bridge method.</p>
 
@@ -412,12 +372,12 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p><img src="/images/softether_vps/login.png" alt="login as root" /></p>
 
 <p>Before installing SoftEther Server let us install some prerequisite.
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (build_tools.sh)</span> <a href='/downloads/code/build_tools.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (build_tools.sh)</span> <a href='/downloads/code/build_tools.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>apt-get update
 </span><span class='line'>apt-get install build-essential
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Go to <a href="http://www.softether-download.com/en.aspx?product=softether">SoftEther</a> to download the server binary.</p>
 
@@ -426,19 +386,19 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>I am using Ver 1.00, Build 9029, rc2 in this tutorial.</p>
 
 <p>After download, run
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (make.sh)</span> <a href='/downloads/code/make.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (make.sh)</span> <a href='/downloads/code/make.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>tar zxf softether-vpnserver-v1.00-9029-rc2-2013.03.16-linux-x64-64bit.tar.gz
 </span><span class='line'><span class="nb">cd </span>vpnserver
 </span><span class='line'>make
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Read the Agreement and press 1 three times.</p>
 
 <p>Then we move the dir to /usr/local/
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (install.sh)</span> <a href='/downloads/code/install.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (install.sh)</span> <a href='/downloads/code/install.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -453,10 +413,10 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 </span><span class='line'>chmod 700 vpncmd
 </span><span class='line'>chmod 700 vpnserver
 </span><span class='line'>nano /etc/init.d/vpnserver
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>paste the following content to nano
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (vpnserver.sh)</span> <a href='/downloads/code/vpnserver.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (vpnserver.sh)</span> <a href='/downloads/code/vpnserver.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -521,12 +481,12 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 </span><span class='line'><span class="nb">exit </span>1
 </span><span class='line'><span class="k">esac</span>
 </span><span class='line'><span class="nb">exit </span>0
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>ctrl-o ret ctrl-x</p>
 
 <p>After that we enable the service
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (service.sh)</span> <a href='/downloads/code/service.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (service.sh)</span> <a href='/downloads/code/service.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -537,7 +497,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 </span><span class='line'>update-rc.d vpnserver defaults
 </span><span class='line'>/etc/init.d/vpnserver start
 </span><span class='line'><span class="nb">cd</span> /usr/local/vpnserver/
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Then we need to do a checking.
 <code>

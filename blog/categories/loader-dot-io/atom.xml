@@ -4,7 +4,7 @@
   <title><![CDATA[Category: loader.io | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/loader-dot-io/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T19:46:09+08:00</updated>
+  <updated>2014-12-14T20:10:27+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -25,11 +25,11 @@
 <p>Sqale is addressing some of the problems Heroku.</p>
 
 <ol>
-<li>Server location &ndash; Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
+<li>Server location - Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
 <li>SSH access
 
 <blockquote><p>Since your app is spread across many dynos in the dyno manifold, there is no single place to SSH into. You deploy and manage apps, not servers.<a href="https://devcenter.heroku.com/articles/one-off-dynos#ssh-access">ref</a></p></blockquote></li>
-<li>Slug size &ndash; Heroku limit it to a maximum 200MB.</li>
+<li>Slug size - Heroku limit it to a maximum 200MB.</li>
 </ol>
 
 
@@ -56,7 +56,7 @@
 <h4>10 concurrent request warmup for 60 second</h4>
 
 <div style="width: 600px;">
-<iframe  style="overflow: hidden;" scrolling="no" width='600' height='300' frameborder='0' src='http://linc01n.github.io//share.loader.io/results/9fc6e5f2ac4f708b91a86095c13d8762/widget'></iframe>
+<iframe  style="overflow: hidden;" scrolling="no" width='600' height='300' frameborder='0' src='//share.loader.io/results/9fc6e5f2ac4f708b91a86095c13d8762/widget'></iframe>
 <div style="width: 100%; text-align: right;">
 <a href="http://loader.io/results/9fc6e5f2ac4f708b91a86095c13d8762" target="_blank"  style="padding: 0 10px 10px 0; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px;">View on loader.io</a>
 </div></div>
@@ -69,7 +69,7 @@
 <h4>1000 concurrent request for 300 second</h4>
 
 <div style="width: 600px;">
-<iframe style="overflow: hidden;" scrolling="no" width='600' height='300' frameborder='0' src='http://linc01n.github.io//share.loader.io/results/36216016f1884328b0b0e71451adcc37/widget'></iframe>
+<iframe style="overflow: hidden;" scrolling="no" width='600' height='300' frameborder='0' src='//share.loader.io/results/36216016f1884328b0b0e71451adcc37/widget'></iframe>
 <div style="width: 100%; text-align: right;">
 <a href="http://loader.io/results/36216016f1884328b0b0e71451adcc37" target="_blank"  style="padding: 0 10px 10px 0; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px;">View on loader.io</a>
 </div></div>

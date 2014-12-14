@@ -4,7 +4,7 @@
   <title><![CDATA[Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T19:46:09+08:00</updated>
+  <updated>2014-12-14T20:10:27+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -31,9 +31,8 @@
 <p>First we boot into <a href="http://gparted.org/">GParted</a> with live CD.
 Then we issue this command</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># dd if=/dev/sda of=(external harddrive) bs=1M</span></code></pre></td></tr></table></div></figure>
-
+<pre><code># dd if=/dev/sda of=(external harddrive) bs=1M
+</code></pre>
 
 <h3>Erase Disk</h3>
 
@@ -106,37 +105,27 @@ Then we issue this command</p>
 
 <p>Create kvm by</p>
 
-<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">vmadm</span> <span class="err">create</span> <span class="err">&lt;</span> <span class="err">/opt/new_vm.json</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code># vmadm create &lt; /opt/new_vm.json
+</code></pre>
 
 <p>You will get a uuid of the machine after this command.</p>
 
-<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">Successfully</span> <span class="err">created</span> <span class="err">VM</span> <span class="mi">226</span><span class="err">d</span><span class="mi">5</span><span class="err">a</span><span class="mi">1</span><span class="err">d</span><span class="mf">-973e-4</span><span class="err">b</span><span class="mf">4e-8158</span><span class="err">-ee</span><span class="mi">33</span><span class="err">cc</span><span class="mf">81e3</span><span class="err">f</span><span class="mi">5</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code>Successfully created VM 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
+</code></pre>
 
 <h1>Restore old machine</h1>
 
 <p>Now we copy back the old machine disk image to the newly created KVM.</p>
 
-<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">dd</span> <span class="err">if=(external</span> <span class="err">harddrive)</span> <span class="err">of=/dev/zvol/</span><span class="mi">226</span><span class="err">d</span><span class="mi">5</span><span class="err">a</span><span class="mi">1</span><span class="err">d</span><span class="mf">-973e-4</span><span class="err">b</span><span class="mf">4e-8158</span><span class="err">-ee</span><span class="mi">33</span><span class="err">cc</span><span class="mf">81e3</span><span class="err">f</span><span class="mi">5</span><span class="err">-disk</span><span class="mi">0</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code># dd if=(external harddrive) of=/dev/zvol/226d5a1d-973e-4b4e-8158-ee33cc81e3f5-disk0
+</code></pre>
 
 <h1>Boot and test</h1>
 
 <p>After the disk copy finish, now you can boot up your vm and check if everything is working.</p>
 
-<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">vmadm</span> <span class="err">boot</span> <span class="mi">226</span><span class="err">d</span><span class="mi">5</span><span class="err">a</span><span class="mi">1</span><span class="err">d</span><span class="mf">-973e-4</span><span class="err">b</span><span class="mf">4e-8158</span><span class="err">-ee</span><span class="mi">33</span><span class="err">cc</span><span class="mf">81e3</span><span class="err">f</span><span class="mi">5</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
+<pre><code># vmadm boot 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
+</code></pre>
 ]]></content>
   </entry>
   
@@ -559,11 +548,11 @@ Then we issue this command</p>
 <p>Sqale is addressing some of the problems Heroku.</p>
 
 <ol>
-<li>Server location &ndash; Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
+<li>Server location - Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
 <li>SSH access
 
 <blockquote><p>Since your app is spread across many dynos in the dyno manifold, there is no single place to SSH into. You deploy and manage apps, not servers.<a href="https://devcenter.heroku.com/articles/one-off-dynos#ssh-access">ref</a></p></blockquote></li>
-<li>Slug size &ndash; Heroku limit it to a maximum 200MB.</li>
+<li>Slug size - Heroku limit it to a maximum 200MB.</li>
 </ol>
 
 
@@ -590,7 +579,7 @@ Then we issue this command</p>
 <h4>10 concurrent request warmup for 60 second</h4>
 
 <div style="width: 600px;">
-<iframe  style="overflow: hidden;" scrolling="no" width='600' height='300' frameborder='0' src='http://linc01n.github.io//share.loader.io/results/9fc6e5f2ac4f708b91a86095c13d8762/widget'></iframe>
+<iframe  style="overflow: hidden;" scrolling="no" width='600' height='300' frameborder='0' src='//share.loader.io/results/9fc6e5f2ac4f708b91a86095c13d8762/widget'></iframe>
 <div style="width: 100%; text-align: right;">
 <a href="http://loader.io/results/9fc6e5f2ac4f708b91a86095c13d8762" target="_blank"  style="padding: 0 10px 10px 0; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px;">View on loader.io</a>
 </div></div>
@@ -603,7 +592,7 @@ Then we issue this command</p>
 <h4>1000 concurrent request for 300 second</h4>
 
 <div style="width: 600px;">
-<iframe style="overflow: hidden;" scrolling="no" width='600' height='300' frameborder='0' src='http://linc01n.github.io//share.loader.io/results/36216016f1884328b0b0e71451adcc37/widget'></iframe>
+<iframe style="overflow: hidden;" scrolling="no" width='600' height='300' frameborder='0' src='//share.loader.io/results/36216016f1884328b0b0e71451adcc37/widget'></iframe>
 <div style="width: 100%; text-align: right;">
 <a href="http://loader.io/results/36216016f1884328b0b0e71451adcc37" target="_blank"  style="padding: 0 10px 10px 0; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px;">View on loader.io</a>
 </div></div>

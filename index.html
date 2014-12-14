@@ -7,7 +7,7 @@
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Dec 10th, 2014 development-setup, kvm, ops, smartos, sysadmin Move Physical Server to SmartOS VM Background In our office we got a dev server &hellip;">
+	<meta name="description" content="development-setup, kvm, ops, smartos, sysadmin Move Physical Server to SmartOS VM Background In our office we got a dev server running centos. It is &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -137,7 +137,7 @@ window.addEventListener('load', function(e) {
   
 
 
-<time datetime="2014-12-10T23:23:17+08:00" data-updated="true" itemprop="datePublished">Dec 10<span>th</span>, 2014</time></div>
+<time datetime="2014-12-10T23:23:17+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
@@ -162,9 +162,8 @@ window.addEventListener('load', function(e) {
 <p>First we boot into <a href="http://gparted.org/">GParted</a> with live CD.
 Then we issue this command</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># dd if=/dev/sda of=(external harddrive) bs=1M</span></code></pre></td></tr></table></div></figure>
-
+<pre><code># dd if=/dev/sda of=(external harddrive) bs=1M
+</code></pre>
 
 <h3>Erase Disk</h3>
 
@@ -237,37 +236,27 @@ Then we issue this command</p>
 
 <p>Create kvm by</p>
 
-<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">vmadm</span> <span class="err">create</span> <span class="err">&lt;</span> <span class="err">/opt/new_vm.json</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code># vmadm create &lt; /opt/new_vm.json
+</code></pre>
 
 <p>You will get a uuid of the machine after this command.</p>
 
-<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">Successfully</span> <span class="err">created</span> <span class="err">VM</span> <span class="mi">226</span><span class="err">d</span><span class="mi">5</span><span class="err">a</span><span class="mi">1</span><span class="err">d</span><span class="mf">-973e-4</span><span class="err">b</span><span class="mf">4e-8158</span><span class="err">-ee</span><span class="mi">33</span><span class="err">cc</span><span class="mf">81e3</span><span class="err">f</span><span class="mi">5</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code>Successfully created VM 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
+</code></pre>
 
 <h1>Restore old machine</h1>
 
 <p>Now we copy back the old machine disk image to the newly created KVM.</p>
 
-<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">dd</span> <span class="err">if=(external</span> <span class="err">harddrive)</span> <span class="err">of=/dev/zvol/</span><span class="mi">226</span><span class="err">d</span><span class="mi">5</span><span class="err">a</span><span class="mi">1</span><span class="err">d</span><span class="mf">-973e-4</span><span class="err">b</span><span class="mf">4e-8158</span><span class="err">-ee</span><span class="mi">33</span><span class="err">cc</span><span class="mf">81e3</span><span class="err">f</span><span class="mi">5</span><span class="err">-disk</span><span class="mi">0</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code># dd if=(external harddrive) of=/dev/zvol/226d5a1d-973e-4b4e-8158-ee33cc81e3f5-disk0
+</code></pre>
 
 <h1>Boot and test</h1>
 
 <p>After the disk copy finish, now you can boot up your vm and check if everything is working.</p>
 
-<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">vmadm</span> <span class="err">boot</span> <span class="mi">226</span><span class="err">d</span><span class="mi">5</span><span class="err">a</span><span class="mi">1</span><span class="err">d</span><span class="mf">-973e-4</span><span class="err">b</span><span class="mf">4e-8158</span><span class="err">-ee</span><span class="mi">33</span><span class="err">cc</span><span class="mf">81e3</span><span class="err">f</span><span class="mi">5</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
+<pre><code># vmadm boot 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
+</code></pre>
 
 		
 		
@@ -290,7 +279,7 @@ Then we issue this command</p>
   
 
 
-<time datetime="2013-10-08T22:09:00+08:00" data-updated="true" itemprop="datePublished">Oct 8<span>th</span>, 2013</time></div>
+<time datetime="2013-10-08T22:09:00+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
@@ -400,7 +389,7 @@ Then we issue this command</p>
   
 
 
-<time datetime="2013-10-05T21:40:00+08:00" data-updated="true" itemprop="datePublished">Oct 5<span>th</span>, 2013</time></div>
+<time datetime="2013-10-05T21:40:00+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
@@ -493,7 +482,7 @@ Then we issue this command</p>
   
 
 
-<time datetime="2013-06-28T19:34:00+08:00" data-updated="true" itemprop="datePublished">Jun 28<span>th</span>, 2013</time></div>
+<time datetime="2013-06-28T19:34:00+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
@@ -544,7 +533,7 @@ Then we issue this command</p>
   
 
 
-<time datetime="2013-06-13T23:16:00+08:00" data-updated="true" itemprop="datePublished">Jun 13<span>th</span>, 2013</time></div>
+<time datetime="2013-06-13T23:16:00+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
@@ -599,7 +588,7 @@ Then we issue this command</p>
   
 
 
-<time datetime="2013-05-17T19:00:00+08:00" data-updated="true" itemprop="datePublished">May 17<span>th</span>, 2013</time></div>
+<time datetime="2013-05-17T19:00:00+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
@@ -827,11 +816,11 @@ Then we issue this command</p>
   
 
 
-<time datetime="2013-03-24T12:49:00+08:00" data-updated="true" itemprop="datePublished">Mar 24<span>th</span>, 2013</time></div>
+<time datetime="2013-03-24T12:49:00+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
-	<a class='category' href='/blog/categories/paas/'>PaaS</a>, <a class='category' href='/blog/categories/loader-dot-io/'>loader.io</a>, <a class='category' href='/blog/categories/loading-test/'>loading test</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/sqale-dot-jp/'>sqale.jp</a>
+	<a class='category' href='/blog/categories/loader-dot-io/'>loader.io</a>, <a class='category' href='/blog/categories/loading-test/'>loading test</a>, <a class='category' href='/blog/categories/paas/'>paas</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/sqale-dot-jp/'>sqale.jp</a>
 
 
 </div>
@@ -846,11 +835,11 @@ Then we issue this command</p>
 <p>Sqale is addressing some of the problems Heroku.</p>
 
 <ol>
-<li>Server location &ndash; Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
+<li>Server location - Heroku servers are in US which is quite far away if the target audience are in APAC area.</li>
 <li>SSH access
 
 <blockquote><p>Since your app is spread across many dynos in the dyno manifold, there is no single place to SSH into. You deploy and manage apps, not servers.<a href="https://devcenter.heroku.com/articles/one-off-dynos#ssh-access">ref</a></p></blockquote></li>
-<li>Slug size &ndash; Heroku limit it to a maximum 200MB.</li>
+<li>Slug size - Heroku limit it to a maximum 200MB.</li>
 </ol>
 
 
@@ -924,7 +913,7 @@ You can scale out by adding more container to your application. But from what I 
   
 
 
-<time datetime="2013-03-19T19:06:00+08:00" data-updated="true" itemprop="datePublished">Mar 19<span>th</span>, 2013</time></div>
+<time datetime="2013-03-19T19:06:00+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
@@ -1226,7 +1215,7 @@ Click on &ldquo;Manage Virtual Hub&rdquo;</p>
   
 
 
-<time datetime="2011-10-18T17:38:00+08:00" data-updated="true" itemprop="datePublished">Oct 18<span>th</span>, 2011</time></div>
+<time datetime="2011-10-18T17:38:00+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
@@ -1337,7 +1326,7 @@ Click on &ldquo;Manage Virtual Hub&rdquo;</p>
   
 
 
-<time datetime="2011-10-03T21:49:00+08:00" data-updated="true" itemprop="datePublished">Oct 3<span>rd</span>, 2011</time></div>
+<time datetime="2011-10-03T21:49:00+08:00" data-updated="true" itemprop="datePublished"></time></div>
 		<div class="tags">
 
 
@@ -1396,7 +1385,7 @@ Click on &ldquo;Manage Virtual Hub&rdquo;</p>
 <nav id="pagenavi">
     
     
-        <a href="/blog/page/2/" class="next">Next</a>
+        <a href="2" class="next">Next</a>
     
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav></div>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: development | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/development/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T19:46:09+08:00</updated>
+  <updated>2014-12-14T20:10:27+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -32,43 +32,35 @@
 
 <p>To generate a graph you need to</p>
 
-<p>```ruby
-require &ldquo;gruff&rdquo;
-require &ldquo;date&rdquo;</p>
+<pre><code class="ruby">require "gruff"
+require "date"
 
-<h1>Create the graph object</h1>
+# Create the graph object
+g = Gruff::Line.new
 
-<p>g = Gruff::Line.new</p>
+# Set the title
+g.title = "My First Graph"
 
-<h1>Set the title</h1>
+# Let say we have a data hash
+# The element is like {Date =&gt; Integer}
 
-<p>g.title = &ldquo;My First Graph&rdquo;</p>
+today     = Date.today
+yesterday = Date.today.prev_day
 
-<h1>Let say we have a data hash</h1>
 
-<h1>The element is like {Date => Integer}</h1>
+data = { yesterday =&gt; 100, today =&gt; 200}
 
-<p>today     = Date.today
-yesterday = Date.today.prev_day</p>
+# We need to set the x-axis labels
+# It need to be a Hash { 0 =&gt; "name 1", 1 =&gt; "name 2", … }
+# We need to do a little bit of data transform here.
+g.labels = Hash[(0...data.keys.size).zip data.keys.map{|day| day.strftime("%d %b")}] # =&gt; {0=&gt;"07 Oct", 1=&gt;"08 Oct"}
 
-<p>data = { yesterday => 100, today => 200}</p>
+# Then we need to set the y-axis, we need to give it a name
+g.data :Price, data.values
 
-<h1>We need to set the x-axis labels</h1>
-
-<h1>It need to be a Hash { 0 => &ldquo;name 1&rdquo;, 1 => &ldquo;name 2&rdquo;, … }</h1>
-
-<h1>We need to do a little bit of data transform here.</h1>
-
-<p>g.labels = Hash[(0&hellip;data.keys.size).zip data.keys.map{|day| day.strftime(&ldquo;%d %b&rdquo;)}] # => {0=>&ldquo;07 Oct&rdquo;, 1=>&ldquo;08 Oct&rdquo;}</p>
-
-<h1>Then we need to set the y-axis, we need to give it a name</h1>
-
-<p>g.data :Price, data.values</p>
-
-<h1>Write the generated graph to a file</h1>
-
-<p>g.write &ldquo;gruff.png&rdquo;
-```</p>
+# Write the generated graph to a file
+g.write "gruff.png"
+</code></pre>
 
 <p>This is the generated graph:</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T19:46:09+08:00</updated>
+  <updated>2014-12-14T20:10:27+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -120,91 +120,77 @@ Press ⌘ + Space then type Terminal</p>
 
 <p>Install Homebrew</p>
 
-<p><code>
-$ /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
-</code></p>
+<pre><code>$ /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
+</code></pre>
 
 <p>Install fuse4x + ntfs-3g</p>
 
-<p><code>
-$ brew install ntfs-3g
-</code></p>
+<pre><code>$ brew install ntfs-3g
+</code></pre>
 
 <p>Load fuse4x kext to kernel</p>
 
-<p><code>
-$ sudo cp -rfX /usr/local/Cellar/fuse4x-kext/0.8.12/Library/Extensions/fuse4x.kext /System/Library/Extensions
+<pre><code>$ sudo cp -rfX /usr/local/Cellar/fuse4x-kext/0.8.12/Library/Extensions/fuse4x.kext /System/Library/Extensions
 $ sudo chmod +s /System/Library/Extensions/fuse4x.kext/Support/load_fuse4x
-</code></p>
+</code></pre>
 
 <p>Setup Auto-mount</p>
 
-<p><code>
-$ sudo mv /sbin/mount_ntfs /sbin/mount_ntfs.orig
+<pre><code>$ sudo mv /sbin/mount_ntfs /sbin/mount_ntfs.orig
 $ sudo touch /sbin/mount_ntfs
 $ sudo chmod 0775 /sbin/mount_ntfs
 $ sudo chown 0:0 /sbin/mount_ntfs
 $ sudo nano /sbin/mount_ntfs
-</code></p>
+</code></pre>
 
 <p>After the last command, a text editor will open. Paste the following code to the editor.</p>
 
-<p>```</p>
+<pre><code>#!/bin/bash
 
-<h1>!/bin/bash</h1>
-
-<p>VOLUME_NAME=&ldquo;${@:$#}&rdquo;
+VOLUME_NAME="${@:$#}"
 VOLUME_NAME=${VOLUME_NAME#/Volumes/}
 USER_ID=501
 GROUP_ID=20
-TIMEOUT=20</p>
+TIMEOUT=20
 
-<p>if [ <code>/usr/bin/stat -f "%u" /dev/console</code> -eq 0 ]; then</p>
+if [ `/usr/bin/stat -f "%u" /dev/console` -eq 0 ]; then
+        USERNAME=`/usr/bin/defaults read /library/preferences/com.apple.loginwindow | /usr/bin/grep autoLoginUser | /usr/bin/awk '{ print $3 }' | /usr/bin/sed 's/;//'`
+        if [ "$USERNAME" = "" ]; then
+                until [ `stat -f "%u" /dev/console` -ne 0 ] || [ $TIMEOUT -eq 0 ]; do
+                        sleep 1
+                        let TIMEOUT--
+                done
+                if [ $TIMEOUT -ne 0 ]; then
+                        USER_ID=`/usr/bin/stat -f "%u" /dev/console`
+                        GROUP_ID=`/usr/bin/stat -f "%g" /dev/console`
+                fi
+        else
+                USER_ID=`/usr/bin/id -u $USERNAME`
+                GROUP_ID=`/usr/bin/id -g $USERNAME`
+        fi
+else
+        USER_ID=`/usr/bin/stat -f "%u" /dev/console`
+        GROUP_ID=`/usr/bin/stat -f "%g" /dev/console`
+fi
 
-<pre><code>    USERNAME=`/usr/bin/defaults read /library/preferences/com.apple.loginwindow | /usr/bin/grep autoLoginUser | /usr/bin/awk '{ print $3 }' | /usr/bin/sed 's/;//'`
-    if [ "$USERNAME" = "" ]; then
-            until [ `stat -f "%u" /dev/console` -ne 0 ] || [ $TIMEOUT -eq 0 ]; do
-                    sleep 1
-                    let TIMEOUT--
-            done
-            if [ $TIMEOUT -ne 0 ]; then
-                    USER_ID=`/usr/bin/stat -f "%u" /dev/console`
-                    GROUP_ID=`/usr/bin/stat -f "%g" /dev/console`
-            fi
-    else
-            USER_ID=`/usr/bin/id -u $USERNAME`
-            GROUP_ID=`/usr/bin/id -g $USERNAME`
-    fi
+/usr/local/bin/ntfs-3g \
+        -o volname="${VOLUME_NAME}" \
+        -o local \
+        -o noappledouble \
+        -o negative_vncache \
+        -o auto_xattr \
+        -o auto_cache \
+        -o noatime \
+        -o windows_names \
+        -o user_xattr \
+        -o inherit \
+        -o uid=$USER_ID \
+        -o gid=$GROUP_ID \
+        -o allow_other \
+        "$@" &amp;&gt; /var/log/ntfsmnt.log
+
+exit $?;
 </code></pre>
-
-<p>else</p>
-
-<pre><code>    USER_ID=`/usr/bin/stat -f "%u" /dev/console`
-    GROUP_ID=`/usr/bin/stat -f "%g" /dev/console`
-</code></pre>
-
-<p>fi</p>
-
-<p>/usr/local/bin/ntfs-3g \</p>
-
-<pre><code>    -o volname="${VOLUME_NAME}" \
-    -o local \
-    -o noappledouble \
-    -o negative_vncache \
-    -o auto_xattr \
-    -o auto_cache \
-    -o noatime \
-    -o windows_names \
-    -o user_xattr \
-    -o inherit \
-    -o uid=$USER_ID \
-    -o gid=$GROUP_ID \
-    -o allow_other \
-    "$@" &amp;&gt; /var/log/ntfsmnt.log
-</code></pre>
-
-<p>exit $?;
-```</p>
 
 <p>The USER_ID should be 501 if you are the only user of your machine. or you can update the USER_ID and GROUP_ID by typing this to check your user and group
 <code>
