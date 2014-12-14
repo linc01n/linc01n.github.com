@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: google webmaster | Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.io/blog/categories/google-webmaster/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T20:10:27+08:00</updated>
-  <id>http://linc01n.github.io/</id>
+  <link href="http://blog.lincoln.hk/blog/categories/google-webmaster/atom.xml" rel="self"/>
+  <link href="http://blog.lincoln.hk/"/>
+  <updated>2014-12-14T20:23:18+08:00</updated>
+  <id>http://blog.lincoln.hk/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Add google webmaster verification in octopress]]></title>
-    <link href="http://linc01n.github.io/blog/2013/06/28/add-google-webmaster-verification-in-octopress/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/06/28/add-google-webmaster-verification-in-octopress/"/>
     <updated>2013-06-28T19:34:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/06/28/add-google-webmaster-verification-in-octopress</id>
+    <id>http://blog.lincoln.hk/blog/2013/06/28/add-google-webmaster-verification-in-octopress</id>
     <content type="html"><![CDATA[<h3>Google Webmaster verification</h3>
 
 <p>I deployed my blog on github. So I can&rsquo;t use DNS verification. I used HTML verification. It require you to put a specific html file on your root directory.</p>

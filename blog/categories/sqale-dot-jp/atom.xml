@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: sqale.jp | Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.io/blog/categories/sqale-dot-jp/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T20:10:27+08:00</updated>
-  <id>http://linc01n.github.io/</id>
+  <link href="http://blog.lincoln.hk/blog/categories/sqale-dot-jp/atom.xml" rel="self"/>
+  <link href="http://blog.lincoln.hk/"/>
+  <updated>2014-12-14T20:23:18+08:00</updated>
+  <id>http://blog.lincoln.hk/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Load testing on sqale.jp single container for static page]]></title>
-    <link href="http://linc01n.github.io/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page/"/>
     <updated>2013-03-24T12:49:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page</id>
+    <id>http://blog.lincoln.hk/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page</id>
     <content type="html"><![CDATA[<p>I met with some amazing developers from <a href="https://sqale.jp">Sqale.jp</a> when I attent <a href="http://rubyconf.tw/2012/">Ruby Conf TW 2012</a> last year.</p>
 
 <p>Sqale is a japanese company compete with <a href="http://www.heroku.com/">Heroku</a> to provide developer friendly platform to host rails app.</p>

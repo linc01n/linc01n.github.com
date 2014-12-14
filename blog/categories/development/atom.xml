@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: development | Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.io/blog/categories/development/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T20:10:27+08:00</updated>
-  <id>http://linc01n.github.io/</id>
+  <link href="http://blog.lincoln.hk/blog/categories/development/atom.xml" rel="self"/>
+  <link href="http://blog.lincoln.hk/"/>
+  <updated>2014-12-14T20:23:18+08:00</updated>
+  <id>http://blog.lincoln.hk/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Using gruff graphing library]]></title>
-    <link href="http://linc01n.github.io/blog/2013/10/08/using-gruff-graphing-library/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/10/08/using-gruff-graphing-library/"/>
     <updated>2013-10-08T22:09:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/10/08/using-gruff-graphing-library</id>
+    <id>http://blog.lincoln.hk/blog/2013/10/08/using-gruff-graphing-library</id>
     <content type="html"><![CDATA[<h3>Requirement</h3>
 
 <p>I played around with <a href="https://github.com/topfunky/gruff">gruff</a> today. The final result is really impressive. Especially it can visualize data from your database in the way you want.</p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.io/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T20:10:27+08:00</updated>
-  <id>http://linc01n.github.io/</id>
+  <link href="http://blog.lincoln.hk/atom.xml" rel="self"/>
+  <link href="http://blog.lincoln.hk/"/>
+  <updated>2014-12-14T20:23:18+08:00</updated>
+  <id>http://blog.lincoln.hk/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Move Physical server to SmartOS VM]]></title>
-    <link href="http://linc01n.github.io/blog/2014/12/10/move-physical-server-to-smartos-vm/"/>
+    <link href="http://blog.lincoln.hk/blog/2014/12/10/move-physical-server-to-smartos-vm/"/>
     <updated>2014-12-10T23:23:17+08:00</updated>
-    <id>http://linc01n.github.io/blog/2014/12/10/move-physical-server-to-smartos-vm</id>
+    <id>http://blog.lincoln.hk/blog/2014/12/10/move-physical-server-to-smartos-vm</id>
     <content type="html"><![CDATA[<h1>Background</h1>
 
 <p>In our office we got a dev server running centos. It is server grade machine with ECC ram and SAS hard drive. The problem with that it used to use by one dev. As the team is expanding, we need more dev server to test our code. Because I am familiar with SmartOS so we will use SmartOS as the hypervisor.</p>
@@ -131,9 +131,9 @@ Then we issue this command</p>
   
   <entry>
     <title type="html"><![CDATA[Using gruff graphing library]]></title>
-    <link href="http://linc01n.github.io/blog/2013/10/08/using-gruff-graphing-library/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/10/08/using-gruff-graphing-library/"/>
     <updated>2013-10-08T22:09:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/10/08/using-gruff-graphing-library</id>
+    <id>http://blog.lincoln.hk/blog/2013/10/08/using-gruff-graphing-library</id>
     <content type="html"><![CDATA[<h3>Requirement</h3>
 
 <p>I played around with <a href="https://github.com/topfunky/gruff">gruff</a> today. The final result is really impressive. Especially it can visualize data from your database in the way you want.</p>
@@ -209,15 +209,15 @@ Then we issue this command</p>
 
 <p>This is the generated graph:</p>
 
-<p><img src="http://linc01n.github.io/images/gruff.png" alt="Generated Graph" /></p>
+<p><img src="http://blog.lincoln.hk/images/gruff.png" alt="Generated Graph" /></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Parallels Desktop as Vagrant Provider]]></title>
-    <link href="http://linc01n.github.io/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider/"/>
     <updated>2013-10-05T21:40:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider</id>
+    <id>http://blog.lincoln.hk/blog/2013/10/05/using-parallels-desktop-as-vagrant-provider</id>
     <content type="html"><![CDATA[<h3>Vagrant is great!</h3>
 
 <h4>What is vagrant?</h4>
@@ -282,9 +282,9 @@ Then we issue this command</p>
   
   <entry>
     <title type="html"><![CDATA[Add google webmaster verification in octopress]]></title>
-    <link href="http://linc01n.github.io/blog/2013/06/28/add-google-webmaster-verification-in-octopress/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/06/28/add-google-webmaster-verification-in-octopress/"/>
     <updated>2013-06-28T19:34:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/06/28/add-google-webmaster-verification-in-octopress</id>
+    <id>http://blog.lincoln.hk/blog/2013/06/28/add-google-webmaster-verification-in-octopress</id>
     <content type="html"><![CDATA[<h3>Google Webmaster verification</h3>
 
 <p>I deployed my blog on github. So I can&rsquo;t use DNS verification. I used HTML verification. It require you to put a specific html file on your root directory.</p>
@@ -307,9 +307,9 @@ Then we issue this command</p>
   
   <entry>
     <title type="html"><![CDATA[Cloudflare messup with our geo targeting ad serving]]></title>
-    <link href="http://linc01n.github.io/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/"/>
     <updated>2013-06-13T23:16:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving</id>
+    <id>http://blog.lincoln.hk/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving</id>
     <content type="html"><![CDATA[<h3>Self-doubt on my code</h3>
 
 <p>I have joined a local AD network company as a senior developer(who got out of college one year ago). I joined this company for more than half a year. Mainly working on cleaning the code and infrastructure. I redesign the AD selection algorithm and implement it. I have learned a lot from this practice. Geo targeting is one of the selection criteria.</p>
@@ -336,9 +336,9 @@ Then we issue this command</p>
   
   <entry>
     <title type="html"><![CDATA[Softether on VPS using local bridge]]></title>
-    <link href="http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/05/17/softether-on-vps-using-local-bridge/"/>
     <updated>2013-05-17T19:00:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge</id>
+    <id>http://blog.lincoln.hk/blog/2013/05/17/softether-on-vps-using-local-bridge</id>
     <content type="html"><![CDATA[<p>This post continues on the last post about <a href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/">Softether setup on a VPS</a>.</p>
 
 <h3>Problem on SecureNAT</h3>
@@ -367,7 +367,7 @@ Then we issue this command</p>
 
 <p>From here we go to the &ldquo;Local Bridge Setting&rdquo;</p>
 
-<p><img src="http://linc01n.github.io/images/softether_local_bridge/local-bridge-setting.png" alt="Local Bridge Setting" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_local_bridge/local-bridge-setting.png" alt="Local Bridge Setting" /></p>
 
 <p>First we choose the Virtual Hub. It should be only one for normal setup.</p>
 
@@ -375,7 +375,7 @@ Then we issue this command</p>
 
 <p>After that we type in the name of the tap device(I use soft here for simplicity).</p>
 
-<p><img src="http://linc01n.github.io/images/softether_local_bridge/create-local-bridge.png" alt="Create Local Bridge" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_local_bridge/create-local-bridge.png" alt="Create Local Bridge" /></p>
 
 <p>After the creation of the local bridge we jump back to our server. And run</p>
 
@@ -385,7 +385,7 @@ Then we issue this command</p>
 
 <p>It should show you something similar to this</p>
 
-<p><img src="http://linc01n.github.io/images/softether_local_bridge/check-on-the-sever.png" alt="Check on the server" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_local_bridge/check-on-the-sever.png" alt="Check on the server" /></p>
 
 <p>Because we are not going to use SecureNAT and SecureDHCP. We need to install a DHCP server on our VPS. We are going to use dnsmasq as our DHCP server.</p>
 
@@ -525,8 +525,8 @@ Then we issue this command</p>
 
 <p>Comparison on SecureNAT and local bridge method.</p>
 
-<p><img src="http://linc01n.github.io/images/softether_local_bridge/l2tp_bridge.png" alt="Speed test on local bridge" />
-<img src="http://linc01n.github.io/images/softether_local_bridge/l2tp_SecureNAT.png" alt="Speed test on SecureNAT" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_local_bridge/l2tp_bridge.png" alt="Speed test on local bridge" />
+<img src="http://blog.lincoln.hk/images/softether_local_bridge/l2tp_SecureNAT.png" alt="Speed test on SecureNAT" /></p>
 
 <h3>Conclusion</h3>
 
@@ -538,9 +538,9 @@ Then we issue this command</p>
   
   <entry>
     <title type="html"><![CDATA[Load testing on sqale.jp single container for static page]]></title>
-    <link href="http://linc01n.github.io/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page/"/>
     <updated>2013-03-24T12:49:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page</id>
+    <id>http://blog.lincoln.hk/blog/2013/03/24/load-testing-on-sqale-dot-jp-single-container-for-static-page</id>
     <content type="html"><![CDATA[<p>I met with some amazing developers from <a href="https://sqale.jp">Sqale.jp</a> when I attent <a href="http://rubyconf.tw/2012/">Ruby Conf TW 2012</a> last year.</p>
 
 <p>Sqale is a japanese company compete with <a href="http://www.heroku.com/">Heroku</a> to provide developer friendly platform to host rails app.</p>
@@ -609,9 +609,9 @@ You can scale out by adding more container to your application. But from what I 
   
   <entry>
     <title type="html"><![CDATA[SoftEther on VPS]]></title>
-    <link href="http://linc01n.github.io/blog/2013/03/19/softether-on-vps/"/>
+    <link href="http://blog.lincoln.hk/blog/2013/03/19/softether-on-vps/"/>
     <updated>2013-03-19T19:06:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2013/03/19/softether-on-vps</id>
+    <id>http://blog.lincoln.hk/blog/2013/03/19/softether-on-vps</id>
     <content type="html"><![CDATA[<p>I saw a post on <a href="http://www.lowendtalk.com/discussion/8783/softether-very-powerful-easy-to-use-multi-protocol-vpn-software">lowendtalk</a> last week introducing a new piece of vpn software call SoftEther.</p>
 
 <h3>What is <a href="http://www.softether.org/">SoftEther</a></h3>
@@ -661,11 +661,11 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>Make sure you login root as follow:</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/login.png" alt="login as root" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_vps/login.png" alt="login as root" /></p>
 
 <p>Before installing SoftEther Server let us install some prerequisite.</p>
 
-<figure class='code'><figcaption><span> (build_tools.sh)</span> <a href='http://linc01n.github.io/downloads/code/build_tools.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (build_tools.sh)</span> <a href='http://blog.lincoln.hk/downloads/code/build_tools.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>apt-get update
@@ -675,13 +675,13 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>Go to <a href="http://www.softether-download.com/en.aspx?product=softether">SoftEther</a> to download the server binary.</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/download_selection.png" alt="download selection" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_vps/download_selection.png" alt="download selection" /></p>
 
 <p>I am using Ver 1.00, Build 9029, rc2 in this tutorial.</p>
 
 <p>After download, run</p>
 
-<figure class='code'><figcaption><span> (make.sh)</span> <a href='http://linc01n.github.io/downloads/code/make.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (make.sh)</span> <a href='http://blog.lincoln.hk/downloads/code/make.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -695,7 +695,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>Then we move the dir to /usr/local/</p>
 
-<figure class='code'><figcaption><span> (install.sh)</span> <a href='http://linc01n.github.io/downloads/code/install.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (install.sh)</span> <a href='http://blog.lincoln.hk/downloads/code/install.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -715,7 +715,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>paste the following content to nano</p>
 
-<figure class='code'><figcaption><span> (vpnserver.sh)</span> <a href='http://linc01n.github.io/downloads/code/vpnserver.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (vpnserver.sh)</span> <a href='http://blog.lincoln.hk/downloads/code/vpnserver.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -787,7 +787,7 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 
 <p>After that we enable the service</p>
 
-<figure class='code'><figcaption><span> (service.sh)</span> <a href='http://linc01n.github.io/downloads/code/service.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span> (service.sh)</span> <a href='http://blog.lincoln.hk/downloads/code/service.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -832,46 +832,46 @@ as an academic project from <a href="http://www.tsukuba.ac.jp/english/">Universi
 <p>I do the setting on a windows client.
 It is running</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/server_manager.png" alt="server manager" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_vps/server_manager.png" alt="server manager" /></p>
 
 <p>Install it, run it, click New setting. Input ip and password.</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/setting.png" alt="input setting" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_vps/setting.png" alt="input setting" /></p>
 
 <p>Then connect to it.
 On successful login, it will pop up Easy Setup</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/easy_setup.png" alt="easy setup" />
+<p><img src="http://blog.lincoln.hk/images/softether_vps/easy_setup.png" alt="easy setup" />
 Check Remote Access Server and Next</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/warning.png" alt="warning" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_vps/warning.png" alt="warning" /></p>
 
 <p>Yes</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/virtual_hub.png" alt="Virtual Hub name" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_vps/virtual_hub.png" alt="Virtual Hub name" /></p>
 
 <p>OK</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/l2tp.png" alt="Setup L2TP" />
+<p><img src="http://blog.lincoln.hk/images/softether_vps/l2tp.png" alt="Setup L2TP" />
 Check Enable L2TP Server Function and input your own pre-share key</p>
 
 <p>OK</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/azure.png" alt="Azure" />
+<p><img src="http://blog.lincoln.hk/images/softether_vps/azure.png" alt="Azure" />
 We disable Azure VPN</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/create_user.png" alt="Create User" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_vps/create_user.png" alt="Create User" /></p>
 
 <p>Then we need to create a new user. This is trivial.</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/user.png" alt="User" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_vps/user.png" alt="User" /></p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/manager.png" alt="Manager" />
+<p><img src="http://blog.lincoln.hk/images/softether_vps/manager.png" alt="Manager" />
 Click on &ldquo;Manage Virtual Hub&rdquo;</p>
 
 <p>Click on &ldquo;Secure NAT&rdquo; (If you want a faster connection we can refer to my 2nd post on <a href="http://linc01n.github.io/blog/2013/05/17/softether-on-vps-using-local-bridge/">softether</a>)</p>
 
-<p><img src="http://linc01n.github.io/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
+<p><img src="http://blog.lincoln.hk/images/softether_vps/secure_nat.png" alt="Secure NAT" /></p>
 
 <p>Enable the Virtual NAT</p>
 
@@ -885,9 +885,9 @@ Click on &ldquo;Manage Virtual Hub&rdquo;</p>
   
   <entry>
     <title type="html"><![CDATA[Django Admin: Auto Select Current User]]></title>
-    <link href="http://linc01n.github.io/blog/2011/10/18/django-admin-auto-select-current-user/"/>
+    <link href="http://blog.lincoln.hk/blog/2011/10/18/django-admin-auto-select-current-user/"/>
     <updated>2011-10-18T17:38:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2011/10/18/django-admin-auto-select-current-user</id>
+    <id>http://blog.lincoln.hk/blog/2011/10/18/django-admin-auto-select-current-user</id>
     <content type="html"><![CDATA[<h2>Background</h2>
 
 <p>There are often times in developing a CMS need to mark down who created the record. Django provide a nice admin interface for us. But when we only use the default, user need to select who they are by themselves. We want to auto select for them and they can&rsquo;t pretend to be others.</p>
@@ -962,7 +962,7 @@ Click on &ldquo;Manage Virtual Hub&rdquo;</p>
 
 <p>By combining this two function we get:</p>
 
-<p><img src="http://linc01n.github.io/images/created_by.jpg" alt="Created By" /></p>
+<p><img src="http://blog.lincoln.hk/images/created_by.jpg" alt="Created By" /></p>
 
 <p>The last get_readonly_fields function make this field can&rsquo;t be edit after the creation.</p>
 ]]></content>
@@ -970,9 +970,9 @@ Click on &ldquo;Manage Virtual Hub&rdquo;</p>
   
   <entry>
     <title type="html"><![CDATA[Synergey Key Mapping Between Mac and Windows]]></title>
-    <link href="http://linc01n.github.io/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/"/>
+    <link href="http://blog.lincoln.hk/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/"/>
     <updated>2011-10-03T21:49:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows</id>
+    <id>http://blog.lincoln.hk/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows</id>
     <content type="html"><![CDATA[<h1>My Brain is going to Explode!</h1>
 
 <p>Synergy is doing a great job about sharing keyboard and mouse between OSes. But when it comes to mac and windows, there are some new problems.</p>
@@ -1014,9 +1014,9 @@ Click on &ldquo;Manage Virtual Hub&rdquo;</p>
   
   <entry>
     <title type="html"><![CDATA[Synergy on Mac OSX Lion]]></title>
-    <link href="http://linc01n.github.io/blog/2011/09/28/synergy-on-mac-osx-lion/"/>
+    <link href="http://blog.lincoln.hk/blog/2011/09/28/synergy-on-mac-osx-lion/"/>
     <updated>2011-09-28T12:31:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2011/09/28/synergy-on-mac-osx-lion</id>
+    <id>http://blog.lincoln.hk/blog/2011/09/28/synergy-on-mac-osx-lion</id>
     <content type="html"><![CDATA[<p><em>Update the QuickSynergy Download link</em></p>
 
 <h1>tl;dr</h1>
@@ -1057,9 +1057,9 @@ Click on &ldquo;Manage Virtual Hub&rdquo;</p>
   
   <entry>
     <title type="html"><![CDATA[Enabling NTFS Write Support on Mac OSX Lion]]></title>
-    <link href="http://linc01n.github.io/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion/"/>
+    <link href="http://blog.lincoln.hk/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion/"/>
     <updated>2011-09-25T22:25:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion</id>
+    <id>http://blog.lincoln.hk/blog/2011/09/25/enabling-ntfs-write-support-on-mac-osx-lion</id>
     <content type="html"><![CDATA[<h2>Mac OSX Lion weaknesses</h2>
 
 <p>I have just bought my new Macbook Pro and setting it up as my dev box. Mac OSX has out-of-the-box support for NTFS read. If you want to transfer file between OSes you will choose FAT32. But FAT32 has one big problem which is no file can exceed 4GB size limit.</p>
@@ -1215,9 +1215,9 @@ Press ⌘ + Space then type Terminal</p>
   
   <entry>
     <title type="html"><![CDATA[Readable Code]]></title>
-    <link href="http://linc01n.github.io/blog/2011/09/07/readable-code/"/>
+    <link href="http://blog.lincoln.hk/blog/2011/09/07/readable-code/"/>
     <updated>2011-09-07T22:29:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2011/09/07/readable-code</id>
+    <id>http://blog.lincoln.hk/blog/2011/09/07/readable-code</id>
     <content type="html"><![CDATA[<h1>Clean Code</h1>
 
 <p>I have graduated from college this June. The culture in my college is you do all group projects by youself. So collaboration is some what new to me.</p>

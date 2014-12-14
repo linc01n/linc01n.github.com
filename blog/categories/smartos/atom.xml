@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: smartos | Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.io/blog/categories/smartos/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T20:10:27+08:00</updated>
-  <id>http://linc01n.github.io/</id>
+  <link href="http://blog.lincoln.hk/blog/categories/smartos/atom.xml" rel="self"/>
+  <link href="http://blog.lincoln.hk/"/>
+  <updated>2014-12-14T20:23:18+08:00</updated>
+  <id>http://blog.lincoln.hk/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Move Physical server to SmartOS VM]]></title>
-    <link href="http://linc01n.github.io/blog/2014/12/10/move-physical-server-to-smartos-vm/"/>
+    <link href="http://blog.lincoln.hk/blog/2014/12/10/move-physical-server-to-smartos-vm/"/>
     <updated>2014-12-10T23:23:17+08:00</updated>
-    <id>http://linc01n.github.io/blog/2014/12/10/move-physical-server-to-smartos-vm</id>
+    <id>http://blog.lincoln.hk/blog/2014/12/10/move-physical-server-to-smartos-vm</id>
     <content type="html"><![CDATA[<h1>Background</h1>
 
 <p>In our office we got a dev server running centos. It is server grade machine with ECC ram and SAS hard drive. The problem with that it used to use by one dev. As the team is expanding, we need more dev server to test our code. Because I am familiar with SmartOS so we will use SmartOS as the hypervisor.</p>

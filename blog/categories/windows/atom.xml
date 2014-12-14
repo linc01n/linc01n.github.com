@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: windows | Coding, Coding, Coding]]></title>
-  <link href="http://linc01n.github.io/blog/categories/windows/atom.xml" rel="self"/>
-  <link href="http://linc01n.github.io/"/>
-  <updated>2014-12-14T20:10:27+08:00</updated>
-  <id>http://linc01n.github.io/</id>
+  <link href="http://blog.lincoln.hk/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://blog.lincoln.hk/"/>
+  <updated>2014-12-14T20:23:18+08:00</updated>
+  <id>http://blog.lincoln.hk/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
     <email><![CDATA[git@lincoln.hk]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Synergey Key Mapping Between Mac and Windows]]></title>
-    <link href="http://linc01n.github.io/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/"/>
+    <link href="http://blog.lincoln.hk/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows/"/>
     <updated>2011-10-03T21:49:00+08:00</updated>
-    <id>http://linc01n.github.io/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows</id>
+    <id>http://blog.lincoln.hk/blog/2011/10/03/synergey-key-mapping-between-mac-and-windows</id>
     <content type="html"><![CDATA[<h1>My Brain is going to Explode!</h1>
 
 <p>Synergy is doing a great job about sharing keyboard and mouse between OSes. But when it comes to mac and windows, there are some new problems.</p>
