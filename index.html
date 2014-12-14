@@ -7,7 +7,7 @@
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Oct 8th, 2013 development, graph, ruby Using Gruff Graphing Library Requirement I played around with gruff today. The final result is really &hellip;">
+	<meta name="description" content="Dec 10th, 2014 development-setup, kvm, ops, smartos, sysadmin Move Physical Server to SmartOS VM Background In our office we got a dev server &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +92,10 @@ window.addEventListener('load', function(e) {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/10/move-physical-server-to-smartos-vm/">Move Physical server to SmartOS VM</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/08/using-gruff-graphing-library/">Using gruff graphing library</a>
       </li>
     
@@ -107,10 +111,6 @@ window.addEventListener('load', function(e) {
         <a href="/blog/2013/06/13/cloudflare-messup-with-our-geo-targeting-ad-serving/">Cloudflare messup with our geo targeting ad serving</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/05/17/softether-on-vps-using-local-bridge/">Softether on VPS using local bridge</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -121,6 +121,159 @@ window.addEventListener('load', function(e) {
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-10T23:23:17+08:00" data-updated="true" itemprop="datePublished">Dec 10<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/development-setup/'>development-setup</a>, <a class='category' href='/blog/categories/kvm/'>kvm</a>, <a class='category' href='/blog/categories/ops/'>ops</a>, <a class='category' href='/blog/categories/smartos/'>smartos</a>, <a class='category' href='/blog/categories/sysadmin/'>sysadmin</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/12/10/move-physical-server-to-smartos-vm/" itemprop="url">Move Physical Server to SmartOS VM</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h1>Background</h1>
+
+<p>In our office we got a dev server running centos. It is server grade machine with ECC ram and SAS hard drive. The problem with that it used to use by one dev. As the team is expanding, we need more dev server to test our code. Because I am familiar with SmartOS so we will use SmartOS as the hypervisor.</p>
+
+<h1>Preparation</h1>
+
+<h3>Clone Disk</h3>
+
+<p>We need to do a clone on our hard disk. Since we only have one SAS hard drive with 1 partition, I need to plug in a external hard drive to clone the drive.</p>
+
+<p>First we boot into <a href="http://gparted.org/">GParted</a> with live CD.
+Then we issue this command</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># dd if=/dev/sda of=(external harddrive) bs=1M</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Erase Disk</h3>
+
+<p>After the disk clone we can plug in the SmartOS live usb and format the hard drive.</p>
+
+<h1>Create KVM</h1>
+
+<p>After SmartOS installation, we now create a new KVM</p>
+
+<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;brand&quot;</span><span class="p">:</span> <span class="s2">&quot;kvm&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;vcpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;autoboot&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;ram&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;alias&quot;</span><span class="p">:</span> <span class="s2">&quot;old_machine&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;old_machine&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;resolvers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;8.8.8.8&quot;</span><span class="p">,</span> <span class="s2">&quot;8.8.4.4&quot;</span><span class="p">],</span>
+</span><span class='line'>  <span class="nt">&quot;disks&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;boot&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;ide&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;size&quot;</span><span class="p">:</span> <span class="mi">153600</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">],</span>
+</span><span class='line'>  <span class="nt">&quot;nics&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;nic_tag&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;e1000&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.xx.xx&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;gateway&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.xx.1&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;allow_ip_spoofing&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;primary&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;255.255.255.0&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Replace <code>ip</code> and <code>gateway</code> with your network settting.</p>
+
+<p>Why I use <code>allow_ip_spoofing</code> is because my old machine got multiple static ip setup.</p>
+
+<p>Create kvm by</p>
+
+<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">vmadm</span> <span class="err">create</span> <span class="err">&lt;</span> <span class="err">/opt/new_vm.json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You will get a uuid of the machine after this command.</p>
+
+<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">Successfully</span> <span class="err">created</span> <span class="err">VM</span> <span class="mi">226</span><span class="err">d</span><span class="mi">5</span><span class="err">a</span><span class="mi">1</span><span class="err">d</span><span class="mf">-973e-4</span><span class="err">b</span><span class="mf">4e-8158</span><span class="err">-ee</span><span class="mi">33</span><span class="err">cc</span><span class="mf">81e3</span><span class="err">f</span><span class="mi">5</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Restore old machine</h1>
+
+<p>Now we copy back the old machine disk image to the newly created KVM.</p>
+
+<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">dd</span> <span class="err">if=(external</span> <span class="err">harddrive)</span> <span class="err">of=/dev/zvol/</span><span class="mi">226</span><span class="err">d</span><span class="mi">5</span><span class="err">a</span><span class="mi">1</span><span class="err">d</span><span class="mf">-973e-4</span><span class="err">b</span><span class="mf">4e-8158</span><span class="err">-ee</span><span class="mi">33</span><span class="err">cc</span><span class="mf">81e3</span><span class="err">f</span><span class="mi">5</span><span class="err">-disk</span><span class="mi">0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Boot and test</h1>
+
+<p>After the disk copy finish, now you can boot up your vm and check if everything is working.</p>
+
+<figure class='code'><figcaption><span>/opt/new_vm.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="err">#</span> <span class="err">vmadm</span> <span class="err">boot</span> <span class="mi">226</span><span class="err">d</span><span class="mi">5</span><span class="err">a</span><span class="mi">1</span><span class="err">d</span><span class="mf">-973e-4</span><span class="err">b</span><span class="mf">4e-8158</span><span class="err">-ee</span><span class="mi">33</span><span class="err">cc</span><span class="mf">81e3</span><span class="err">f</span><span class="mi">5</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -1232,75 +1385,6 @@ Click on &ldquo;Manage Virtual Hub&rdquo;</p>
 <h1>Done</h1>
 
 <p>Now I can use control-c and control-v in both of my machine. The shortcut won&rsquo;t mess up my head anymore. :)</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-28T12:31:00+08:00" data-updated="true" itemprop="datePublished">Sep 28<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/development-setup/'>development setup</a>, <a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/osx/'>osx</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2011/09/28/synergy-on-mac-osx-lion/" itemprop="url">Synergy on Mac OSX Lion</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><em>Update the QuickSynergy Download link</em></p>
-
-<h1>tl;dr</h1>
-
-<h3>On Mac:</h3>
-
-<p>Download: <a href="http://quicksynergy.googlecode.com/files/QuickSynergy.dmg">QuickSynergy for Mac</a></p>
-
-<p>Setup the Windows Computer name or IP on the display edge in Quick Synergy.</p>
-
-<p>Press Start.</p>
-
-<h3>On Windows:</h3>
-
-<p>Download: <a href="http://synergy.googlecode.com/files/synergy-1.3.7-Windows-x86.exe">Synergy 1.3.7</a></p>
-
-<p>Install it and run it.</p>
-
-<p>Type in the Mac IP in the &ldquo;Other Computer&rsquo;s Host Name&rdquo;</p>
-
-<h3>Done</h3>
-
-<h1>Same mouse and keyboard for Mac and Windows</h1>
-
-<p><a href="http://synergy-foss.org/">Synergy</a> is a software kvm. It can let you share same set of mouse and keyboard between two different computers through TCP/IP.</p>
-
-<h2>Synergy 1.3.7</h2>
-
-<p>I want to setup my Lion as server and Win7 as client. After trying with multiple combination of version and configuration, I found Quick Synergy can at least work.</p>
-
-<p>Problems with 1.4.4 Beta Server on Lion is the keyboard can&rsquo;t use the Shift key in Windows machine. Problmes with 1.3.7 Server is that I can make my keyboard work in Windows machine.</p>
-
-<h2>Solutions</h2>
-
-<p>Install Quick Synergy with the above instruction. Simple configuration and save all the hassle.</p>
 
 		
 		

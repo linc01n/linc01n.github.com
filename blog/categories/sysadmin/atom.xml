@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sysadmin | Coding, Coding, Coding]]></title>
   <link href="http://linc01n.github.io/blog/categories/sysadmin/atom.xml" rel="self"/>
   <link href="http://linc01n.github.io/"/>
-  <updated>2014-04-05T18:27:53+08:00</updated>
+  <updated>2014-12-14T19:46:09+08:00</updated>
   <id>http://linc01n.github.io/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -12,6 +12,114 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Move Physical server to SmartOS VM]]></title>
+    <link href="http://linc01n.github.io/blog/2014/12/10/move-physical-server-to-smartos-vm/"/>
+    <updated>2014-12-10T23:23:17+08:00</updated>
+    <id>http://linc01n.github.io/blog/2014/12/10/move-physical-server-to-smartos-vm</id>
+    <content type="html"><![CDATA[<h1>Background</h1>
+
+<p>In our office we got a dev server running centos. It is server grade machine with ECC ram and SAS hard drive. The problem with that it used to use by one dev. As the team is expanding, we need more dev server to test our code. Because I am familiar with SmartOS so we will use SmartOS as the hypervisor.</p>
+
+<h1>Preparation</h1>
+
+<h3>Clone Disk</h3>
+
+<p>We need to do a clone on our hard disk. Since we only have one SAS hard drive with 1 partition, I need to plug in a external hard drive to clone the drive.</p>
+
+<p>First we boot into <a href="http://gparted.org/">GParted</a> with live CD.
+Then we issue this command</p>
+
+<p>```</p>
+
+<h1>dd if=/dev/sda of=(external harddrive) bs=1M</h1>
+
+<p>```</p>
+
+<h3>Erase Disk</h3>
+
+<p>After the disk clone we can plug in the SmartOS live usb and format the hard drive.</p>
+
+<h1>Create KVM</h1>
+
+<p>After SmartOS installation, we now create a new KVM</p>
+
+<p>```json /opt/new_vm.json
+{
+  &ldquo;brand&rdquo;: &ldquo;kvm&rdquo;,
+  &ldquo;vcpus&rdquo;: 1,
+  &ldquo;autoboot&rdquo;: true,
+  &ldquo;ram&rdquo;: 2048,
+  &ldquo;alias&rdquo;: &ldquo;old_machine&rdquo;,
+  &ldquo;host&rdquo;: &ldquo;old_machine&rdquo;,
+  &ldquo;resolvers&rdquo;: [&ldquo;8.8.8.8&rdquo;, &ldquo;8.8.4.4&rdquo;],
+  &ldquo;disks&rdquo;: [</p>
+
+<pre><code>{
+  "boot": true,
+  "model": "ide",
+  "size": 153600
+}
+</code></pre>
+
+<p>  ],
+  &ldquo;nics&rdquo;: [</p>
+
+<pre><code>{
+  "nic_tag": "admin",
+  "model": "e1000",
+  "ip": "192.168.xx.xx",
+  "gateway": "192.168.xx.1",
+  "allow_ip_spoofing": true,
+  "primary": true,
+  "netmask": "255.255.255.0"
+}
+</code></pre>
+
+<p>  ]
+}
+```</p>
+
+<p>Replace <code>ip</code> and <code>gateway</code> with your network settting.</p>
+
+<p>Why I use <code>allow_ip_spoofing</code> is because my old machine got multiple static ip setup.</p>
+
+<p>Create kvm by</p>
+
+<p>```</p>
+
+<h1>vmadm create &lt; /opt/new_vm.json</h1>
+
+<p>```</p>
+
+<p>You will get a uuid of the machine after this command.</p>
+
+<p><code>
+Successfully created VM 226d5a1d-973e-4b4e-8158-ee33cc81e3f5
+</code></p>
+
+<h1>Restore old machine</h1>
+
+<p>Now we copy back the old machine disk image to the newly created KVM.</p>
+
+<p>```</p>
+
+<h1>dd if=(external harddrive) of=/dev/zvol/226d5a1d-973e-4b4e-8158-ee33cc81e3f5-disk0</h1>
+
+<p>```</p>
+
+<h1>Boot and test</h1>
+
+<p>After the disk copy finish, now you can boot up your vm and check if everything is working.</p>
+
+<p>```</p>
+
+<h1>vmadm boot 226d5a1d-973e-4b4e-8158-ee33cc81e3f5</h1>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Softether on VPS using local bridge]]></title>
