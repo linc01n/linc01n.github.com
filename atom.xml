@@ -4,7 +4,7 @@
   <title><![CDATA[Coding, Coding, Coding]]></title>
   <link href="http://blog.lincoln.hk/atom.xml" rel="self"/>
   <link href="http://blog.lincoln.hk/"/>
-  <updated>2014-12-14T20:23:18+08:00</updated>
+  <updated>2015-11-18T00:05:54+08:00</updated>
   <id>http://blog.lincoln.hk/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Faraday::SSLError]]></title>
+    <link href="http://blog.lincoln.hk/blog/2015/11/17/faraday-sslerror/"/>
+    <updated>2015-11-17T23:57:52+08:00</updated>
+    <id>http://blog.lincoln.hk/blog/2015/11/17/faraday-sslerror</id>
+    <content type="html"><![CDATA[<h1>SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed</h1>
+
+<p>When you are using rvm and upgrade osx to Yosemite, this error may happen when you are developing for a rails app.</p>
+
+<h1>solutions</h1>
+
+<p>To solve this, the simplest solution is</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm reinstall 2.2.3 --disable-binary</span></code></pre></td></tr></table></div></figure>
+
+
+<p>this will recompile ruby from scratch and it should solve the problem.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Move Physical server to SmartOS VM]]></title>

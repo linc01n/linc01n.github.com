@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Readable Code - Coding, Coding, Coding</title>
+	<title>Faraday::SSLError - Coding, Coding, Coding</title>
 	<meta name="author" content="Lincoln Lee">
 
 	
-	<meta name="description" content="Readable Code Clean Code I have graduated from college this June. The culture in my college is you do all group projects by youself. So &hellip;">
+	<meta name="description" content="Faraday::SSLError SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed When you are using rvm and upgrade &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -17,7 +17,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="Coding, Coding, Coding" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://blog.lincoln.hk/blog/2011/09/07/readable-code/">
+	<link rel="canonical" href="http://blog.lincoln.hk/blog/2015/11/17/faraday-sslerror/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 
@@ -120,52 +120,20 @@ window.addEventListener('load', function(e) {
 		<div class="mid-col">
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Readable Code</h1>
-	<div class="entry-content" itemprop="articleBody"><h1>Clean Code</h1>
+	<h1 class="title" itemprop="name">Faraday::SSLError</h1>
+	<div class="entry-content" itemprop="articleBody"><h1>SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed</h1>
 
-<p>I have graduated from college this June. The culture in my college is you do all group projects by youself. So collaboration is some what new to me.</p>
+<p>When you are using rvm and upgrade osx to Yosemite, this error may happen when you are developing for a rails app.</p>
 
-<p>I started working in a web company after my graduation. After two months of non-stop coding day and night, I learnt a few things about coding.</p>
+<h1>solutions</h1>
 
-<p>This time I will talk about coding practice.</p>
+<p>To solve this, the simplest solution is</p>
 
-<h2>Background</h2>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm reinstall 2.2.3 --disable-binary</span></code></pre></td></tr></table></div></figure>
 
-<p>The project I invovled was a CMS-like Web Site Builder. The whole team had 4 coders. We used SVN as a version control tools for collaboration. A PHP MVC framework is used in developing the project(God bless :) ).</p>
 
-<h2>Coding Practice</h2>
-
-<p>Assignment or functions call can tightly packed:</p>
-
-<pre><code>a = 1;
-foo();
-bar();
-</code></pre>
-
-<p>Loop should wrap with newline</p>
-
-<pre><code>foo();
-
-if(bar){
-  a = 1;
-}
-
-foo();
-
-for($i = 0; $i &lt; 10; $i++){
-
-  if(bar){
-    exit();
-  }
-
-}
-
-exit();
-</code></pre>
-
-<h2>Conclusion</h2>
-
-<p>I always think coding practice is not a very important thing in development. But after I worked with a project that contains 30K LOC, I understand this kind of agreement can help with code maintenance and easier for debugging.</p>
+<p>this will recompile ruby from scratch and it should solve the problem.</p>
 </div>
 
 </article>
@@ -213,8 +181,8 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.lincoln.hk/blog/2011/09/07/readable-code/';
-        var disqus_url = 'http://blog.lincoln.hk/blog/2011/09/07/readable-code/';
+        var disqus_identifier = 'http://blog.lincoln.hk/blog/2015/11/17/faraday-sslerror/';
+        var disqus_url = 'http://blog.lincoln.hk/blog/2015/11/17/faraday-sslerror/';
         var disqus_script = 'embed.js';
       
     (function () {
