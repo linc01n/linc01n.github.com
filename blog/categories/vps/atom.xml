@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vps | Coding, Coding, Coding]]></title>
   <link href="http://blog.lincoln.hk/blog/categories/vps/atom.xml" rel="self"/>
   <link href="http://blog.lincoln.hk/"/>
-  <updated>2015-11-18T00:05:54+08:00</updated>
+  <updated>2015-11-22T18:51:25+08:00</updated>
   <id>http://blog.lincoln.hk/</id>
   <author>
     <name><![CDATA[Lincoln Lee]]></name>
@@ -222,8 +222,6 @@ dhcp-option=tap_soft,3,192.168.7.1
 <h3>Conclusion</h3>
 
 <p>Local bridge use far less CPU resources than SecureNAT. It is a bit trouble to setup but I think it is worth to use local bridge.</p>
-
-<p>I would recommend <a href="https://clientarea.ramnode.com/aff.php?aff=319">Ramnode</a>(affiliated) as a VPS provider. Their VPS is speedy and support is amazing.</p>
 ]]></content>
   </entry>
   
